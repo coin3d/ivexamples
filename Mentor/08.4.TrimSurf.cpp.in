@@ -56,6 +56,7 @@
 #include <Inventor/SoInput.h>
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
+#include <Inventor/errors/SoDebugError.h>
 #include <Inventor/nodes/SoBaseColor.h>
 #include <Inventor/nodes/SoCamera.h>
 #include <Inventor/nodes/SoComplexity.h>
@@ -263,7 +264,7 @@ main(int, char **argv)
 
    char * oivhome = getenv("OIVHOME");
    if (!oivhome) {
-     (void)fprintf(stderr, "\nWARNING: Environment variable $OIVHOME not set.\n\n");
+     SoDebugError::postWarning("main", "Environment variable OIVHOME not set.");
    }
    else {
      SbString s(oivhome);
