@@ -90,7 +90,8 @@ CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES = 
 DIST_SOURCES = 
 DIST_COMMON =  ./stamp-h.in Makefile.am Makefile.in aclocal.m4 \
-config.h.in configure configure.in install-sh missing mkinstalldirs
+config.h.in configure configure.in depcomp install-sh missing \
+mkinstalldirs
 
 
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
