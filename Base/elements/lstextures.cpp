@@ -110,10 +110,12 @@ main(int argc, char ** argv)
 
   SoSeparator * root = SoDB::readAll(&input);
   if (root) {
+    root->ref();
     SoCallbackAction cbaction;
     cbaction.addPreCallback(SoTexture2::getClassTypeId(), pre_tex2_cb, NULL);
     cbaction.addPreCallback(SoShape::getClassTypeId(), pre_shape_cb, NULL);
     cbaction.apply(root);
+    root->unref();
     return 0;
   }
   return 1;
