@@ -215,6 +215,9 @@ if test x"${WINWIDGET+set}" != x"set"; then
   WINWIDGET=$WIDGET
 fi
 
+# FIXME: the following blocks for detection and setup of gl.h
+# inclusion is copied from Coin's configure.ac. Duplication is
+# bad, it should be collected in a shared macro. 20030401 mortene.
 
 # how to include gl.h
 if test x"$ac_cv_header_GL_gl_h" = x"yes"; then
