@@ -85,13 +85,7 @@ if $sim_ac_ivexamples_use_inventor; then
     SIM_AC_CHECK_X_INTRINSIC
   fi
   
-  SIM_AC_CHECK_OPENGL([
-    CPPFLAGS="$CPPFLAGS $sim_ac_gl_cppflags"
-    CFLAGS="$CFLAGS $sim_ac_gl_cflags"
-    CXXFLAGS="$CXXFLAGS $sim_ac_gl_cxxflags"
-    LDFLAGS="$LDFLAGS $sim_ac_gl_ldflags"
-    LIBS="$sim_ac_gl_libs $LIBS"
-  ], [AC_MSG_ERROR(needs an OpenGL-compatible development system installation)])
+  SIM_AC_CHECK_OPENGL([ ], [AC_MSG_ERROR(needs an OpenGL-compatible development system installation)])
 
   SIM_AC_CHECK_GLU( , AC_MSG_ERROR(needs the GLU library functions))
 
