@@ -19,7 +19,7 @@ AUTOCONF_VER=2.5[023456789]
 AUTOMAKE_VER=1.4[efghijklmn]     # Automake from CVS
 
 PROJECT=ivexamples
-MACRODIR=conf-macros
+MACRODIR=cfg/m4
 AUTOMAKE_ADD=
 
 if test "$1" = "--clean"; then
@@ -70,7 +70,7 @@ if test ! -d $MACRODIR; then
         echo ""
 	echo "Couldn't fetch $MACRODIR module!"
         echo ""
-        echo "Directory ``$MACRODIR'' (a separate CVS module) seems to be missing."
+        echo "Directory $MACRODIR (a separate CVS module) seems to be missing."
         echo "You probably checked out $PROJECT before ``$MACRODIR'' was added."
         echo "Run 'cvs -d :pserver:cvs@cvs.sim.no:/export/cvsroot co $MACRODIR'"
         echo "to try again."

@@ -91,7 +91,7 @@ printVolume_SOURCES = printVolume.cpp GetVolumeAction.cpp GetVolumeAction.h
 EXEEXT =
 OBJEXT = o
 subdir = Toolmaker/04.Actions
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 noinst_PROGRAMS = printVolume$(EXEEXT)
@@ -120,7 +120,7 @@ COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CF
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(printVolume_SOURCES)
-depcomp = $(SHELL) $(top_srcdir)/depcomp
+depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 @AMDEP@DEP_FILES = $(DEPDIR)/GetVolumeAction.Po $(DEPDIR)/printVolume.Po
 DIST_COMMON = README Makefile.am Makefile.in
 

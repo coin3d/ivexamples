@@ -305,7 +305,7 @@ noinst_PROGRAMS = \
 EXEEXT =
 OBJEXT = o
 subdir = Mentor
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES = 02.1.HelloCone.cpp 02.2.EngineSpin.cpp \
 02.3.Trackball.cpp 02.4.Examiner.cpp 03.1.Molecule.cpp 03.2.Robot.cpp \
@@ -730,7 +730,7 @@ $(15_3_AttachManip_SOURCES) $(15_4_Customize_SOURCES) \
 $(16_1_Overlay_SOURCES) $(16_5_Examiner_SOURCES) \
 $(17_1_ColorIndex_SOURCES) $(17_2_GLCallback_SOURCES) \
 $(17_3_GLFloor_SOURCES)
-depcomp = $(SHELL) $(top_srcdir)/depcomp
+depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 @AMDEP@DEP_FILES = $(DEPDIR)/02.1.HelloCone.Po \
 @AMDEP@ $(DEPDIR)/02.2.EngineSpin.Po $(DEPDIR)/02.3.Trackball.Po \
 @AMDEP@ $(DEPDIR)/02.4.Examiner.Po $(DEPDIR)/03.1.Molecule.Po \

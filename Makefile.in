@@ -88,13 +88,13 @@ EXEEXT =
 OBJEXT = o
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
 DIST_COMMON = ./stamp-h.in Makefile.am Makefile.in aclocal.m4 \
-config.h.in configure configure.in depcomp install-sh missing \
-mkinstalldirs
+cfg/install-sh cfg/missing cfg/mkinstalldirs config.h.in configure \
+configure.in depcomp install-sh missing mkinstalldirs
 
 DIST_SUBDIRS = $(SUBDIRS)
 all: config.h
@@ -249,7 +249,7 @@ GZIP_ENV = --best
 distdir: $(DISTFILES)
 	-chmod -R a+w $(distdir) >/dev/null 2>&1; rm -rf $(distdir)
 	mkdir $(distdir)
-	$(mkinstalldirs) $(distdir)/Mentor $(distdir)/Toolmaker/02.Nodes
+	$(mkinstalldirs) $(distdir)/Mentor $(distdir)/Toolmaker/02.Nodes $(distdir)/cfg
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \

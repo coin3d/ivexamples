@@ -88,7 +88,7 @@ lstextures_SOURCES = lstextures.cpp texturefilenameelement.cpp
 EXEEXT =
 OBJEXT = o
 subdir = Base/elements
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 noinst_PROGRAMS = lstextures$(EXEEXT)
@@ -114,7 +114,7 @@ CXXFLAGS = @CXXFLAGS@
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(lstextures_SOURCES)
-depcomp = $(SHELL) $(top_srcdir)/depcomp
+depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 @AMDEP@DEP_FILES = $(DEPDIR)/lstextures.Po \
 @AMDEP@ $(DEPDIR)/texturefilenameelement.Po
 DIST_COMMON = README Makefile.am Makefile.in

@@ -91,7 +91,7 @@ fieldtest_SOURCES = main.cpp SFDouble.cpp SFDouble.h MFDouble.cpp MFDouble.h
 EXEEXT =
 OBJEXT = o
 subdir = Toolmaker/03.Fields
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 noinst_PROGRAMS = fieldtest$(EXEEXT)
@@ -121,7 +121,7 @@ COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CF
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(fieldtest_SOURCES)
-depcomp = $(SHELL) $(top_srcdir)/depcomp
+depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 @AMDEP@DEP_FILES = $(DEPDIR)/MFDouble.Po $(DEPDIR)/SFDouble.Po \
 @AMDEP@ $(DEPDIR)/main.Po
 DIST_COMMON = README Makefile.am Makefile.in

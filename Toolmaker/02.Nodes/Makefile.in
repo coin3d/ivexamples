@@ -98,7 +98,7 @@ newNodes_SOURCES = \
 EXEEXT =
 OBJEXT = o
 subdir = Toolmaker/02.Nodes
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES = newNodes.cpp
 noinst_PROGRAMS = newNodes$(EXEEXT)
@@ -128,7 +128,7 @@ COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CF
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(newNodes_SOURCES)
-depcomp = $(SHELL) $(top_srcdir)/depcomp
+depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
 @AMDEP@DEP_FILES = $(DEPDIR)/Alternate.Po $(DEPDIR)/Glow.Po \
 @AMDEP@ $(DEPDIR)/Pyramid.Po $(DEPDIR)/newNodes.Po
 DIST_COMMON = Makefile.am Makefile.in newNodes.cpp.in
