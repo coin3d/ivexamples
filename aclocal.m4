@@ -857,17 +857,22 @@ fi
 # as we can get false positives and/or false negatives when running under
 # Cygwin, using the Microsoft Visual C++ compiler (the configure script will
 # pick the GCC preprocessor).
-AC_DEFUN([SIM_AC_CHECK_HEADER],
-[AC_VAR_PUSHDEF([ac_Header], [ac_cv_header_$1])dnl
-AC_ARG_VAR([CPPFLAGS], [C/C++ preprocessor flags, e.g. -I<include dir> if you ha
-ve headers in a nonstandard directory <include dir>])
-AC_CACHE_CHECK([for $1], ac_Header,
-[AC_TRY_COMPILE([#include <$1>
-], [],
-AC_VAR_SET(ac_Header, yes), AC_VAR_SET(ac_Header, no))])
-AC_SHELL_IFELSE([test AC_VAR_GET(ac_Header) = yes],
-                [$2], [$3])dnl
-AC_VAR_POPDEF([ac_Header])dnl
+
+AC_DEFUN([SIM_AC_CHECK_HEADER], [
+AC_VAR_PUSHDEF([ac_Header], [ac_cv_header_$1])
+AC_ARG_VAR([CPPFLAGS], [C/C++ preprocessor flags, e.g. -I<include dir> if you have headers in a nonstandard directory <include dir>])
+AC_CACHE_CHECK(
+  [for $1],
+  ac_Header,
+  [AC_TRY_COMPILE([#include <$1>],
+  [],
+  [AC_VAR_SET(ac_Header, yes)],
+  [AC_VAR_SET(ac_Header, no)])])
+AS_IFELSE(
+  [test AC_VAR_GET(ac_Header) = yes],
+  [$2],
+  [$3])
+AC_VAR_POPDEF([ac_Header])
 ])# SIM_AC_CHECK_HEADER
 
 
@@ -877,9 +882,10 @@ AC_VAR_POPDEF([ac_Header])dnl
 AC_DEFUN([SIM_AC_CHECK_HEADERS],
 [for ac_header in $1
 do
-SIM_AC_CHECK_HEADER($ac_header,
-                    [AC_DEFINE_UNQUOTED(AC_TR_CPP(HAVE_$ac_header)) $2],
-                    [$3])dnl
+SIM_AC_CHECK_HEADER(
+  [$ac_header],
+  [AC_DEFINE_UNQUOTED(AC_TR_CPP(HAVE_$ac_header)) $2],
+  [$3])
 done
 ])# SIM_AC_CHECK_HEADERS
 

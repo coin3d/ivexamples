@@ -1,6 +1,20 @@
 #  This can be any file in the package.
 AC_INIT(Mentor/02.1.HelloCone.cpp.in)
 
+# **************************************************************************
+# If the Microsoft Visual C++ cl.exe compiler is available, set us up for
+# compiling with it.
+
+BUILD_WITH_MSVC=false
+sim_ac_msvccc=$srcdir/conf-macros/msvccc
+if test -z "$CC" && test -z "$CXX" && $sim_ac_msvccc >/dev/null 2>&1; then
+  CC=$sim_ac_msvccc
+  CXX=$sim_ac_msvccc
+  BUILD_WITH_MSVC=true
+fi
+AC_SUBST(BUILD_WITH_MSVC)
+
+# **************************************************************************
 #  Locate C++ compiler and set C++ as the default compiler to run
 #  in tests.
 AC_PROG_CXX
