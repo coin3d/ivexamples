@@ -12,125 +12,6 @@
 # PARTICULAR PURPOSE.
 
 # **************************************************************************
-# SIM_AC_CVS_CHANGES( SIM_AC_CVS_CHANGE-MACROS )
-#
-# This macro is just an envelope macro for SIM_AC_CVS_CHANGE invokations.
-# It performs necessary initializations and finalizing.  All the
-# SIM_AC_CVS_CHANGE invokations should be preformed inside the same
-# SIM_AC_CVS_CHANGES macro.
-#
-# Authors:
-#   Lars J. Aas <larsa@sim.no>
-#
-
-AC_DEFUN([SIM_AC_CVS_CHANGES], [
-pushdef([sim_ac_cvs_changes], 1)
-sim_ac_do_cvs_update=false
-sim_ac_cvs_changed=false
-sim_ac_cvs_problem=false
-sim_ac_cvs_save_builddir=`pwd`
-AC_ARG_ENABLE(
-  [cvs-auto-update],
-  AC_HELP_STRING([--enable-cvs-auto-update],
-                 [auto-update CVS repository if possible]),
-  [case "$enableval" in
-  yes) sim_ac_do_cvs_update=true ;;
-  no)  sim_ac_do_cvs_update=false ;;
-  *)   AC_MSG_ERROR(["$enableval" given to --enable-cvs-update]) ;;
-  esac])
-if test -d $srcdir/CVS; then
-  ifelse([$1], , :, [$1])
-  if $sim_ac_cvs_problem; then
-    cat <<"CVS_CHANGES_EOF"
-To make the above listed procedure be executed automatically, run configure
-again with "--enable-cvs-auto-update" added to the configure options.
-CVS_CHANGES_EOF
-  fi
-fi
-$sim_ac_cvs_problem && echo "" && echo "Aborting..." && exit 1
-popdef([sim_ac_cvs_changes])
-]) # SIM_AC_CVS_CHANGES
-
-# **************************************************************************
-# SIM_AC_CVS_CHANGE( UPDATE-PROCEDURE, UPDATE-TEST, UPDATE-TEST, ... )
-#
-# This macro is used to ensure that CVS source repository changes that need
-# manual intervention on all the build systems are executed before the
-# configure script is run.
-#
-# UPDATE-PROCEDURE is the procedure needed to update the source repository.
-# UPDATE-TEST is a command that returns failure if the update procedure
-# hasn't been executed, and success afterwards.  You can have as many test
-# as you like.  All tests must pass for the macro to believe the source
-# repository is up-to-date.
-#
-# All commands (the update procedure and the tests) are executed from the
-# CVS repository root.
-#
-# SIM_AC_CVS_CHANGE must be invoked inside SIM_AC_CVS_CHANGES.
-#
-# Authors:
-#   Lars J. Aas <larsa@sim.no>
-#
-
-AC_DEFUN([SIM_AC_CVS_CHANGE], [
-ifdef([sim_ac_cvs_changes], ,
-      [AC_MSG_ERROR([[SIM_AC_CVS_CHANGE invoked outside SIM_AC_CVS_CHANGES]])])
-cd $srcdir;
-m4_foreach([testcommand], [m4_shift($@)], [testcommand
-if test $? -ne 0; then sim_ac_cvs_changed=true; fi
-])
-cd $sim_ac_cvs_save_builddir
-if $sim_ac_cvs_changed; then
-  if $sim_ac_do_cvs_update; then
-    echo "Performing repository update:"
-    cd $srcdir;
-    ( set -x
-$1 )
-    sim_ac_cvs_unfixed=false
-m4_foreach([testcommand], [m4_shift($@)],
-[    testcommand
-    if test $? -ne 0; then sim_ac_cvs_unfixed=true; fi
-])
-    cd $sim_ac_cvs_save_builddir
-    if $sim_ac_cvs_unfixed; then
-      cat <<"CVS_CHANGE_EOF"
-
-The following update procedure does not seem to have produced the desired
-effect:
-
-$1
-
-You should investigate what went wrong and alert the relevant software
-developers about it.
-
-Aborting...
-CVS_CHANGE_EOF
-      exit 1
-    fi
-  else
-    $sim_ac_cvs_problem || {
-    cat <<"CVS_CHANGE_EOF"
-
-The configure script has detected source hierachy inconsistencies between
-your source repository and the master source repository.  This needs to be
-fixed before you can proceed.
-
-The suggested update procedure is to execute the following set of commands
-in the root source directory:
-CVS_CHANGE_EOF
-    }
-    cat <<"CVS_CHANGE_EOF"
-$1
-CVS_CHANGE_EOF
-    sim_ac_cvs_problem=true
-  fi
-fi
-]) # SIM_AC_CVS_CHANGE
-
-# EOF **********************************************************************
-
-# **************************************************************************
 # SIM_AC_SETUP_MSVC_IFELSE( IF-FOUND, IF-NOT-FOUND )
 #
 # This macro invokes IF-FOUND if the wrapmsvc wrapper can be run, and
@@ -165,7 +46,7 @@ AC_REQUIRE([SIM_AC_MSVC_DISABLE_OPTION])
 
 BUILD_WITH_MSVC=false
 if $sim_ac_try_msvc; then
-  sim_ac_wrapmsvc=`cd $srcdir; pwd`/cfg/m4/wrapmsvc.exe
+  sim_ac_wrapmsvc=`cd $srcdir; pwd`/cfg/wrapmsvc.exe
   if test -z "$CC" -a -z "$CXX" && $sim_ac_wrapmsvc >/dev/null 2>&1; then
     m4_ifdef([$0_VISITED],
       [AC_FATAL([Macro $0 invoked multiple times])])
@@ -271,7 +152,7 @@ sim_ac_message_file=$1
 ]) # SIM_AC_ERROR_MESSAGE_FILE
 
 AC_DEFUN([SIM_AC_ONE_MESSAGE], [
-: ${sim_ac_message_file=$ac_aux_dir/m4/errors.txt}
+: ${sim_ac_message_file=$ac_aux_dir/errors.txt}
 if test -f $sim_ac_message_file; then
   sim_ac_message="`sed -n -e '/^!$1$/,/^!/ { /^!/ d; p; }' <$sim_ac_message_file`"
   if test x"$sim_ac_message" = x""; then
@@ -1125,20 +1006,22 @@ AC_ARG_ENABLE(
   [enable_warnings=yes])
 
 if test x"$enable_warnings" = x"yes"; then
-  if test x"$GCC" = x"yes"; then
-    SIM_AC_CC_COMPILER_OPTION([-W -Wall -Wno-unused],
-                              [CFLAGS="$CFLAGS -W -Wall -Wno-unused"])
-    SIM_AC_CC_COMPILER_OPTION([-Wno-multichar],
-                              [CFLAGS="$CFLAGS -Wno-multichar"])
-  fi
 
-  if test x"$GXX" = x"yes"; then
-    SIM_AC_CXX_COMPILER_OPTION([-W -Wall -Wno-unused],
-                               [CXXFLAGS="$CXXFLAGS -W -Wall -Wno-unused"])
-    SIM_AC_CXX_COMPILER_OPTION([-Wno-multichar],
-                               [CXXFLAGS="$CXXFLAGS -Wno-multichar"])
-  fi
+  for sim_ac_try_warning_option in \
+    "-W" "-Wall" "-Wno-unused" "-Wno-multichar" "-Woverloaded-virtual"; do
 
+    if test x"$GCC" = x"yes"; then
+      SIM_AC_CC_COMPILER_OPTION([$sim_ac_try_warning_option],
+                                [CFLAGS="$CFLAGS $sim_ac_try_warning_option"])
+    fi
+  
+    if test x"$GXX" = x"yes"; then
+      SIM_AC_CXX_COMPILER_OPTION([$sim_ac_try_warning_option],
+                                 [CXXFLAGS="$CXXFLAGS $sim_ac_try_warning_option"])
+    fi
+
+  done
+    
   case $host in
   *-*-irix*) 
     ### Turn on all warnings ######################################
@@ -1642,6 +1525,8 @@ fi
 AC_DEFUN([SIM_AC_CHECK_X11MU], [
 
 sim_ac_x11mu_avail=no
+sim_ac_x11mu_cppflags=""
+sim_ac_x11mu_ldflags=""
 sim_ac_x11mu_libs="-lXmu"
 
 sim_ac_save_libs=$LIBS
@@ -1664,9 +1549,13 @@ if test x"$sim_cv_lib_x11mu_avail" = xyes; then
   sim_ac_x11mu_avail=yes
 else
   # On HP-UX, Xmu might be located under /usr/contrib/X11R6/
-  if test -d /usr/contrib/X11R6; then
-    CPPFLAGS="-I/usr/contrib/X11R6/include $CPPFLAGS"
-    LDFLAGS="-L/usr/contrib/X11R6/lib $LDFLAGS"
+  mudir=/usr/contrib/X11R6
+  if test -d $mudir; then
+    sim_ac_x11mu_cppflags="-I$mudir/include"
+    sim_ac_x11mu_ldflags="-L$mudir/lib"
+    CPPFLAGS="$sim_ac_x11mu_cppflags $CPPFLAGS"
+    LDFLAGS="$sim_ac_x11mu_ldflags $LDFLAGS"
+
     AC_CACHE_CHECK(
       [once more whether the X11 miscellaneous utilities library is available],
       sim_cv_lib_x11mu_contrib_avail,
@@ -1678,6 +1567,9 @@ else
                    [sim_cv_lib_x11mu_contrib_avail=no])])
     if test x"$sim_cv_lib_x11mu_contrib_avail" = xyes; then
       sim_ac_x11mu_avail=yes
+    else
+      sim_ac_x11mu_cppflags=""
+      sim_ac_x11mu_ldflags=""
     fi
   fi
 fi
@@ -1727,7 +1619,7 @@ AC_CACHE_CHECK(
                [sim_cv_lib_x11xid_avail=yes],
                [sim_cv_lib_x11xid_avail=no])])
 
-if test x"$sim_cv_lib_x11xid_avail" = xyes; then
+if test x"$sim_cv_lib_x11xid_avail" = x"yes"; then
   sim_ac_x11xid_avail=yes
   $1
 else
@@ -2701,7 +2593,9 @@ if test x"$with_pthread" != xno; then
 
   # FIXME: should investigate and document the exact meaning of
   # the _REENTRANT flag. larsa's commit message mentions
-  # "glibc-doc/FAQ.threads.html".
+  # "glibc-doc/FAQ.threads.html". Also, kintel points to the
+  # comp.programming.thrads FAQ, which has an entry on the
+  # _REENTRANT define.
   #
   # Preferably, it should only be set up when really needed
   # (as detected by some other configure check).

@@ -98,10 +98,11 @@ RECURSIVE_TARGETS = info-recursive dvi-recursive install-info-recursive \
 	uninstall-info-recursive all-recursive install-data-recursive \
 	install-exec-recursive installdirs-recursive install-recursive \
 	uninstall-recursive check-recursive installcheck-recursive
-DIST_COMMON = ./stamp-h.in Makefile.am Makefile.in aclocal.m4 \
-	cfg/depcomp cfg/install-sh cfg/missing cfg/mkinstalldirs \
-	config.h.in configure configure.in depcomp install-sh missing \
-	mkinstalldirs
+DIST_COMMON = README ./stamp-h.in AUTHORS COPYING ChangeLog INSTALL \
+	Makefile.am Makefile.in NEWS aclocal.m4 cfg/config.guess \
+	cfg/config.sub cfg/depcomp cfg/install-sh cfg/missing \
+	cfg/mkinstalldirs config.h.in configure configure.in depcomp \
+	install-sh missing mkinstalldirs
 DIST_SUBDIRS = $(SUBDIRS)
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
@@ -109,7 +110,7 @@ all: config.h
 .SUFFIXES:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  Makefile
+	  $(AUTOMAKE) --gnu  Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && \
 	  CONFIG_HEADERS= CONFIG_LINKS= \
