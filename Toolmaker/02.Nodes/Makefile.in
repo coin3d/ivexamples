@@ -88,7 +88,7 @@ gui = @gui@
 install_sh = @install_sh@
 soguiconfig = @soguiconfig@
 
-BUILT_SOURCES = newNodes.cpp
+BUILT_SOURCES = newNodes.cpp Pyramid.cpp
 
 noinst_PROGRAMS = newNodes
 
