@@ -342,6 +342,7 @@ AC_OUTPUT([
 	Toolmaker/02.Nodes/Pyramid.cpp
 	Toolmaker/03.Fields/Makefile
 	Toolmaker/04.Actions/Makefile
+	Toolmaker/04.Actions/printVolume.cpp
 	Toolmaker/05.Elements/Makefile
 	Toolmaker/07.Nodekits/Makefile
 ])

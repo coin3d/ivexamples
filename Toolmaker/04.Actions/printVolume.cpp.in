@@ -53,7 +53,8 @@
 // Header file for new action class
 #include "GetVolumeAction.h"
 
-main()
+int
+main(void)
 {
    // Initialize Inventor
    SoInteraction::init();
@@ -65,20 +66,13 @@ main()
    SoInput      myInput;
    SoSeparator  *root;
 
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/Toolmaker/04.Actions/volume.iv";
-   if (! myInput.openFile(s.getString())) {
-      fprintf(stderr, "Can't open %s for reading\n", s.getString());
+   SoInput::addDirectoryFirst("@top_srcdir@/Toolmaker/04.Actions");
+
+   if (! myInput.openFile("volume.iv")) {
       return 1;
    }
    root = SoDB::readAll(&myInput);
    if (root == NULL) {
-      printf("Couldn't read scene from %s\n", s.getString());
       return 2;
    }
    root->ref();
