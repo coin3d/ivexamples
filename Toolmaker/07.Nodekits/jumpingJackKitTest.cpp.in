@@ -42,16 +42,17 @@
  *  puts it in an examinerViewer.
  *------------------------------------------------------------*/
 
-#include <Inventor/Xt/SoXt.h>
-#include <Inventor/Xt/viewers/SoXtExaminerViewer.h>
+#include <Inventor/@Gui@/So@Gui@.h>
+#include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
 
 // Header files for new node class
 #include "JumpingJackKit.h"
 
+int
 main(int, char **argv)
 {
-   // Initialize Inventor and Xt
-   Widget myWindow = SoXt::init(argv[0]);
+   // Initialize Inventor and @Gui@
+   @WIDGET@ myWindow = So@Gui@::init(argv[0]);
    if (myWindow == NULL) exit(1);
 
    // Initialize the new node class
@@ -60,13 +61,14 @@ main(int, char **argv)
    JumpingJackKit *jackyBaby = new JumpingJackKit;
    jackyBaby->ref();
 
-   SoXtExaminerViewer *viewer = 
-      new SoXtExaminerViewer(myWindow);
+   So@Gui@ExaminerViewer *viewer = 
+      new So@Gui@ExaminerViewer(myWindow);
    viewer->setSceneGraph(jackyBaby);
    viewer->setTitle("JumpingJackKit");
    viewer->show();
    viewer->viewAll();
 
-   SoXt::show(myWindow);
-   SoXt::mainLoop();
+   So@Gui@::show(myWindow);
+   So@Gui@::mainLoop();
+   return 0;
 }
