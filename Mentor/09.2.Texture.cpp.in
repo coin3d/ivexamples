@@ -43,6 +43,8 @@
  *  a texture map.
  *----------------------------------------------------------*/
 
+#include <Inventor/@Gui@/So@Gui@.h>
+#include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
 #include <Inventor/SoDB.h>
 #include <Inventor/SoInput.h>
 #include <Inventor/SoOffscreenRenderer.h>
@@ -53,8 +55,6 @@
 #include <Inventor/nodes/SoRotationXYZ.h>
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoTexture2.h>
-#include <Inventor/@Gui@/So@Gui@.h>
-#include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
 
 
 SbBool 
