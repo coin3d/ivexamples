@@ -1142,12 +1142,18 @@ if test x"$enable_warnings" = x"yes"; then
   case $host in
   *-*-irix*) 
     ### Turn on all warnings ######################################
-    if test x"$CC" = xcc || test x"$CC" = xCC; then
+    # we try to catch settings like CC="CC -n32" too, even though the
+    # -n32 option belongs to C[XX]FLAGS
+    case $CC in
+    cc | "cc "* | CC | "CC "* )
       SIM_AC_CC_COMPILER_OPTION([-fullwarn], [CFLAGS="$CFLAGS -fullwarn"])
-    fi
-    if test x"$CXX" = xCC; then
+      ;;
+    esac
+    case $CXX in
+    CC | "CC "* )
       SIM_AC_CXX_COMPILER_OPTION([-fullwarn], [CXXFLAGS="$CXXFLAGS -fullwarn"])
-    fi
+      ;;
+    esac
 
     ### Turn off specific (bogus) warnings ########################
 
@@ -1176,14 +1182,17 @@ if test x"$enable_warnings" = x"yes"; then
 
     sim_ac_bogus_warnings="-woff 3115,3262,1174,1209,1355,1375,3201,1110,1506,1169"
 
-    if test x"$CC" = xcc || test x"$CC" = xCC; then
+    case $CC in
+    cc | "cc "* | CC | "CC "* )
       SIM_AC_CC_COMPILER_OPTION([$sim_ac_bogus_warnings],
                                 [CFLAGS="$CFLAGS $sim_ac_bogus_warnings"])
-    fi
-    if test x"$CXX" = xCC; then
+    esac
+    case $CXX in
+    CC | "CC "* )
       SIM_AC_CXX_COMPILER_OPTION([$sim_ac_bogus_warnings],
                                  [CXXFLAGS="$CXXFLAGS $sim_ac_bogus_warnings"])
-    fi
+      ;;
+    esac
   ;;
   esac
 fi
@@ -1621,36 +1630,65 @@ fi
 #  The LIBS flag will also be modified accordingly. In addition, the
 #  variable $sim_ac_x11mu_avail is set to "yes" if the X11 miscellaneous
 #  utilities extension is found.
+#  CPPFLAGS and LDFLAGS might also be modified, if library is found in a
+#  non-standard location.
 #
 # Author: Morten Eriksen, <mortene@sim.no>.
 #
 # TODO:
 #    * [mortene:20000122] make sure this work on MSWin (with
 #      Cygwin installation)
-#
 
 AC_DEFUN([SIM_AC_CHECK_X11MU], [
 
 sim_ac_x11mu_avail=no
 sim_ac_x11mu_libs="-lXmu"
+
 sim_ac_save_libs=$LIBS
+sim_ac_save_cppflags=$CPPFLAGS
+sim_ac_save_ldflags=$LDFLAGS
+
 LIBS="$sim_ac_x11mu_libs $LIBS"
 
 AC_CACHE_CHECK(
-  [whether the X11 miscellaneous utilities is available],
+  [whether the X11 miscellaneous utilities library is available],
   sim_cv_lib_x11mu_avail,
   [AC_TRY_LINK([#include <X11/Xlib.h>
                 #include <X11/Xmu/Xmu.h>
                 #include <X11/Xmu/StdCmap.h>],
                [(void)XmuAllStandardColormaps(0L);],
                [sim_cv_lib_x11mu_avail=yes],
-               [sim_cv_lib_x11mu_avail=no])])
+               [sim_cv_lib_x11mu_avail=maybe])])
 
 if test x"$sim_cv_lib_x11mu_avail" = xyes; then
   sim_ac_x11mu_avail=yes
+else
+  # On HP-UX, Xmu might be located under /usr/contrib/X11R6/
+  if test -d /usr/contrib/X11R6; then
+    CPPFLAGS="-I/usr/contrib/X11R6/include $CPPFLAGS"
+    LDFLAGS="-L/usr/contrib/X11R6/lib $LDFLAGS"
+    AC_CACHE_CHECK(
+      [once more whether the X11 miscellaneous utilities library is available],
+      sim_cv_lib_x11mu_contrib_avail,
+      [AC_TRY_LINK([#include <X11/Xlib.h>
+                    #include <X11/Xmu/Xmu.h>
+                    #include <X11/Xmu/StdCmap.h>],
+                   [(void)XmuAllStandardColormaps(0L);],
+                   [sim_cv_lib_x11mu_contrib_avail=yes],
+                   [sim_cv_lib_x11mu_contrib_avail=no])])
+    if test x"$sim_cv_lib_x11mu_contrib_avail" = xyes; then
+      sim_ac_x11mu_avail=yes
+    fi
+  fi
+fi
+
+if test x"$sim_ac_x11mu_avail" = xyes; then
+  :
   $1
 else
   LIBS=$sim_ac_save_libs
+  CPPFLAGS=$sim_ac_save_cppflags
+  LDFLAGS=$sim_ac_save_ldflags
   $2
 fi
 ])

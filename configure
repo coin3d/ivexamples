@@ -6284,8 +6284,8 @@ sim_ac_save_ldflags=$LDFLAGS
 
 LIBS="$sim_ac_x11mu_libs $LIBS"
 
-echo "$as_me:$LINENO: checking whether the X11 miscellaneous utilities is available" >&5
-echo $ECHO_N "checking whether the X11 miscellaneous utilities is available... $ECHO_C" >&6
+echo "$as_me:$LINENO: checking whether the X11 miscellaneous utilities library is available" >&5
+echo $ECHO_N "checking whether the X11 miscellaneous utilities library is available... $ECHO_C" >&6
 if test "${sim_cv_lib_x11mu_avail+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
@@ -6325,7 +6325,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
 else
   echo "$as_me: failed program was:" >&5
 cat conftest.$ac_ext >&5
-sim_cv_lib_x11mu_avail=no
+sim_cv_lib_x11mu_avail=maybe
 fi
 rm -f conftest.$ac_objext conftest$ac_exeext conftest.$ac_ext
 fi
@@ -6339,8 +6339,8 @@ else
   if test -d /usr/contrib/X11R6; then
     CPPFLAGS="-I/usr/contrib/X11R6/include $CPPFLAGS"
     LDFLAGS="-L/usr/contrib/X11R6/lib $LDFLAGS"
-    echo "$as_me:$LINENO: checking whether the X11 miscellaneous utilities is available" >&5
-echo $ECHO_N "checking whether the X11 miscellaneous utilities is available... $ECHO_C" >&6
+    echo "$as_me:$LINENO: checking once more whether the X11 miscellaneous utilities library is available" >&5
+echo $ECHO_N "checking once more whether the X11 miscellaneous utilities library is available... $ECHO_C" >&6
 if test "${sim_cv_lib_x11mu_contrib_avail+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
@@ -9591,6 +9591,9 @@ if test x"${WINWIDGET+set}" != x"set"; then
   WINWIDGET=$WIDGET
 fi
 
+# FIXME: the following blocks for detection and setup of gl.h
+# inclusion is copied from Coin's configure.ac. Duplication is
+# bad, it should be collected in a shared macro. 20030401 mortene.
 
 # how to include gl.h
 if test x"$ac_cv_header_GL_gl_h" = x"yes"; then
