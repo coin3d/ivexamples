@@ -58,6 +58,7 @@
 #include "Pyramid.h"
 #include "Alternate.h"
 
+int
 main(int, char **argv)
 {
    SoInput      myInput;
@@ -72,22 +73,14 @@ main(int, char **argv)
    Pyramid::initClass();
    Alternate::initClass();
 
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/Toolmaker/02.Nodes/newNodes.iv";
+   SoInput::addDirectoryFirst("@top_srcdir@/Toolmaker/02.Nodes");
 
-   if (! myInput.openFile(s.getString())) {
-      fprintf(stderr, "Can't open %s\n", s.getString());
+   if (! myInput.openFile("newNodes.iv")) {
       return 1;
    }
 
    root = SoDB::readAll(&myInput);
    if (root == NULL) {
-      printf("File %s contains bad data\n", s.getString());
       return 2;
    }
 
