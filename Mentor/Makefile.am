@@ -74,7 +74,8 @@ XT_ONLY_PROGS = \
         10.5.SelectionCB \
         10.6.PickFilterTopLevel \
         16.1.Overlay \
-        17.1.ColorIndex
+        17.1.ColorIndex \
+        17.3.GLFloor
 else
 XT_ONLY_PROGS = 
 endif
@@ -135,8 +136,7 @@ noinst_PROGRAMS = \
         15.3.AttachManip \
         15.4.Customize \
         16.5.Examiner \
-        17.2.GLCallback \
-        17.3.GLFloor
+        17.2.GLCallback
 
 # Not yet in use (note: these are also matched by uncommenting below):
 
