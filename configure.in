@@ -96,7 +96,6 @@ else
       qt  | soqt)    sim_ac_gui_toolkit=soqt  ;;
       gtk | sogtk)   sim_ac_gui_toolkit=sogtk ;;
       be  | sobe)    sim_ac_gui_toolkit=sobe  ;;
-      iv  | oiv)     sim_ac_gui_toolkit=oiv   ;;
       *) AC_MSG_ERROR([invalid --with-toolkit value: "$withval"]) ;;
     esac],
     [sim_ac_gui_toolkit=soxt])
