@@ -80,13 +80,10 @@ gui = @gui@
 install_sh = @install_sh@
 soguiconfig = @soguiconfig@
 
-############################################################################
 
-
-noinst_PROGRAMS = elementtest
-
-elementtest_SOURCES = main.cpp TemperatureElement.cpp TemperatureElement.h
-subdir = Toolmaker/05.Elements
+noinst_PROGRAMS = lstextures
+lstextures_SOURCES = lstextures.cpp texturefilenameelement.cpp
+subdir = Base/elements
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
 CONFIG_CLEAN_FILES = 
@@ -97,36 +94,33 @@ DEFS = @DEFS@ -I. -I$(srcdir) -I../..
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-am_elementtest_OBJECTS =  main.o TemperatureElement.o
-elementtest_OBJECTS =  $(am_elementtest_OBJECTS)
-elementtest_LDADD = $(LDADD)
-elementtest_DEPENDENCIES = 
-elementtest_LDFLAGS = 
+am_lstextures_OBJECTS =  lstextures.o texturefilenameelement.o
+lstextures_OBJECTS =  $(am_lstextures_OBJECTS)
+lstextures_LDADD = $(LDADD)
+lstextures_DEPENDENCIES = 
+lstextures_LDFLAGS = 
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXFLAGS = @CXXFLAGS@
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-CFLAGS = @CFLAGS@
-COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES =  $(elementtest_SOURCES)
+DIST_SOURCES =  $(lstextures_SOURCES)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
-DEP_FILES =  @AMDEP@ $(DEPDIR)/TemperatureElement.Po $(DEPDIR)/main.Po
+DEP_FILES =  @AMDEP@ $(DEPDIR)/lstextures.Po \
+$(DEPDIR)/texturefilenameelement.Po
 DIST_COMMON =  README Makefile.am Makefile.in
 
 
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
 GZIP_ENV = --best
-SOURCES = $(elementtest_SOURCES)
-OBJECTS = $(am_elementtest_OBJECTS)
+SOURCES = $(lstextures_SOURCES)
+OBJECTS = $(am_lstextures_OBJECTS)
 
 all: all-redirect
 .SUFFIXES:
-.SUFFIXES: .c .cpp .h .o
+.SUFFIXES: .c .cpp .o
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
-	cd $(top_srcdir) && $(AUTOMAKE) --foreign Toolmaker/05.Elements/Makefile
+	cd $(top_srcdir) && $(AUTOMAKE) --foreign Base/elements/Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) \
@@ -152,9 +146,9 @@ distclean-compile:
 
 maintainer-clean-compile:
 
-elementtest: $(elementtest_OBJECTS) $(elementtest_DEPENDENCIES)
-	@rm -f elementtest
-	$(CXXLINK) $(elementtest_LDFLAGS) $(elementtest_OBJECTS) $(elementtest_LDADD) $(LIBS)
+lstextures: $(lstextures_OBJECTS) $(lstextures_DEPENDENCIES)
+	@rm -f lstextures
+	$(CXXLINK) $(lstextures_LDFLAGS) $(lstextures_OBJECTS) $(lstextures_LDADD) $(LIBS)
 
 tags: TAGS
 
@@ -189,8 +183,8 @@ distclean-tags:
 
 maintainer-clean-tags:
 
-@AMDEP@include $(DEPDIR)/TemperatureElement.Po
-@AMDEP@include $(DEPDIR)/main.Po
+@AMDEP@include $(DEPDIR)/lstextures.Po
+@AMDEP@include $(DEPDIR)/texturefilenameelement.Po
 
 mostlyclean-depend:
 
@@ -296,8 +290,6 @@ uninstall-am uninstall all-redirect all-am all install-strip \
 installdirs mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
-
-############################################################################
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

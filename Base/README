@@ -1,0 +1,6 @@
+This directory (and it's subdirectories) contains examples which do
+not use any of the GUI glue libraries, only the core Coin or Inventor
+library.
+
+-- 
+mortene@sim.no

@@ -79,7 +79,7 @@ dnl *******************************************************************
 dnl * Compiler control.
 dnl *******************************************************************
 
-SIM_DEBUGSYMBOLS
+SIM_AC_DEBUGSYMBOLS
 SIM_AC_RTTI_SUPPORT
 SIM_EXCEPTION_HANDLING
 SIM_PROFILING_SUPPORT
@@ -91,6 +91,8 @@ dnl *******************************************************************
 
 AC_OUTPUT([
 	Makefile
+	Base/Makefile
+	Base/elements/Makefile
 	Mentor/Makefile
 	Mentor/02.1.HelloCone.cpp
 	Mentor/02.2.EngineSpin.cpp

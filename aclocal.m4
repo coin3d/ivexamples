@@ -1,14 +1,15 @@
-dnl aclocal.m4 generated automatically by aclocal 1.4a
+# aclocal.m4 generated automatically by aclocal 1.4a
 
-dnl Copyright (C) 1994, 1995-9, 2000 Free Software Foundation, Inc.
-dnl This file is free software; the Free Software Foundation
-dnl gives unlimited permission to copy and/or distribute it,
-dnl with or without modifications, as long as this notice is preserved.
+# Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000
+# Free Software Foundation, Inc.
+# This file is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
 
-dnl This program is distributed in the hope that it will be useful,
-dnl but WITHOUT ANY WARRANTY, to the extent permitted by law; without
-dnl even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-dnl PARTICULAR PURPOSE.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
 
 # Do all the work for Automake.  This macro actually does too much --
 # some checks are only needed if your package does certain things.
@@ -38,7 +39,7 @@ AC_DEFUN([AM_INIT_AUTOMAKE],
 [dnl We require 2.13 because we rely on SHELL being computed by configure.
 AC_REQUIRE([AC_PROG_INSTALL])dnl
 # test to see if srcdir already configured
-if test "`CDPATH=: && cd $srcdir && pwd`" != "`pwd`" &&
+if test "`CDPATH=:; cd $srcdir && pwd`" != "`pwd`" &&
    test -f $srcdir/config.status; then
   AC_MSG_ERROR([source directory already configured; run "make distclean" there first])
 fi
@@ -146,7 +147,7 @@ AC_SUBST(install_sh)])
 # If it does, set am_missing_run to use it, otherwise, to nothing.
 AC_DEFUN([AM_MISSING_HAS_RUN], [
 test x"${MISSING+set}" = xset || \
-  MISSING="\${SHELL} `CDPATH=: && cd $ac_aux_dir && pwd`/missing"
+  MISSING="\${SHELL} `CDPATH=:; cd $ac_aux_dir && pwd`/missing"
 # Use eval to expand $SHELL
 if eval "$MISSING --run :"; then
   am_missing_run="$MISSING --run "
@@ -374,7 +375,7 @@ else
 fi])
 
 # Usage:
-#   SIM_DEBUGSYMBOLS
+#   SIM_AC_DEBUGSYMBOLS
 #
 # Description:
 #   Let the user decide if debug symbol information should be compiled
@@ -386,16 +387,12 @@ fi])
 # 
 # Author: Morten Eriksen, <mortene@sim.no>.
 # 
-# TODO:
-#   * [mortene:19991114] make this work with compilers other than gcc/g++
-# 
 
-AC_DEFUN([SIM_DEBUGSYMBOLS], [
-AC_PREREQ([2.13])
+AC_DEFUN([SIM_AC_DEBUGSYMBOLS], [
 AC_ARG_ENABLE(
   [symbols],
   AC_HELP_STRING([--enable-symbols],
-                 [(GCC only) include symbol debug information [default=yes]]),
+                 [include symbol debug information [[default=yes]]]),
   [case "${enableval}" in
     yes) enable_symbols=yes ;;
     no)  enable_symbols=no ;;
@@ -404,15 +401,11 @@ AC_ARG_ENABLE(
   [enable_symbols=yes])
 
 if test x"$enable_symbols" = x"no"; then
-  if test x"$GXX" = x"yes" || x"$GCC" = x"yes"; then
-    CFLAGS="`echo $CFLAGS | sed 's/-g//'`"
-    CXXFLAGS="`echo $CXXFLAGS | sed 's/-g//'`"
-  else
-    AC_MSG_WARN([--disable-symbols only has effect when using GNU gcc or g++])
-  fi
+  CFLAGS="`echo $CFLAGS | sed 's/-g//'`"
+  CPPFLAGS="`echo $CPPFLAGS | sed 's/-g//'`"
+  CXXFLAGS="`echo $CXXFLAGS | sed 's/-g//'`"
 fi
 ])
-
 
 # Usage:
 #   SIM_AC_RTTI_SUPPORT
@@ -431,7 +424,7 @@ AC_DEFUN([SIM_AC_RTTI_SUPPORT], [
 AC_PREREQ([2.13])
 AC_ARG_ENABLE(
   [rtti],
-  AC_HELP_STRING([--enable-rtti], [(g++ only) compile with RTTI [default=yes]]),
+  AC_HELP_STRING([--enable-rtti], [(g++ only) compile with RTTI [[default=yes]]]),
   [case "${enableval}" in
     yes) enable_rtti=yes ;;
     no)  enable_rtti=no ;;
@@ -470,7 +463,7 @@ AC_PREREQ([2.13])
 AC_ARG_ENABLE(
   [exceptions],
   AC_HELP_STRING([--enable-exceptions],
-                 [(g++ only) compile with exceptions [default=no]]),
+                 [(g++ only) compile with exceptions [[default=no]]]),
   [case "${enableval}" in
     yes) enable_exceptions=yes ;;
     no)  enable_exceptions=no ;;
@@ -574,7 +567,7 @@ AC_PREREQ([2.13])
 AC_ARG_ENABLE(
   [profile],
   AC_HELP_STRING([--enable-profile],
-                 [(GCC only) turn on inclusion of profiling code [default=no]]),
+                 [(GCC only) turn on inclusion of profiling code [[default=no]]]),
   [case "${enableval}" in
     yes) enable_profile=yes ;;
     no)  enable_profile=no ;;
@@ -623,7 +616,7 @@ AC_DEFUN([SIM_COMPILER_WARNINGS], [
 AC_ARG_ENABLE(
   [warnings],
   AC_HELP_STRING([--enable-warnings],
-                 [turn on warnings when compiling [default=yes]]),
+                 [turn on warnings when compiling [[default=yes]]]),
   [case "${enableval}" in
     yes) enable_warnings=yes ;;
     no)  enable_warnings=no ;;
