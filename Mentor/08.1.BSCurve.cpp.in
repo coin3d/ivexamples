@@ -214,13 +214,14 @@ main(int, char **argv)
 
    char * oivhome = getenv("OIVHOME");
    if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
+     (void)fprintf(stderr, "\nWARNING: Environment variable $OIVHOME not set.\n\n");
    }
-   SbString s(oivhome);
-   s += "/src/examples/data";
-   // So we can find the texture.
-   SoInput::addDirectoryLast(s.getString());
+   else {
+     SbString s(oivhome);
+     s += "/src/examples/data";
+     // So we can find the texture.
+     SoInput::addDirectoryLast(s.getString());
+   }
 
    in.setBuffer(floorData, strlen(floorData));
    SoDB::read(&in, result);
