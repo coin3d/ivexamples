@@ -85,22 +85,27 @@ main(int, char **argv)
 
    // Create the globe
    SoSeparator *sphereSep = new SoSeparator;
-   SoTexture2  *myTexture2 = new SoTexture2;
    SoComplexity *sphereComplexity = new SoComplexity;
    sphereComplexity->value = 0.55;
    root->addChild(sphereSep);
-   sphereSep->addChild(myTexture2);
-   sphereSep->addChild(sphereComplexity);
-   sphereSep->addChild(new SoSphere);
 
    char * oivhome = getenv("OIVHOME");
    if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
+     (void)fprintf(stderr,
+                   "WARNING: environment variable $OIVHOME not set, "
+                   "can't find texture globe.rgb.\n");
    }
-   SbString s(oivhome);
-   s += "/src/examples/data/globe.rgb";
-   myTexture2->filename = s;
+   else {
+     SoTexture2  *myTexture2 = new SoTexture2;
+     sphereSep->addChild(myTexture2);
+
+     SbString s(oivhome);
+     s += "/src/examples/data/globe.rgb";
+     myTexture2->filename = s;
+   }
+
+   sphereSep->addChild(sphereComplexity);
+   sphereSep->addChild(new SoSphere);
 
    // Add Text3 for AFRICA, transformed to proper location.
    SoSeparator *africaSep = new SoSeparator;
