@@ -377,7 +377,10 @@ fi
 
 AC_DEFUN([AM_AUX_DIR_EXPAND], [
 # expand $ac_aux_dir to an absolute path
-am_aux_dir=`CDPATH=:; cd $ac_aux_dir && pwd`
+if test "${CDPATH+set}" = set; then
+  CDPATH=${ZSH_VERSION+.}:   # as recommended in autoconf.texi
+fi
+am_aux_dir=`cd $ac_aux_dir && pwd`
 ])
 
 # AM_PROG_INSTALL_SH
@@ -985,7 +988,7 @@ AC_ARG_ENABLE(
   [case "${enableval}" in
     yes) enable_warnings=yes ;;
     no)  enable_warnings=no ;;
-    *) AC_MSG_ERROR(bad value "${enableval}" for --enable-warnings) ;;
+    *) AC_MSG_ERROR([bad value "$enableval" for --enable-warnings]) ;;
   esac],
   [enable_warnings=yes])
 
@@ -1677,13 +1680,17 @@ fi
 #  OpenGL-compatible development system is found.
 #
 #
-# Author: Morten Eriksen, <mortene@sim.no>.
+# Authors:
+#   Morten Eriksen <mortene@sim.no>
+#   Lars J. Aas <larsa@sim.no>
 
 AC_DEFUN(SIM_AC_CHECK_OPENGL, [
 
-unset sim_ac_gl_cppflags
-unset sim_ac_gl_ldflags
-unset sim_ac_gl_libs
+sim_ac_gl_cppflags=
+sim_ac_gl_cflags=
+sim_ac_gl_cxxflags=
+sim_ac_gl_ldflags=
+sim_ac_gl_libs=
 sim_ac_gl_avail=no
 
 AC_ARG_WITH(
@@ -1693,7 +1700,7 @@ AC_ARG_WITH(
   [],
   [with_mesa=yes])
 
-# It's usually libGL.so on UNIX systems and opengl32.lib on MSWindows.
+
 sim_ac_gl_glnames="-lGL -lopengl32"
 sim_ac_gl_mesaglnames=-lMesaGL
 
@@ -1713,52 +1720,90 @@ AC_ARG_WITH(
   [with_opengl=yes])
 
 if test x"$with_opengl" != xno; then
+  sim_ac_use_framework_option=false;
+  case $host_os in
+  darwin*)
+    if test x"$GCC" = x"yes"; then
+      SIM_AC_CC_COMPILER_OPTION([-framework OpenGL], [sim_ac_use_framework_option=true])
+    fi
+    ;;
+  esac
+
   if test x"$with_opengl" != xyes; then
     sim_ac_gl_cppflags="-I${with_opengl}/include"
     sim_ac_gl_ldflags="-L${with_opengl}/lib"
   else
-    # This is a common location for the OpenGL library on HPUX.
-    sim_ac_gl_hpux=/opt/graphics/OpenGL
-    if test -d $sim_ac_gl_hpux; then
-      sim_ac_gl_cppflags=-I$sim_ac_gl_hpux/include
-      sim_ac_gl_ldflags=-L$sim_ac_gl_hpux/lib
+    if $sim_ac_use_framework_option; then
+      # hopefully, this is the default behavior and not needed. 20011005 larsa
+      # sim_ac_gl_cppflags="-F/System/Library/Frameworks/OpenGL.framework/"
+      sim_ac_gl_ldflags="-Wl,-framework,OpenGL"
+    else
+      ## This is a common location for the OpenGL library on HPUX.
+      sim_ac_gl_hpux=/opt/graphics/OpenGL
+      if test -d $sim_ac_gl_hpux; then
+        sim_ac_gl_cppflags=-I$sim_ac_gl_hpux/include
+        sim_ac_gl_ldflags=-L$sim_ac_gl_hpux/lib
+      fi
     fi
   fi
 
   sim_ac_save_cppflags=$CPPFLAGS
+  sim_ac_save_cflags=$CFLAGS
+  sim_ac_save_cxxflags=$CXXFLAGS
   sim_ac_save_ldflags=$LDFLAGS
   sim_ac_save_libs=$LIBS
 
   CPPFLAGS="$CPPFLAGS $sim_ac_gl_cppflags"
   LDFLAGS="$LDFLAGS $sim_ac_gl_ldflags"
 
+  ## This must be done after include-paths have been set up for CPPFLAGS.
+  AC_CHECK_HEADERS([GL/gl.h OpenGL/gl.h])
+
   AC_CACHE_CHECK(
     [whether OpenGL library is available],
     sim_cv_lib_gl,
     [sim_cv_lib_gl=UNRESOLVED
 
-    for sim_ac_gl_libcheck in $sim_ac_gl_first $sim_ac_gl_second; do
+    # Mac OS X uses nada, which is why "" was set first
+    for sim_ac_gl_libcheck in "" $sim_ac_gl_first $sim_ac_gl_second; do
       if test "x$sim_cv_lib_gl" = "xUNRESOLVED"; then
         LIBS="$sim_ac_gl_libcheck $sim_ac_save_libs"
         AC_TRY_LINK([
-#if HAVE_WINDOWS_H
+#ifdef HAVE_WINDOWS_H
 #include <windows.h>
 #endif /* HAVE_WINDOWS_H */
+#ifdef HAVE_GL_GL_H
 #include <GL/gl.h>
+#else
+#ifdef HAVE_OPENGL_GL_H
+/* Mac OS X */
+#include <OpenGL/gl.h>
+#endif
+#endif
 ],
                     [
 glPointSize(1.0f);
-],
-                    [sim_cv_lib_gl="$sim_ac_gl_libcheck"])
+], [
+          if test x"$sim_ac_gl_libcheck" = x""; then
+            sim_cv_lib_gl="$sim_ac_gl_ldflags"
+          else
+            sim_cv_lib_gl="$sim_ac_gl_libcheck"
+          fi])
       fi
     done
   ])
 
   LIBS="$sim_ac_save_libs"
 
-  if test "x$sim_cv_lib_gl" != "xUNRESOLVED"; then
+  case $sim_cv_lib_gl in
+  -Wl,-framework,OpenGL)
+    sim_ac_gl_libs=
+    sim_ac_gl_ldflags="$sim_cv_lib_gl"
+    ;;
+  -l*)
     sim_ac_gl_libs="$sim_cv_lib_gl"
-  else
+    ;;
+  *)
     AC_MSG_WARN([couldn't compile or link with OpenGL library -- trying with pthread library in place...])
 
     SIM_AC_CHECK_PTHREAD([
@@ -1776,7 +1821,13 @@ glPointSize(1.0f);
           if test "x$sim_cv_lib_gl_pthread" = "xUNRESOLVED"; then
             LIBS="$sim_ac_gl_libcheck $sim_ac_pthread_libs $sim_ac_save_libs"
             AC_TRY_LINK([
+#ifdef HAVE_GL_GL_H
 #include <GL/gl.h>
+#else
+#ifdef HAVE_OPENGL_GL_H
+#include <OpenGL/gl.h>
+#endif
+#endif
 ],
                         [
 glPointSize(1.0f);
@@ -1790,21 +1841,68 @@ glPointSize(1.0f);
         sim_ac_gl_libs="$sim_cv_lib_gl_pthread $sim_ac_pthread_libs"
       fi
     fi
-  fi
+    ;;
+  esac
 
 
-  if test "x$sim_ac_gl_libs" != "x"; then
-    LIBS="$sim_ac_gl_libs $sim_ac_save_libs"
+  # MacOS will have empty sim_ac_gl_libs, so don't check if it is empty...
+  if test x"$sim_cv_gl_libs" != x"UNRESOLVED"; then
     sim_ac_gl_avail=yes
     $1
   else
     CPPFLAGS=$sim_ac_save_cppflags
+    CFLAGS=$sim_ac_save_cflags
+    CXXFLAGS=$sim_ac_save_cxxflags
     LDFLAGS=$sim_ac_save_ldflags
     LIBS=$sim_ac_save_libs
     $2
   fi
 fi
 ])
+
+
+# **************************************************************************
+# SIM_AC_GLU_READY_IFELSE( [ACTION-IF-TRUE], [ACTION-IF-FALSE] )
+
+AC_DEFUN([SIM_AC_GLU_READY_IFELSE], [
+AC_CHECK_HEADERS([GL/glu.h OpenGL/glu.h])
+AC_CACHE_CHECK(
+  [if GLU is available as part of GL library],
+  [sim_cv_glu_ready],
+  [AC_TRY_LINK(
+    [
+#ifdef HAVE_WINDOWS_H
+#include <windows.h>
+#endif /* HAVE_WINDOWS_H */
+#ifdef HAVE_GL_GL_H
+#include <GL/gl.h>
+#else
+#ifdef HAVE_OPENGL_GL_H
+#include <OpenGL/gl.h>
+#endif
+#endif
+#ifdef HAVE_GL_GLU_H
+#include <GL/glu.h>
+#else
+#ifdef HAVE_OPENGL_GLU_H
+#include <OpenGL/glu.h>
+#endif
+#endif
+],
+    [
+gluSphere(0L, 1.0, 1, 1);
+/* Defect JAGad01283 of HP's aCC compiler causes a link failure unless
+   there is at least one "pure" OpenGL call along with GLU calls. */
+glEnd();
+],
+    [sim_cv_glu_ready=true],
+    [sim_cv_glu_ready=false])])
+if ${sim_cv_glu_ready}; then
+  ifelse([$1], , :, [$1])
+else
+  ifelse([$2], , :, [$2])
+fi
+]) # SIM_AC_GLU_READY_IFELSE()
 
 
 # Usage:
@@ -1824,7 +1922,8 @@ fi
 #
 # Author: Morten Eriksen, <mortene@sim.no>.
 
-AC_DEFUN(SIM_AC_CHECK_GLU, [
+AC_DEFUN([SIM_AC_CHECK_GLU], [
+AC_CHECK_HEADERS([GL/glu.h OpenGL/glu.h])
 
 unset sim_ac_glu_cppflags
 unset sim_ac_glu_ldflags
@@ -1875,11 +1974,23 @@ if test x"$with_glu" != xno; then
       if test "x$sim_cv_lib_glu" = "xUNRESOLVED"; then
         LIBS="$sim_ac_glu_libcheck $sim_ac_save_libs"
         AC_TRY_LINK([
-#if HAVE_WINDOWS_H
+#ifdef HAVE_WINDOWS_H
 #include <windows.h>
 #endif /* HAVE_WINDOWS_H */
+#ifdef HAVE_GL_GL_H
 #include <GL/gl.h>
+#else
+#ifdef HAVE_OPENGL_GL_H
+#include <OpenGL/gl.h>
+#endif
+#endif
+#ifdef HAVE_GL_GLU_H
 #include <GL/glu.h>
+#else
+#ifdef HAVE_OPENGL_GLU_H
+#include <OpenGL/glu.h>
+#endif
+#endif
 ],
                     [
 gluSphere(0L, 1.0, 1, 1);
@@ -1909,37 +2020,6 @@ fi
 ])
 
 
-# **************************************************************************
-# SIM_AC_GLU_READY_IFELSE( [ACTION-IF-TRUE], [ACTION-IF-FALSE] )
-
-AC_DEFUN([SIM_AC_GLU_READY_IFELSE],
-[AC_CACHE_CHECK(
-  [if GLU is available as part of GL library],
-  [sim_cv_glu_ready],
-  [AC_TRY_LINK(
-    [
-#if HAVE_WINDOWS_H
-#include <windows.h>
-#endif /* HAVE_WINDOWS_H */
-#include <GL/gl.h>
-#include <GL/glu.h>
-],
-    [
-gluSphere(0L, 1.0, 1, 1);
-/* Defect JAGad01283 of HP's aCC compiler causes a link failure unless
-   there is at least one "pure" OpenGL call along with GLU calls. */
-glEnd();
-],
-    [sim_cv_glu_ready=true],
-    [sim_cv_glu_ready=false])])
-if ${sim_cv_glu_ready}; then
-  ifelse([$1], , :, [$1])
-else
-  ifelse([$2], , :, [$2])
-fi
-]) # SIM_AC_GLU_READY_IFELSE()
-
-
 # Usage:
 #  SIM_AC_GLU_NURBSOBJECT([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
 #
@@ -1961,11 +2041,24 @@ AC_CACHE_CHECK(
    for sim_ac_glu_structname in GLUnurbs GLUnurbsObj; do
     if test "$sim_cv_func_glu_nurbsobject" = NONE; then
       AC_TRY_LINK([
-#if HAVE_WINDOWS_H
+#ifdef HAVE_WINDOWS_H
 #include <windows.h>
 #endif /* HAVE_WINDOWS_H */
+#ifdef HAVE_GL_GL_H
 #include <GL/gl.h>
-#include <GL/glu.h>],
+#else
+#ifdef HAVE_OPENGL_GL_H
+#include <OpenGL/gl.h>
+#endif
+#endif
+#ifdef HAVE_GL_GLU_H
+#include <GL/glu.h>
+#else
+#ifdef HAVE_OPENGL_GLU_H
+#include <OpenGL/glu.h>
+#endif
+#endif
+],
                   [
 $sim_ac_glu_structname * hepp = gluNewNurbsRenderer();
 gluDeleteNurbsRenderer(hepp);
