@@ -26,10 +26,13 @@ SIM_AC_SETUP_MSVC_IFELSE([
 ])
 
 # **************************************************************************
-#  Locate C++ compiler and set C++ as the default compiler to run
-#  in tests.
+
+## CPP needed for the Open Inventor version check.
+AC_PROG_CPP
+## Locate C++ compiler and set C++ as the default compiler to run
+## in tests.
 AC_PROG_CXX
-AC_LANG_CPLUSPLUS
+AC_LANG(C++)
 
 # *******************************************************************
 # * Miscellaneous options and initializations.
@@ -62,20 +65,24 @@ AC_CHECK_HEADERS([windows.h])
 # **************************************************************************
 # Search and set up necessary stuff to use the Inventor implementation.
 
-if test x"$with_inventor" = xyes; then
+sim_ac_ivexamples_use_inventor=true
+if test x"$with_inventor" = x; then sim_ac_ivexamples_use_inventor=false; fi
+if test x"$with_inventor" = xno; then sim_ac_ivexamples_use_inventor=false; fi
+
+if $sim_ac_ivexamples_use_inventor; then
   # If we want to compile and link against InventorXt and Inventor, we
   # need to check for a shitload of libraries.
 
   SIM_AC_CHECK_MATHLIB
   SIM_AC_CHECK_DL
-  SIM_CHECK_X11
+  SIM_AC_CHECK_X11
   
   if test x"$sim_ac_x11_avail" = xyes; then
-    SIM_CHECK_X11SHMEM
-    SIM_CHECK_X11MU
-    SIM_CHECK_X11XID
+    SIM_AC_CHECK_X11SHMEM
+    SIM_AC_CHECK_X11MU
+    SIM_AC_CHECK_X11XID
     SIM_AC_CHECK_X11_XP
-    SIM_CHECK_X_INTRINSIC
+    SIM_AC_CHECK_X_INTRINSIC
   fi
   
   SIM_AC_CHECK_OPENGL( , AC_MSG_ERROR(needs an OpenGL-compatible development system installation))
