@@ -1,0 +1,1339 @@
+# Makefile.in generated automatically by automake 1.4a from Makefile.am
+
+# Copyright (C) 1994, 1995-9, 2000 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_FLAG =
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+
+@SET_MAKE@
+AMDEP = @AMDEP@
+AMTAR = @AMTAR@
+AWK = @AWK@
+CC = @CC@
+COMPONENTHEADER = @COMPONENTHEADER@
+CPP = @CPP@
+CXX = @CXX@
+CXXCPP = @CXXCPP@
+DEPDIR = @DEPDIR@
+EVENT = @EVENT@
+GUI = @GUI@
+Gui = @Gui@
+MAINT = @MAINT@
+MAKEINFO = @MAKEINFO@
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+WIDGET = @WIDGET@
+WINWIDGET = @WINWIDGET@
+gui = @gui@
+install_sh = @install_sh@
+soguiconfig = @soguiconfig@
+
+############################################################################
+
+
+BUILT_SOURCES = \
+	02.1.HelloCone.cpp \
+	02.2.EngineSpin.cpp \
+	02.3.Trackball.cpp \
+	02.4.Examiner.cpp \
+	03.1.Molecule.cpp \
+	03.2.Robot.cpp \
+	03.3.Naming.cpp \
+	04.1.Cameras.cpp \
+	04.2.Lights.cpp \
+	05.1.FaceSet.cpp \
+	05.2.IndexedFaceSet.cpp \
+	05.3.TriangleStripSet.cpp \
+	05.4.QuadMesh.cpp \
+	05.5.Binding.cpp \
+	05.6.TransformOrdering.cpp \
+	06.1.Text.cpp \
+	06.2.Simple3DText.cpp \
+	06.3.Complex3DText.cpp \
+	07.1.BasicTexture.cpp \
+	07.2.TextureCoordinates.cpp \
+	07.3.TextureFunction.cpp \
+	08.1.BSCurve.cpp \
+	08.2.UniCurve.cpp \
+	08.3.BezSurf.cpp \
+	08.4.TrimSurf.cpp \
+	09.1.Print.cpp \
+	09.2.Texture.cpp \
+	09.3.Search.cpp \
+	09.4.PickAction.cpp \
+	09.5.GenSph.cpp \
+	10.1.addEventCB.cpp \
+	10.2.setEventCB.cpp \
+	10.3and4.MotifList.cpp \
+	10.5.SelectionCB.cpp \
+	10.6.PickFilterTopLevel.cpp \
+	10.7.PickFilterManip.cpp \
+	10.8.PickFilterNodeKit.cpp \
+	11.1.ReadFile.cpp \
+	11.2.ReadString.cpp \
+	12.1.FieldSensor.cpp \
+	12.2.NodeSensor.cpp \
+	12.3.AlarmSensor.cpp \
+	12.4.TimerSensor.cpp \
+	13.1.GlobalFlds.cpp \
+	13.2.ElapsedTime.cpp \
+	13.3.TimeCounter.cpp \
+	13.4.Gate.cpp \
+	13.5.Boolean.cpp \
+	13.6.Calculator.cpp \
+	13.7.Rotor.cpp \
+	13.8.Blinker.cpp \
+	14.1.FrolickingWords.cpp \
+	14.2.Editors.cpp \
+	14.3.Balance.cpp \
+	15.1.ConeRadius.cpp \
+	15.2.SliderBox.cpp \
+	15.3.AttachManip.cpp \
+	15.4.Customize.cpp \
+	16.1.Overlay.cpp \
+	16.2.Callback.cpp \
+	16.3.AttachEditor.cpp \
+	16.4.OneWindow.cpp \
+	16.5.Examiner.cpp \
+	17.1.ColorIndex.cpp \
+	17.2.GLCallback.cpp \
+	17.3.GLFloor.cpp
+
+@BUILD_XT_ONLY_EXAMPLES_TRUE@XT_ONLY_PROGS = @BUILD_XT_ONLY_EXAMPLES_TRUE@\
+@BUILD_XT_ONLY_EXAMPLES_TRUE@        10.2.setEventCB \
+@BUILD_XT_ONLY_EXAMPLES_TRUE@        10.5.SelectionCB \
+@BUILD_XT_ONLY_EXAMPLES_TRUE@        10.6.PickFilterTopLevel \
+@BUILD_XT_ONLY_EXAMPLES_TRUE@        16.1.Overlay \
+@BUILD_XT_ONLY_EXAMPLES_TRUE@        17.1.ColorIndex
+@BUILD_XT_ONLY_EXAMPLES_FALSE@XT_ONLY_PROGS = 
+
+noinst_PROGRAMS = \
+        $(XT_ONLY_PROGS) \
+        02.1.HelloCone \
+        02.2.EngineSpin \
+        02.3.Trackball \
+        02.4.Examiner \
+        03.1.Molecule \
+        03.2.Robot \
+        03.3.Naming \
+        04.1.Cameras \
+        04.2.Lights \
+        05.1.FaceSet \
+        05.2.IndexedFaceSet \
+        05.3.TriangleStripSet \
+        05.4.QuadMesh \
+        05.5.Binding \
+        05.6.TransformOrdering \
+        06.1.Text \
+        06.2.Simple3DText \
+        06.3.Complex3DText \
+        07.1.BasicTexture \
+        07.2.TextureCoordinates \
+        07.3.TextureFunction \
+        08.1.BSCurve \
+        08.2.UniCurve \
+        08.3.BezSurf \
+        08.4.TrimSurf \
+        09.1.Print \
+        09.2.Texture \
+        09.3.Search \
+        09.4.PickAction \
+        09.5.GenSph \
+        10.1.addEventCB \
+        10.7.PickFilterManip \
+        11.1.ReadFile \
+        11.2.ReadString \
+        12.1.FieldSensor \
+        12.2.NodeSensor \
+        12.3.AlarmSensor \
+        12.4.TimerSensor \
+        13.1.GlobalFlds \
+        13.2.ElapsedTime \
+        13.3.TimeCounter \
+        13.4.Gate \
+        13.5.Boolean \
+        13.6.Calculator \
+        13.7.Rotor \
+        13.8.Blinker \
+        14.1.FrolickingWords \
+        14.3.Balance \
+        15.1.ConeRadius \
+        15.2.SliderBox \
+        15.3.AttachManip \
+        15.4.Customize \
+        16.5.Examiner \
+        17.2.GLCallback \
+        17.3.GLFloor
+
+
+# Not yet in use (note: these are also matched by uncommenting below):
+
+# (doesn't link with -lInventorXt (weird))
+# 10.3and4.MotifList
+#
+# (missing SoXtMaterialEditor)
+# 10.8.PickFilterNodeKit
+# 16.2.Callback
+# 16.3.AttachEditor
+# 16.4.OneWindow
+#
+# (missing SoXtDirectionalLightEditor and SoXtMaterialEditor)
+# 14.2.Editors
+
+02_1_HelloCone_SOURCES = 02.1.HelloCone.cpp
+02_2_EngineSpin_SOURCES = 02.2.EngineSpin.cpp
+02_3_Trackball_SOURCES = 02.3.Trackball.cpp
+02_4_Examiner_SOURCES = 02.4.Examiner.cpp
+03_1_Molecule_SOURCES = 03.1.Molecule.cpp
+03_2_Robot_SOURCES = 03.2.Robot.cpp
+03_3_Naming_SOURCES = 03.3.Naming.cpp
+04_1_Cameras_SOURCES = 04.1.Cameras.cpp
+04_2_Lights_SOURCES = 04.2.Lights.cpp
+05_1_FaceSet_SOURCES = 05.1.FaceSet.cpp
+05_2_IndexedFaceSet_SOURCES = 05.2.IndexedFaceSet.cpp
+05_3_TriangleStripSet_SOURCES = 05.3.TriangleStripSet.cpp
+05_4_QuadMesh_SOURCES = 05.4.QuadMesh.cpp
+05_5_Binding_SOURCES = 05.5.Binding.cpp
+05_6_TransformOrdering_SOURCES = 05.6.TransformOrdering.cpp
+06_1_Text_SOURCES = 06.1.Text.cpp
+06_2_Simple3DText_SOURCES = 06.2.Simple3DText.cpp
+06_3_Complex3DText_SOURCES = 06.3.Complex3DText.cpp
+07_1_BasicTexture_SOURCES = 07.1.BasicTexture.cpp
+07_2_TextureCoordinates_SOURCES = 07.2.TextureCoordinates.cpp
+07_3_TextureFunction_SOURCES = 07.3.TextureFunction.cpp
+08_1_BSCurve_SOURCES = 08.1.BSCurve.cpp
+08_2_UniCurve_SOURCES = 08.2.UniCurve.cpp
+08_3_BezSurf_SOURCES = 08.3.BezSurf.cpp
+08_4_TrimSurf_SOURCES = 08.4.TrimSurf.cpp
+09_1_Print_SOURCES = 09.1.Print.cpp
+09_2_Texture_SOURCES = 09.2.Texture.cpp
+09_3_Search_SOURCES = 09.3.Search.cpp
+09_4_PickAction_SOURCES = 09.4.PickAction.cpp
+09_5_GenSph_SOURCES = 09.5.GenSph.cpp
+10_1_addEventCB_SOURCES = 10.1.addEventCB.cpp
+#10_3and4_MotifList_SOURCES = 10.3and4.MotifList.cpp
+10_7_PickFilterManip_SOURCES = 10.7.PickFilterManip.cpp
+#10_8_PickFilterNodeKit_SOURCES = 10.8.PickFilterNodeKit.cpp
+11_1_ReadFile_SOURCES = 11.1.ReadFile.cpp
+11_2_ReadString_SOURCES = 11.2.ReadString.cpp
+12_1_FieldSensor_SOURCES = 12.1.FieldSensor.cpp
+12_2_NodeSensor_SOURCES = 12.2.NodeSensor.cpp
+12_3_AlarmSensor_SOURCES = 12.3.AlarmSensor.cpp
+12_4_TimerSensor_SOURCES = 12.4.TimerSensor.cpp
+13_1_GlobalFlds_SOURCES = 13.1.GlobalFlds.cpp
+13_2_ElapsedTime_SOURCES = 13.2.ElapsedTime.cpp
+13_3_TimeCounter_SOURCES = 13.3.TimeCounter.cpp
+13_4_Gate_SOURCES = 13.4.Gate.cpp
+13_5_Boolean_SOURCES = 13.5.Boolean.cpp
+13_6_Calculator_SOURCES = 13.6.Calculator.cpp
+13_7_Rotor_SOURCES = 13.7.Rotor.cpp
+13_8_Blinker_SOURCES = 13.8.Blinker.cpp
+14_1_FrolickingWords_SOURCES = 14.1.FrolickingWords.cpp
+#14_2_Editors_SOURCES = 14.2.Editors.cpp
+14_3_Balance_SOURCES = 14.3.Balance.cpp
+15_1_ConeRadius_SOURCES = 15.1.ConeRadius.cpp
+15_2_SliderBox_SOURCES = 15.2.SliderBox.cpp
+15_3_AttachManip_SOURCES = 15.3.AttachManip.cpp
+15_4_Customize_SOURCES = 15.4.Customize.cpp
+#16_2_Callback_SOURCES = 16.2.Callback.cpp
+#16_3_AttachEditor_SOURCES = 16.3.AttachEditor.cpp
+#16_4_OneWindow_SOURCES = 16.4.OneWindow.cpp
+16_5_Examiner_SOURCES = 16.5.Examiner.cpp
+17_2_GLCallback_SOURCES = 17.2.GLCallback.cpp
+17_3_GLFloor_SOURCES = 17.3.GLFloor.cpp
+
+@BUILD_XT_ONLY_EXAMPLES_TRUE@10_2_setEventCB_SOURCES = @BUILD_XT_ONLY_EXAMPLES_TRUE@10.2.setEventCB.cpp
+@BUILD_XT_ONLY_EXAMPLES_TRUE@10_5_SelectionCB_SOURCES = @BUILD_XT_ONLY_EXAMPLES_TRUE@10.5.SelectionCB.cpp
+@BUILD_XT_ONLY_EXAMPLES_TRUE@10_6_PickFilterTopLevel_SOURCES = @BUILD_XT_ONLY_EXAMPLES_TRUE@10.6.PickFilterTopLevel.cpp
+@BUILD_XT_ONLY_EXAMPLES_TRUE@16_1_Overlay_SOURCES = @BUILD_XT_ONLY_EXAMPLES_TRUE@16.1.Overlay.cpp
+@BUILD_XT_ONLY_EXAMPLES_TRUE@17_1_ColorIndex_SOURCES = @BUILD_XT_ONLY_EXAMPLES_TRUE@17.1.ColorIndex.cpp
+subdir = Mentor
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+CONFIG_CLEAN_FILES =  02.1.HelloCone.cpp 02.2.EngineSpin.cpp \
+02.3.Trackball.cpp 02.4.Examiner.cpp 03.1.Molecule.cpp 03.2.Robot.cpp \
+03.3.Naming.cpp 04.1.Cameras.cpp 04.2.Lights.cpp 05.1.FaceSet.cpp \
+05.2.IndexedFaceSet.cpp 05.3.TriangleStripSet.cpp 05.4.QuadMesh.cpp \
+05.5.Binding.cpp 05.6.TransformOrdering.cpp 06.1.Text.cpp \
+06.2.Simple3DText.cpp 06.3.Complex3DText.cpp 07.1.BasicTexture.cpp \
+07.2.TextureCoordinates.cpp 07.3.TextureFunction.cpp 08.1.BSCurve.cpp \
+08.2.UniCurve.cpp 08.3.BezSurf.cpp 08.4.TrimSurf.cpp 09.1.Print.cpp \
+09.2.Texture.cpp 09.3.Search.cpp 09.4.PickAction.cpp 09.5.GenSph.cpp \
+10.1.addEventCB.cpp 10.2.setEventCB.cpp 10.3and4.MotifList.cpp \
+10.5.SelectionCB.cpp 10.6.PickFilterTopLevel.cpp \
+10.7.PickFilterManip.cpp 10.8.PickFilterNodeKit.cpp 11.1.ReadFile.cpp \
+11.2.ReadString.cpp 12.1.FieldSensor.cpp 12.2.NodeSensor.cpp \
+12.3.AlarmSensor.cpp 12.4.TimerSensor.cpp 13.1.GlobalFlds.cpp \
+13.2.ElapsedTime.cpp 13.3.TimeCounter.cpp 13.4.Gate.cpp \
+13.5.Boolean.cpp 13.6.Calculator.cpp 13.7.Rotor.cpp 13.8.Blinker.cpp \
+14.1.FrolickingWords.cpp 14.2.Editors.cpp 14.3.Balance.cpp \
+15.1.ConeRadius.cpp 15.2.SliderBox.cpp 15.3.AttachManip.cpp \
+15.4.Customize.cpp 16.1.Overlay.cpp 16.2.Callback.cpp \
+16.3.AttachEditor.cpp 16.4.OneWindow.cpp 16.5.Examiner.cpp \
+17.1.ColorIndex.cpp 17.2.GLCallback.cpp 17.3.GLFloor.cpp
+PROGRAMS =  $(noinst_PROGRAMS)
+
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I..
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+am_02_1_HelloCone_OBJECTS =  02.1.HelloCone.o
+02_1_HelloCone_OBJECTS =  $(am_02_1_HelloCone_OBJECTS)
+02_1_HelloCone_LDADD = $(LDADD)
+02_1_HelloCone_DEPENDENCIES = 
+02_1_HelloCone_LDFLAGS = 
+am_02_2_EngineSpin_OBJECTS =  02.2.EngineSpin.o
+02_2_EngineSpin_OBJECTS =  $(am_02_2_EngineSpin_OBJECTS)
+02_2_EngineSpin_LDADD = $(LDADD)
+02_2_EngineSpin_DEPENDENCIES = 
+02_2_EngineSpin_LDFLAGS = 
+am_02_3_Trackball_OBJECTS =  02.3.Trackball.o
+02_3_Trackball_OBJECTS =  $(am_02_3_Trackball_OBJECTS)
+02_3_Trackball_LDADD = $(LDADD)
+02_3_Trackball_DEPENDENCIES = 
+02_3_Trackball_LDFLAGS = 
+am_02_4_Examiner_OBJECTS =  02.4.Examiner.o
+02_4_Examiner_OBJECTS =  $(am_02_4_Examiner_OBJECTS)
+02_4_Examiner_LDADD = $(LDADD)
+02_4_Examiner_DEPENDENCIES = 
+02_4_Examiner_LDFLAGS = 
+am_03_1_Molecule_OBJECTS =  03.1.Molecule.o
+03_1_Molecule_OBJECTS =  $(am_03_1_Molecule_OBJECTS)
+03_1_Molecule_LDADD = $(LDADD)
+03_1_Molecule_DEPENDENCIES = 
+03_1_Molecule_LDFLAGS = 
+am_03_2_Robot_OBJECTS =  03.2.Robot.o
+03_2_Robot_OBJECTS =  $(am_03_2_Robot_OBJECTS)
+03_2_Robot_LDADD = $(LDADD)
+03_2_Robot_DEPENDENCIES = 
+03_2_Robot_LDFLAGS = 
+am_03_3_Naming_OBJECTS =  03.3.Naming.o
+03_3_Naming_OBJECTS =  $(am_03_3_Naming_OBJECTS)
+03_3_Naming_LDADD = $(LDADD)
+03_3_Naming_DEPENDENCIES = 
+03_3_Naming_LDFLAGS = 
+am_04_1_Cameras_OBJECTS =  04.1.Cameras.o
+04_1_Cameras_OBJECTS =  $(am_04_1_Cameras_OBJECTS)
+04_1_Cameras_LDADD = $(LDADD)
+04_1_Cameras_DEPENDENCIES = 
+04_1_Cameras_LDFLAGS = 
+am_04_2_Lights_OBJECTS =  04.2.Lights.o
+04_2_Lights_OBJECTS =  $(am_04_2_Lights_OBJECTS)
+04_2_Lights_LDADD = $(LDADD)
+04_2_Lights_DEPENDENCIES = 
+04_2_Lights_LDFLAGS = 
+am_05_1_FaceSet_OBJECTS =  05.1.FaceSet.o
+05_1_FaceSet_OBJECTS =  $(am_05_1_FaceSet_OBJECTS)
+05_1_FaceSet_LDADD = $(LDADD)
+05_1_FaceSet_DEPENDENCIES = 
+05_1_FaceSet_LDFLAGS = 
+am_05_2_IndexedFaceSet_OBJECTS =  05.2.IndexedFaceSet.o
+05_2_IndexedFaceSet_OBJECTS =  $(am_05_2_IndexedFaceSet_OBJECTS)
+05_2_IndexedFaceSet_LDADD = $(LDADD)
+05_2_IndexedFaceSet_DEPENDENCIES = 
+05_2_IndexedFaceSet_LDFLAGS = 
+am_05_3_TriangleStripSet_OBJECTS =  05.3.TriangleStripSet.o
+05_3_TriangleStripSet_OBJECTS =  $(am_05_3_TriangleStripSet_OBJECTS)
+05_3_TriangleStripSet_LDADD = $(LDADD)
+05_3_TriangleStripSet_DEPENDENCIES = 
+05_3_TriangleStripSet_LDFLAGS = 
+am_05_4_QuadMesh_OBJECTS =  05.4.QuadMesh.o
+05_4_QuadMesh_OBJECTS =  $(am_05_4_QuadMesh_OBJECTS)
+05_4_QuadMesh_LDADD = $(LDADD)
+05_4_QuadMesh_DEPENDENCIES = 
+05_4_QuadMesh_LDFLAGS = 
+am_05_5_Binding_OBJECTS =  05.5.Binding.o
+05_5_Binding_OBJECTS =  $(am_05_5_Binding_OBJECTS)
+05_5_Binding_LDADD = $(LDADD)
+05_5_Binding_DEPENDENCIES = 
+05_5_Binding_LDFLAGS = 
+am_05_6_TransformOrdering_OBJECTS =  05.6.TransformOrdering.o
+05_6_TransformOrdering_OBJECTS =  $(am_05_6_TransformOrdering_OBJECTS)
+05_6_TransformOrdering_LDADD = $(LDADD)
+05_6_TransformOrdering_DEPENDENCIES = 
+05_6_TransformOrdering_LDFLAGS = 
+am_06_1_Text_OBJECTS =  06.1.Text.o
+06_1_Text_OBJECTS =  $(am_06_1_Text_OBJECTS)
+06_1_Text_LDADD = $(LDADD)
+06_1_Text_DEPENDENCIES = 
+06_1_Text_LDFLAGS = 
+am_06_2_Simple3DText_OBJECTS =  06.2.Simple3DText.o
+06_2_Simple3DText_OBJECTS =  $(am_06_2_Simple3DText_OBJECTS)
+06_2_Simple3DText_LDADD = $(LDADD)
+06_2_Simple3DText_DEPENDENCIES = 
+06_2_Simple3DText_LDFLAGS = 
+am_06_3_Complex3DText_OBJECTS =  06.3.Complex3DText.o
+06_3_Complex3DText_OBJECTS =  $(am_06_3_Complex3DText_OBJECTS)
+06_3_Complex3DText_LDADD = $(LDADD)
+06_3_Complex3DText_DEPENDENCIES = 
+06_3_Complex3DText_LDFLAGS = 
+am_07_1_BasicTexture_OBJECTS =  07.1.BasicTexture.o
+07_1_BasicTexture_OBJECTS =  $(am_07_1_BasicTexture_OBJECTS)
+07_1_BasicTexture_LDADD = $(LDADD)
+07_1_BasicTexture_DEPENDENCIES = 
+07_1_BasicTexture_LDFLAGS = 
+am_07_2_TextureCoordinates_OBJECTS =  07.2.TextureCoordinates.o
+07_2_TextureCoordinates_OBJECTS =  $(am_07_2_TextureCoordinates_OBJECTS)
+07_2_TextureCoordinates_LDADD = $(LDADD)
+07_2_TextureCoordinates_DEPENDENCIES = 
+07_2_TextureCoordinates_LDFLAGS = 
+am_07_3_TextureFunction_OBJECTS =  07.3.TextureFunction.o
+07_3_TextureFunction_OBJECTS =  $(am_07_3_TextureFunction_OBJECTS)
+07_3_TextureFunction_LDADD = $(LDADD)
+07_3_TextureFunction_DEPENDENCIES = 
+07_3_TextureFunction_LDFLAGS = 
+am_08_1_BSCurve_OBJECTS =  08.1.BSCurve.o
+08_1_BSCurve_OBJECTS =  $(am_08_1_BSCurve_OBJECTS)
+08_1_BSCurve_LDADD = $(LDADD)
+08_1_BSCurve_DEPENDENCIES = 
+08_1_BSCurve_LDFLAGS = 
+am_08_2_UniCurve_OBJECTS =  08.2.UniCurve.o
+08_2_UniCurve_OBJECTS =  $(am_08_2_UniCurve_OBJECTS)
+08_2_UniCurve_LDADD = $(LDADD)
+08_2_UniCurve_DEPENDENCIES = 
+08_2_UniCurve_LDFLAGS = 
+am_08_3_BezSurf_OBJECTS =  08.3.BezSurf.o
+08_3_BezSurf_OBJECTS =  $(am_08_3_BezSurf_OBJECTS)
+08_3_BezSurf_LDADD = $(LDADD)
+08_3_BezSurf_DEPENDENCIES = 
+08_3_BezSurf_LDFLAGS = 
+am_08_4_TrimSurf_OBJECTS =  08.4.TrimSurf.o
+08_4_TrimSurf_OBJECTS =  $(am_08_4_TrimSurf_OBJECTS)
+08_4_TrimSurf_LDADD = $(LDADD)
+08_4_TrimSurf_DEPENDENCIES = 
+08_4_TrimSurf_LDFLAGS = 
+am_09_1_Print_OBJECTS =  09.1.Print.o
+09_1_Print_OBJECTS =  $(am_09_1_Print_OBJECTS)
+09_1_Print_LDADD = $(LDADD)
+09_1_Print_DEPENDENCIES = 
+09_1_Print_LDFLAGS = 
+am_09_2_Texture_OBJECTS =  09.2.Texture.o
+09_2_Texture_OBJECTS =  $(am_09_2_Texture_OBJECTS)
+09_2_Texture_LDADD = $(LDADD)
+09_2_Texture_DEPENDENCIES = 
+09_2_Texture_LDFLAGS = 
+am_09_3_Search_OBJECTS =  09.3.Search.o
+09_3_Search_OBJECTS =  $(am_09_3_Search_OBJECTS)
+09_3_Search_LDADD = $(LDADD)
+09_3_Search_DEPENDENCIES = 
+09_3_Search_LDFLAGS = 
+am_09_4_PickAction_OBJECTS =  09.4.PickAction.o
+09_4_PickAction_OBJECTS =  $(am_09_4_PickAction_OBJECTS)
+09_4_PickAction_LDADD = $(LDADD)
+09_4_PickAction_DEPENDENCIES = 
+09_4_PickAction_LDFLAGS = 
+am_09_5_GenSph_OBJECTS =  09.5.GenSph.o
+09_5_GenSph_OBJECTS =  $(am_09_5_GenSph_OBJECTS)
+09_5_GenSph_LDADD = $(LDADD)
+09_5_GenSph_DEPENDENCIES = 
+09_5_GenSph_LDFLAGS = 
+am_10_1_addEventCB_OBJECTS =  10.1.addEventCB.o
+10_1_addEventCB_OBJECTS =  $(am_10_1_addEventCB_OBJECTS)
+10_1_addEventCB_LDADD = $(LDADD)
+10_1_addEventCB_DEPENDENCIES = 
+10_1_addEventCB_LDFLAGS = 
+@BUILD_XT_ONLY_EXAMPLES_TRUE@am_10_2_setEventCB_OBJECTS =  \
+@BUILD_XT_ONLY_EXAMPLES_TRUE@10.2.setEventCB.o
+10_2_setEventCB_OBJECTS =  $(am_10_2_setEventCB_OBJECTS)
+10_2_setEventCB_LDADD = $(LDADD)
+10_2_setEventCB_DEPENDENCIES = 
+10_2_setEventCB_LDFLAGS = 
+@BUILD_XT_ONLY_EXAMPLES_TRUE@am_10_5_SelectionCB_OBJECTS =  \
+@BUILD_XT_ONLY_EXAMPLES_TRUE@10.5.SelectionCB.o
+10_5_SelectionCB_OBJECTS =  $(am_10_5_SelectionCB_OBJECTS)
+10_5_SelectionCB_LDADD = $(LDADD)
+10_5_SelectionCB_DEPENDENCIES = 
+10_5_SelectionCB_LDFLAGS = 
+@BUILD_XT_ONLY_EXAMPLES_TRUE@am_10_6_PickFilterTopLevel_OBJECTS =  \
+@BUILD_XT_ONLY_EXAMPLES_TRUE@10.6.PickFilterTopLevel.o
+10_6_PickFilterTopLevel_OBJECTS =  $(am_10_6_PickFilterTopLevel_OBJECTS)
+10_6_PickFilterTopLevel_LDADD = $(LDADD)
+10_6_PickFilterTopLevel_DEPENDENCIES = 
+10_6_PickFilterTopLevel_LDFLAGS = 
+am_10_7_PickFilterManip_OBJECTS =  10.7.PickFilterManip.o
+10_7_PickFilterManip_OBJECTS =  $(am_10_7_PickFilterManip_OBJECTS)
+10_7_PickFilterManip_LDADD = $(LDADD)
+10_7_PickFilterManip_DEPENDENCIES = 
+10_7_PickFilterManip_LDFLAGS = 
+am_11_1_ReadFile_OBJECTS =  11.1.ReadFile.o
+11_1_ReadFile_OBJECTS =  $(am_11_1_ReadFile_OBJECTS)
+11_1_ReadFile_LDADD = $(LDADD)
+11_1_ReadFile_DEPENDENCIES = 
+11_1_ReadFile_LDFLAGS = 
+am_11_2_ReadString_OBJECTS =  11.2.ReadString.o
+11_2_ReadString_OBJECTS =  $(am_11_2_ReadString_OBJECTS)
+11_2_ReadString_LDADD = $(LDADD)
+11_2_ReadString_DEPENDENCIES = 
+11_2_ReadString_LDFLAGS = 
+am_12_1_FieldSensor_OBJECTS =  12.1.FieldSensor.o
+12_1_FieldSensor_OBJECTS =  $(am_12_1_FieldSensor_OBJECTS)
+12_1_FieldSensor_LDADD = $(LDADD)
+12_1_FieldSensor_DEPENDENCIES = 
+12_1_FieldSensor_LDFLAGS = 
+am_12_2_NodeSensor_OBJECTS =  12.2.NodeSensor.o
+12_2_NodeSensor_OBJECTS =  $(am_12_2_NodeSensor_OBJECTS)
+12_2_NodeSensor_LDADD = $(LDADD)
+12_2_NodeSensor_DEPENDENCIES = 
+12_2_NodeSensor_LDFLAGS = 
+am_12_3_AlarmSensor_OBJECTS =  12.3.AlarmSensor.o
+12_3_AlarmSensor_OBJECTS =  $(am_12_3_AlarmSensor_OBJECTS)
+12_3_AlarmSensor_LDADD = $(LDADD)
+12_3_AlarmSensor_DEPENDENCIES = 
+12_3_AlarmSensor_LDFLAGS = 
+am_12_4_TimerSensor_OBJECTS =  12.4.TimerSensor.o
+12_4_TimerSensor_OBJECTS =  $(am_12_4_TimerSensor_OBJECTS)
+12_4_TimerSensor_LDADD = $(LDADD)
+12_4_TimerSensor_DEPENDENCIES = 
+12_4_TimerSensor_LDFLAGS = 
+am_13_1_GlobalFlds_OBJECTS =  13.1.GlobalFlds.o
+13_1_GlobalFlds_OBJECTS =  $(am_13_1_GlobalFlds_OBJECTS)
+13_1_GlobalFlds_LDADD = $(LDADD)
+13_1_GlobalFlds_DEPENDENCIES = 
+13_1_GlobalFlds_LDFLAGS = 
+am_13_2_ElapsedTime_OBJECTS =  13.2.ElapsedTime.o
+13_2_ElapsedTime_OBJECTS =  $(am_13_2_ElapsedTime_OBJECTS)
+13_2_ElapsedTime_LDADD = $(LDADD)
+13_2_ElapsedTime_DEPENDENCIES = 
+13_2_ElapsedTime_LDFLAGS = 
+am_13_3_TimeCounter_OBJECTS =  13.3.TimeCounter.o
+13_3_TimeCounter_OBJECTS =  $(am_13_3_TimeCounter_OBJECTS)
+13_3_TimeCounter_LDADD = $(LDADD)
+13_3_TimeCounter_DEPENDENCIES = 
+13_3_TimeCounter_LDFLAGS = 
+am_13_4_Gate_OBJECTS =  13.4.Gate.o
+13_4_Gate_OBJECTS =  $(am_13_4_Gate_OBJECTS)
+13_4_Gate_LDADD = $(LDADD)
+13_4_Gate_DEPENDENCIES = 
+13_4_Gate_LDFLAGS = 
+am_13_5_Boolean_OBJECTS =  13.5.Boolean.o
+13_5_Boolean_OBJECTS =  $(am_13_5_Boolean_OBJECTS)
+13_5_Boolean_LDADD = $(LDADD)
+13_5_Boolean_DEPENDENCIES = 
+13_5_Boolean_LDFLAGS = 
+am_13_6_Calculator_OBJECTS =  13.6.Calculator.o
+13_6_Calculator_OBJECTS =  $(am_13_6_Calculator_OBJECTS)
+13_6_Calculator_LDADD = $(LDADD)
+13_6_Calculator_DEPENDENCIES = 
+13_6_Calculator_LDFLAGS = 
+am_13_7_Rotor_OBJECTS =  13.7.Rotor.o
+13_7_Rotor_OBJECTS =  $(am_13_7_Rotor_OBJECTS)
+13_7_Rotor_LDADD = $(LDADD)
+13_7_Rotor_DEPENDENCIES = 
+13_7_Rotor_LDFLAGS = 
+am_13_8_Blinker_OBJECTS =  13.8.Blinker.o
+13_8_Blinker_OBJECTS =  $(am_13_8_Blinker_OBJECTS)
+13_8_Blinker_LDADD = $(LDADD)
+13_8_Blinker_DEPENDENCIES = 
+13_8_Blinker_LDFLAGS = 
+am_14_1_FrolickingWords_OBJECTS =  14.1.FrolickingWords.o
+14_1_FrolickingWords_OBJECTS =  $(am_14_1_FrolickingWords_OBJECTS)
+14_1_FrolickingWords_LDADD = $(LDADD)
+14_1_FrolickingWords_DEPENDENCIES = 
+14_1_FrolickingWords_LDFLAGS = 
+am_14_3_Balance_OBJECTS =  14.3.Balance.o
+14_3_Balance_OBJECTS =  $(am_14_3_Balance_OBJECTS)
+14_3_Balance_LDADD = $(LDADD)
+14_3_Balance_DEPENDENCIES = 
+14_3_Balance_LDFLAGS = 
+am_15_1_ConeRadius_OBJECTS =  15.1.ConeRadius.o
+15_1_ConeRadius_OBJECTS =  $(am_15_1_ConeRadius_OBJECTS)
+15_1_ConeRadius_LDADD = $(LDADD)
+15_1_ConeRadius_DEPENDENCIES = 
+15_1_ConeRadius_LDFLAGS = 
+am_15_2_SliderBox_OBJECTS =  15.2.SliderBox.o
+15_2_SliderBox_OBJECTS =  $(am_15_2_SliderBox_OBJECTS)
+15_2_SliderBox_LDADD = $(LDADD)
+15_2_SliderBox_DEPENDENCIES = 
+15_2_SliderBox_LDFLAGS = 
+am_15_3_AttachManip_OBJECTS =  15.3.AttachManip.o
+15_3_AttachManip_OBJECTS =  $(am_15_3_AttachManip_OBJECTS)
+15_3_AttachManip_LDADD = $(LDADD)
+15_3_AttachManip_DEPENDENCIES = 
+15_3_AttachManip_LDFLAGS = 
+am_15_4_Customize_OBJECTS =  15.4.Customize.o
+15_4_Customize_OBJECTS =  $(am_15_4_Customize_OBJECTS)
+15_4_Customize_LDADD = $(LDADD)
+15_4_Customize_DEPENDENCIES = 
+15_4_Customize_LDFLAGS = 
+@BUILD_XT_ONLY_EXAMPLES_TRUE@am_16_1_Overlay_OBJECTS =  16.1.Overlay.o
+16_1_Overlay_OBJECTS =  $(am_16_1_Overlay_OBJECTS)
+16_1_Overlay_LDADD = $(LDADD)
+16_1_Overlay_DEPENDENCIES = 
+16_1_Overlay_LDFLAGS = 
+am_16_5_Examiner_OBJECTS =  16.5.Examiner.o
+16_5_Examiner_OBJECTS =  $(am_16_5_Examiner_OBJECTS)
+16_5_Examiner_LDADD = $(LDADD)
+16_5_Examiner_DEPENDENCIES = 
+16_5_Examiner_LDFLAGS = 
+@BUILD_XT_ONLY_EXAMPLES_TRUE@am_17_1_ColorIndex_OBJECTS =  \
+@BUILD_XT_ONLY_EXAMPLES_TRUE@17.1.ColorIndex.o
+17_1_ColorIndex_OBJECTS =  $(am_17_1_ColorIndex_OBJECTS)
+17_1_ColorIndex_LDADD = $(LDADD)
+17_1_ColorIndex_DEPENDENCIES = 
+17_1_ColorIndex_LDFLAGS = 
+am_17_2_GLCallback_OBJECTS =  17.2.GLCallback.o
+17_2_GLCallback_OBJECTS =  $(am_17_2_GLCallback_OBJECTS)
+17_2_GLCallback_LDADD = $(LDADD)
+17_2_GLCallback_DEPENDENCIES = 
+17_2_GLCallback_LDFLAGS = 
+am_17_3_GLFloor_OBJECTS =  17.3.GLFloor.o
+17_3_GLFloor_OBJECTS =  $(am_17_3_GLFloor_OBJECTS)
+17_3_GLFloor_LDADD = $(LDADD)
+17_3_GLFloor_DEPENDENCIES = 
+17_3_GLFloor_LDFLAGS = 
+CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXFLAGS = @CXXFLAGS@
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+DIST_SOURCES =  $(02_1_HelloCone_SOURCES) $(02_2_EngineSpin_SOURCES) \
+$(02_3_Trackball_SOURCES) $(02_4_Examiner_SOURCES) \
+$(03_1_Molecule_SOURCES) $(03_2_Robot_SOURCES) $(03_3_Naming_SOURCES) \
+$(04_1_Cameras_SOURCES) $(04_2_Lights_SOURCES) $(05_1_FaceSet_SOURCES) \
+$(05_2_IndexedFaceSet_SOURCES) $(05_3_TriangleStripSet_SOURCES) \
+$(05_4_QuadMesh_SOURCES) $(05_5_Binding_SOURCES) \
+$(05_6_TransformOrdering_SOURCES) $(06_1_Text_SOURCES) \
+$(06_2_Simple3DText_SOURCES) $(06_3_Complex3DText_SOURCES) \
+$(07_1_BasicTexture_SOURCES) $(07_2_TextureCoordinates_SOURCES) \
+$(07_3_TextureFunction_SOURCES) $(08_1_BSCurve_SOURCES) \
+$(08_2_UniCurve_SOURCES) $(08_3_BezSurf_SOURCES) \
+$(08_4_TrimSurf_SOURCES) $(09_1_Print_SOURCES) $(09_2_Texture_SOURCES) \
+$(09_3_Search_SOURCES) $(09_4_PickAction_SOURCES) \
+$(09_5_GenSph_SOURCES) $(10_1_addEventCB_SOURCES) \
+$(10_2_setEventCB_SOURCES) $(10_5_SelectionCB_SOURCES) \
+$(10_6_PickFilterTopLevel_SOURCES) $(10_7_PickFilterManip_SOURCES) \
+$(11_1_ReadFile_SOURCES) $(11_2_ReadString_SOURCES) \
+$(12_1_FieldSensor_SOURCES) $(12_2_NodeSensor_SOURCES) \
+$(12_3_AlarmSensor_SOURCES) $(12_4_TimerSensor_SOURCES) \
+$(13_1_GlobalFlds_SOURCES) $(13_2_ElapsedTime_SOURCES) \
+$(13_3_TimeCounter_SOURCES) $(13_4_Gate_SOURCES) \
+$(13_5_Boolean_SOURCES) $(13_6_Calculator_SOURCES) \
+$(13_7_Rotor_SOURCES) $(13_8_Blinker_SOURCES) \
+$(14_1_FrolickingWords_SOURCES) $(14_3_Balance_SOURCES) \
+$(15_1_ConeRadius_SOURCES) $(15_2_SliderBox_SOURCES) \
+$(15_3_AttachManip_SOURCES) $(15_4_Customize_SOURCES) \
+$(16_1_Overlay_SOURCES) $(16_5_Examiner_SOURCES) \
+$(17_1_ColorIndex_SOURCES) $(17_2_GLCallback_SOURCES) \
+$(17_3_GLFloor_SOURCES)
+depcomp = $(SHELL) $(top_srcdir)/depcomp
+DEP_FILES =  @AMDEP@ $(DEPDIR)/02.1.HelloCone.Po \
+$(DEPDIR)/02.2.EngineSpin.Po $(DEPDIR)/02.3.Trackball.Po \
+$(DEPDIR)/02.4.Examiner.Po $(DEPDIR)/03.1.Molecule.Po \
+$(DEPDIR)/03.2.Robot.Po $(DEPDIR)/03.3.Naming.Po \
+$(DEPDIR)/04.1.Cameras.Po $(DEPDIR)/04.2.Lights.Po \
+$(DEPDIR)/05.1.FaceSet.Po $(DEPDIR)/05.2.IndexedFaceSet.Po \
+$(DEPDIR)/05.3.TriangleStripSet.Po $(DEPDIR)/05.4.QuadMesh.Po \
+$(DEPDIR)/05.5.Binding.Po $(DEPDIR)/05.6.TransformOrdering.Po \
+$(DEPDIR)/06.1.Text.Po $(DEPDIR)/06.2.Simple3DText.Po \
+$(DEPDIR)/06.3.Complex3DText.Po $(DEPDIR)/07.1.BasicTexture.Po \
+$(DEPDIR)/07.2.TextureCoordinates.Po $(DEPDIR)/07.3.TextureFunction.Po \
+$(DEPDIR)/08.1.BSCurve.Po $(DEPDIR)/08.2.UniCurve.Po \
+$(DEPDIR)/08.3.BezSurf.Po $(DEPDIR)/08.4.TrimSurf.Po \
+$(DEPDIR)/09.1.Print.Po $(DEPDIR)/09.2.Texture.Po \
+$(DEPDIR)/09.3.Search.Po $(DEPDIR)/09.4.PickAction.Po \
+$(DEPDIR)/09.5.GenSph.Po $(DEPDIR)/10.1.addEventCB.Po \
+$(DEPDIR)/10.2.setEventCB.Po $(DEPDIR)/10.5.SelectionCB.Po \
+$(DEPDIR)/10.6.PickFilterTopLevel.Po $(DEPDIR)/10.7.PickFilterManip.Po \
+$(DEPDIR)/11.1.ReadFile.Po $(DEPDIR)/11.2.ReadString.Po \
+$(DEPDIR)/12.1.FieldSensor.Po $(DEPDIR)/12.2.NodeSensor.Po \
+$(DEPDIR)/12.3.AlarmSensor.Po $(DEPDIR)/12.4.TimerSensor.Po \
+$(DEPDIR)/13.1.GlobalFlds.Po $(DEPDIR)/13.2.ElapsedTime.Po \
+$(DEPDIR)/13.3.TimeCounter.Po $(DEPDIR)/13.4.Gate.Po \
+$(DEPDIR)/13.5.Boolean.Po $(DEPDIR)/13.6.Calculator.Po \
+$(DEPDIR)/13.7.Rotor.Po $(DEPDIR)/13.8.Blinker.Po \
+$(DEPDIR)/14.1.FrolickingWords.Po $(DEPDIR)/14.3.Balance.Po \
+$(DEPDIR)/15.1.ConeRadius.Po $(DEPDIR)/15.2.SliderBox.Po \
+$(DEPDIR)/15.3.AttachManip.Po $(DEPDIR)/15.4.Customize.Po \
+$(DEPDIR)/16.1.Overlay.Po $(DEPDIR)/16.5.Examiner.Po \
+$(DEPDIR)/17.1.ColorIndex.Po $(DEPDIR)/17.2.GLCallback.Po \
+$(DEPDIR)/17.3.GLFloor.Po
+DIST_COMMON =  02.1.HelloCone.cpp.in 02.2.EngineSpin.cpp.in \
+02.3.Trackball.cpp.in 02.4.Examiner.cpp.in 03.1.Molecule.cpp.in \
+03.2.Robot.cpp.in 03.3.Naming.cpp.in 04.1.Cameras.cpp.in \
+04.2.Lights.cpp.in 05.1.FaceSet.cpp.in 05.2.IndexedFaceSet.cpp.in \
+05.3.TriangleStripSet.cpp.in 05.4.QuadMesh.cpp.in 05.5.Binding.cpp.in \
+05.6.TransformOrdering.cpp.in 06.1.Text.cpp.in 06.2.Simple3DText.cpp.in \
+06.3.Complex3DText.cpp.in 07.1.BasicTexture.cpp.in \
+07.2.TextureCoordinates.cpp.in 07.3.TextureFunction.cpp.in \
+08.1.BSCurve.cpp.in 08.2.UniCurve.cpp.in 08.3.BezSurf.cpp.in \
+08.4.TrimSurf.cpp.in 09.1.Print.cpp.in 09.2.Texture.cpp.in \
+09.3.Search.cpp.in 09.4.PickAction.cpp.in 09.5.GenSph.cpp.in \
+10.1.addEventCB.cpp.in 10.2.setEventCB.cpp.in 10.3and4.MotifList.cpp.in \
+10.5.SelectionCB.cpp.in 10.6.PickFilterTopLevel.cpp.in \
+10.7.PickFilterManip.cpp.in 10.8.PickFilterNodeKit.cpp.in \
+11.1.ReadFile.cpp.in 11.2.ReadString.cpp.in 12.1.FieldSensor.cpp.in \
+12.2.NodeSensor.cpp.in 12.3.AlarmSensor.cpp.in 12.4.TimerSensor.cpp.in \
+13.1.GlobalFlds.cpp.in 13.2.ElapsedTime.cpp.in 13.3.TimeCounter.cpp.in \
+13.4.Gate.cpp.in 13.5.Boolean.cpp.in 13.6.Calculator.cpp.in \
+13.7.Rotor.cpp.in 13.8.Blinker.cpp.in 14.1.FrolickingWords.cpp.in \
+14.2.Editors.cpp.in 14.3.Balance.cpp.in 15.1.ConeRadius.cpp.in \
+15.2.SliderBox.cpp.in 15.3.AttachManip.cpp.in 15.4.Customize.cpp.in \
+16.1.Overlay.cpp.in 16.2.Callback.cpp.in 16.3.AttachEditor.cpp.in \
+16.4.OneWindow.cpp.in 16.5.Examiner.cpp.in 17.1.ColorIndex.cpp.in \
+17.2.GLCallback.cpp.in 17.3.GLFloor.cpp.in Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+
+GZIP_ENV = --best
+SOURCES = $(02_1_HelloCone_SOURCES) $(02_2_EngineSpin_SOURCES) $(02_3_Trackball_SOURCES) $(02_4_Examiner_SOURCES) $(03_1_Molecule_SOURCES) $(03_2_Robot_SOURCES) $(03_3_Naming_SOURCES) $(04_1_Cameras_SOURCES) $(04_2_Lights_SOURCES) $(05_1_FaceSet_SOURCES) $(05_2_IndexedFaceSet_SOURCES) $(05_3_TriangleStripSet_SOURCES) $(05_4_QuadMesh_SOURCES) $(05_5_Binding_SOURCES) $(05_6_TransformOrdering_SOURCES) $(06_1_Text_SOURCES) $(06_2_Simple3DText_SOURCES) $(06_3_Complex3DText_SOURCES) $(07_1_BasicTexture_SOURCES) $(07_2_TextureCoordinates_SOURCES) $(07_3_TextureFunction_SOURCES) $(08_1_BSCurve_SOURCES) $(08_2_UniCurve_SOURCES) $(08_3_BezSurf_SOURCES) $(08_4_TrimSurf_SOURCES) $(09_1_Print_SOURCES) $(09_2_Texture_SOURCES) $(09_3_Search_SOURCES) $(09_4_PickAction_SOURCES) $(09_5_GenSph_SOURCES) $(10_1_addEventCB_SOURCES) $(10_2_setEventCB_SOURCES) $(10_5_SelectionCB_SOURCES) $(10_6_PickFilterTopLevel_SOURCES) $(10_7_PickFilterManip_SOURCES) $(11_1_ReadFile_SOURCES) $(11_2_ReadString_SOURCES) $(12_1_FieldSensor_SOURCES) $(12_2_NodeSensor_SOURCES) $(12_3_AlarmSensor_SOURCES) $(12_4_TimerSensor_SOURCES) $(13_1_GlobalFlds_SOURCES) $(13_2_ElapsedTime_SOURCES) $(13_3_TimeCounter_SOURCES) $(13_4_Gate_SOURCES) $(13_5_Boolean_SOURCES) $(13_6_Calculator_SOURCES) $(13_7_Rotor_SOURCES) $(13_8_Blinker_SOURCES) $(14_1_FrolickingWords_SOURCES) $(14_3_Balance_SOURCES) $(15_1_ConeRadius_SOURCES) $(15_2_SliderBox_SOURCES) $(15_3_AttachManip_SOURCES) $(15_4_Customize_SOURCES) $(16_1_Overlay_SOURCES) $(16_5_Examiner_SOURCES) $(17_1_ColorIndex_SOURCES) $(17_2_GLCallback_SOURCES) $(17_3_GLFloor_SOURCES)
+OBJECTS = $(am_02_1_HelloCone_OBJECTS) $(am_02_2_EngineSpin_OBJECTS) $(am_02_3_Trackball_OBJECTS) $(am_02_4_Examiner_OBJECTS) $(am_03_1_Molecule_OBJECTS) $(am_03_2_Robot_OBJECTS) $(am_03_3_Naming_OBJECTS) $(am_04_1_Cameras_OBJECTS) $(am_04_2_Lights_OBJECTS) $(am_05_1_FaceSet_OBJECTS) $(am_05_2_IndexedFaceSet_OBJECTS) $(am_05_3_TriangleStripSet_OBJECTS) $(am_05_4_QuadMesh_OBJECTS) $(am_05_5_Binding_OBJECTS) $(am_05_6_TransformOrdering_OBJECTS) $(am_06_1_Text_OBJECTS) $(am_06_2_Simple3DText_OBJECTS) $(am_06_3_Complex3DText_OBJECTS) $(am_07_1_BasicTexture_OBJECTS) $(am_07_2_TextureCoordinates_OBJECTS) $(am_07_3_TextureFunction_OBJECTS) $(am_08_1_BSCurve_OBJECTS) $(am_08_2_UniCurve_OBJECTS) $(am_08_3_BezSurf_OBJECTS) $(am_08_4_TrimSurf_OBJECTS) $(am_09_1_Print_OBJECTS) $(am_09_2_Texture_OBJECTS) $(am_09_3_Search_OBJECTS) $(am_09_4_PickAction_OBJECTS) $(am_09_5_GenSph_OBJECTS) $(am_10_1_addEventCB_OBJECTS) $(am_10_2_setEventCB_OBJECTS) $(am_10_5_SelectionCB_OBJECTS) $(am_10_6_PickFilterTopLevel_OBJECTS) $(am_10_7_PickFilterManip_OBJECTS) $(am_11_1_ReadFile_OBJECTS) $(am_11_2_ReadString_OBJECTS) $(am_12_1_FieldSensor_OBJECTS) $(am_12_2_NodeSensor_OBJECTS) $(am_12_3_AlarmSensor_OBJECTS) $(am_12_4_TimerSensor_OBJECTS) $(am_13_1_GlobalFlds_OBJECTS) $(am_13_2_ElapsedTime_OBJECTS) $(am_13_3_TimeCounter_OBJECTS) $(am_13_4_Gate_OBJECTS) $(am_13_5_Boolean_OBJECTS) $(am_13_6_Calculator_OBJECTS) $(am_13_7_Rotor_OBJECTS) $(am_13_8_Blinker_OBJECTS) $(am_14_1_FrolickingWords_OBJECTS) $(am_14_3_Balance_OBJECTS) $(am_15_1_ConeRadius_OBJECTS) $(am_15_2_SliderBox_OBJECTS) $(am_15_3_AttachManip_OBJECTS) $(am_15_4_Customize_OBJECTS) $(am_16_1_Overlay_OBJECTS) $(am_16_5_Examiner_OBJECTS) $(am_17_1_ColorIndex_OBJECTS) $(am_17_2_GLCallback_OBJECTS) $(am_17_3_GLFloor_OBJECTS)
+
+all: all-redirect
+.SUFFIXES:
+.SUFFIXES: .c .cpp .o
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --foreign Mentor/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+02.1.HelloCone.cpp: $(top_builddir)/config.status 02.1.HelloCone.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+02.2.EngineSpin.cpp: $(top_builddir)/config.status 02.2.EngineSpin.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+02.3.Trackball.cpp: $(top_builddir)/config.status 02.3.Trackball.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+02.4.Examiner.cpp: $(top_builddir)/config.status 02.4.Examiner.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+03.1.Molecule.cpp: $(top_builddir)/config.status 03.1.Molecule.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+03.2.Robot.cpp: $(top_builddir)/config.status 03.2.Robot.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+03.3.Naming.cpp: $(top_builddir)/config.status 03.3.Naming.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+04.1.Cameras.cpp: $(top_builddir)/config.status 04.1.Cameras.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+04.2.Lights.cpp: $(top_builddir)/config.status 04.2.Lights.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+05.1.FaceSet.cpp: $(top_builddir)/config.status 05.1.FaceSet.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+05.2.IndexedFaceSet.cpp: $(top_builddir)/config.status 05.2.IndexedFaceSet.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+05.3.TriangleStripSet.cpp: $(top_builddir)/config.status 05.3.TriangleStripSet.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+05.4.QuadMesh.cpp: $(top_builddir)/config.status 05.4.QuadMesh.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+05.5.Binding.cpp: $(top_builddir)/config.status 05.5.Binding.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+05.6.TransformOrdering.cpp: $(top_builddir)/config.status 05.6.TransformOrdering.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+06.1.Text.cpp: $(top_builddir)/config.status 06.1.Text.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+06.2.Simple3DText.cpp: $(top_builddir)/config.status 06.2.Simple3DText.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+06.3.Complex3DText.cpp: $(top_builddir)/config.status 06.3.Complex3DText.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+07.1.BasicTexture.cpp: $(top_builddir)/config.status 07.1.BasicTexture.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+07.2.TextureCoordinates.cpp: $(top_builddir)/config.status 07.2.TextureCoordinates.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+07.3.TextureFunction.cpp: $(top_builddir)/config.status 07.3.TextureFunction.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+08.1.BSCurve.cpp: $(top_builddir)/config.status 08.1.BSCurve.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+08.2.UniCurve.cpp: $(top_builddir)/config.status 08.2.UniCurve.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+08.3.BezSurf.cpp: $(top_builddir)/config.status 08.3.BezSurf.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+08.4.TrimSurf.cpp: $(top_builddir)/config.status 08.4.TrimSurf.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+09.1.Print.cpp: $(top_builddir)/config.status 09.1.Print.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+09.2.Texture.cpp: $(top_builddir)/config.status 09.2.Texture.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+09.3.Search.cpp: $(top_builddir)/config.status 09.3.Search.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+09.4.PickAction.cpp: $(top_builddir)/config.status 09.4.PickAction.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+09.5.GenSph.cpp: $(top_builddir)/config.status 09.5.GenSph.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+10.1.addEventCB.cpp: $(top_builddir)/config.status 10.1.addEventCB.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+10.2.setEventCB.cpp: $(top_builddir)/config.status 10.2.setEventCB.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+10.3and4.MotifList.cpp: $(top_builddir)/config.status 10.3and4.MotifList.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+10.5.SelectionCB.cpp: $(top_builddir)/config.status 10.5.SelectionCB.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+10.6.PickFilterTopLevel.cpp: $(top_builddir)/config.status 10.6.PickFilterTopLevel.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+10.7.PickFilterManip.cpp: $(top_builddir)/config.status 10.7.PickFilterManip.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+10.8.PickFilterNodeKit.cpp: $(top_builddir)/config.status 10.8.PickFilterNodeKit.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+11.1.ReadFile.cpp: $(top_builddir)/config.status 11.1.ReadFile.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+11.2.ReadString.cpp: $(top_builddir)/config.status 11.2.ReadString.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+12.1.FieldSensor.cpp: $(top_builddir)/config.status 12.1.FieldSensor.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+12.2.NodeSensor.cpp: $(top_builddir)/config.status 12.2.NodeSensor.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+12.3.AlarmSensor.cpp: $(top_builddir)/config.status 12.3.AlarmSensor.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+12.4.TimerSensor.cpp: $(top_builddir)/config.status 12.4.TimerSensor.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+13.1.GlobalFlds.cpp: $(top_builddir)/config.status 13.1.GlobalFlds.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+13.2.ElapsedTime.cpp: $(top_builddir)/config.status 13.2.ElapsedTime.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+13.3.TimeCounter.cpp: $(top_builddir)/config.status 13.3.TimeCounter.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+13.4.Gate.cpp: $(top_builddir)/config.status 13.4.Gate.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+13.5.Boolean.cpp: $(top_builddir)/config.status 13.5.Boolean.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+13.6.Calculator.cpp: $(top_builddir)/config.status 13.6.Calculator.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+13.7.Rotor.cpp: $(top_builddir)/config.status 13.7.Rotor.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+13.8.Blinker.cpp: $(top_builddir)/config.status 13.8.Blinker.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+14.1.FrolickingWords.cpp: $(top_builddir)/config.status 14.1.FrolickingWords.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+14.2.Editors.cpp: $(top_builddir)/config.status 14.2.Editors.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+14.3.Balance.cpp: $(top_builddir)/config.status 14.3.Balance.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+15.1.ConeRadius.cpp: $(top_builddir)/config.status 15.1.ConeRadius.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+15.2.SliderBox.cpp: $(top_builddir)/config.status 15.2.SliderBox.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+15.3.AttachManip.cpp: $(top_builddir)/config.status 15.3.AttachManip.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+15.4.Customize.cpp: $(top_builddir)/config.status 15.4.Customize.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+16.1.Overlay.cpp: $(top_builddir)/config.status 16.1.Overlay.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+16.2.Callback.cpp: $(top_builddir)/config.status 16.2.Callback.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+16.3.AttachEditor.cpp: $(top_builddir)/config.status 16.3.AttachEditor.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+16.4.OneWindow.cpp: $(top_builddir)/config.status 16.4.OneWindow.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+16.5.Examiner.cpp: $(top_builddir)/config.status 16.5.Examiner.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+17.1.ColorIndex.cpp: $(top_builddir)/config.status 17.1.ColorIndex.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+17.2.GLCallback.cpp: $(top_builddir)/config.status 17.2.GLCallback.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+17.3.GLFloor.cpp: $(top_builddir)/config.status 17.3.GLFloor.cpp.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+mostlyclean-noinstPROGRAMS:
+
+clean-noinstPROGRAMS:
+	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
+
+distclean-noinstPROGRAMS:
+
+maintainer-clean-noinstPROGRAMS:
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+02.1.HelloCone: $(02_1_HelloCone_OBJECTS) $(02_1_HelloCone_DEPENDENCIES)
+	@rm -f 02.1.HelloCone
+	$(CXXLINK) $(02_1_HelloCone_LDFLAGS) $(02_1_HelloCone_OBJECTS) $(02_1_HelloCone_LDADD) $(LIBS)
+
+02.2.EngineSpin: $(02_2_EngineSpin_OBJECTS) $(02_2_EngineSpin_DEPENDENCIES)
+	@rm -f 02.2.EngineSpin
+	$(CXXLINK) $(02_2_EngineSpin_LDFLAGS) $(02_2_EngineSpin_OBJECTS) $(02_2_EngineSpin_LDADD) $(LIBS)
+
+02.3.Trackball: $(02_3_Trackball_OBJECTS) $(02_3_Trackball_DEPENDENCIES)
+	@rm -f 02.3.Trackball
+	$(CXXLINK) $(02_3_Trackball_LDFLAGS) $(02_3_Trackball_OBJECTS) $(02_3_Trackball_LDADD) $(LIBS)
+
+02.4.Examiner: $(02_4_Examiner_OBJECTS) $(02_4_Examiner_DEPENDENCIES)
+	@rm -f 02.4.Examiner
+	$(CXXLINK) $(02_4_Examiner_LDFLAGS) $(02_4_Examiner_OBJECTS) $(02_4_Examiner_LDADD) $(LIBS)
+
+03.1.Molecule: $(03_1_Molecule_OBJECTS) $(03_1_Molecule_DEPENDENCIES)
+	@rm -f 03.1.Molecule
+	$(CXXLINK) $(03_1_Molecule_LDFLAGS) $(03_1_Molecule_OBJECTS) $(03_1_Molecule_LDADD) $(LIBS)
+
+03.2.Robot: $(03_2_Robot_OBJECTS) $(03_2_Robot_DEPENDENCIES)
+	@rm -f 03.2.Robot
+	$(CXXLINK) $(03_2_Robot_LDFLAGS) $(03_2_Robot_OBJECTS) $(03_2_Robot_LDADD) $(LIBS)
+
+03.3.Naming: $(03_3_Naming_OBJECTS) $(03_3_Naming_DEPENDENCIES)
+	@rm -f 03.3.Naming
+	$(CXXLINK) $(03_3_Naming_LDFLAGS) $(03_3_Naming_OBJECTS) $(03_3_Naming_LDADD) $(LIBS)
+
+04.1.Cameras: $(04_1_Cameras_OBJECTS) $(04_1_Cameras_DEPENDENCIES)
+	@rm -f 04.1.Cameras
+	$(CXXLINK) $(04_1_Cameras_LDFLAGS) $(04_1_Cameras_OBJECTS) $(04_1_Cameras_LDADD) $(LIBS)
+
+04.2.Lights: $(04_2_Lights_OBJECTS) $(04_2_Lights_DEPENDENCIES)
+	@rm -f 04.2.Lights
+	$(CXXLINK) $(04_2_Lights_LDFLAGS) $(04_2_Lights_OBJECTS) $(04_2_Lights_LDADD) $(LIBS)
+
+05.1.FaceSet: $(05_1_FaceSet_OBJECTS) $(05_1_FaceSet_DEPENDENCIES)
+	@rm -f 05.1.FaceSet
+	$(CXXLINK) $(05_1_FaceSet_LDFLAGS) $(05_1_FaceSet_OBJECTS) $(05_1_FaceSet_LDADD) $(LIBS)
+
+05.2.IndexedFaceSet: $(05_2_IndexedFaceSet_OBJECTS) $(05_2_IndexedFaceSet_DEPENDENCIES)
+	@rm -f 05.2.IndexedFaceSet
+	$(CXXLINK) $(05_2_IndexedFaceSet_LDFLAGS) $(05_2_IndexedFaceSet_OBJECTS) $(05_2_IndexedFaceSet_LDADD) $(LIBS)
+
+05.3.TriangleStripSet: $(05_3_TriangleStripSet_OBJECTS) $(05_3_TriangleStripSet_DEPENDENCIES)
+	@rm -f 05.3.TriangleStripSet
+	$(CXXLINK) $(05_3_TriangleStripSet_LDFLAGS) $(05_3_TriangleStripSet_OBJECTS) $(05_3_TriangleStripSet_LDADD) $(LIBS)
+
+05.4.QuadMesh: $(05_4_QuadMesh_OBJECTS) $(05_4_QuadMesh_DEPENDENCIES)
+	@rm -f 05.4.QuadMesh
+	$(CXXLINK) $(05_4_QuadMesh_LDFLAGS) $(05_4_QuadMesh_OBJECTS) $(05_4_QuadMesh_LDADD) $(LIBS)
+
+05.5.Binding: $(05_5_Binding_OBJECTS) $(05_5_Binding_DEPENDENCIES)
+	@rm -f 05.5.Binding
+	$(CXXLINK) $(05_5_Binding_LDFLAGS) $(05_5_Binding_OBJECTS) $(05_5_Binding_LDADD) $(LIBS)
+
+05.6.TransformOrdering: $(05_6_TransformOrdering_OBJECTS) $(05_6_TransformOrdering_DEPENDENCIES)
+	@rm -f 05.6.TransformOrdering
+	$(CXXLINK) $(05_6_TransformOrdering_LDFLAGS) $(05_6_TransformOrdering_OBJECTS) $(05_6_TransformOrdering_LDADD) $(LIBS)
+
+06.1.Text: $(06_1_Text_OBJECTS) $(06_1_Text_DEPENDENCIES)
+	@rm -f 06.1.Text
+	$(CXXLINK) $(06_1_Text_LDFLAGS) $(06_1_Text_OBJECTS) $(06_1_Text_LDADD) $(LIBS)
+
+06.2.Simple3DText: $(06_2_Simple3DText_OBJECTS) $(06_2_Simple3DText_DEPENDENCIES)
+	@rm -f 06.2.Simple3DText
+	$(CXXLINK) $(06_2_Simple3DText_LDFLAGS) $(06_2_Simple3DText_OBJECTS) $(06_2_Simple3DText_LDADD) $(LIBS)
+
+06.3.Complex3DText: $(06_3_Complex3DText_OBJECTS) $(06_3_Complex3DText_DEPENDENCIES)
+	@rm -f 06.3.Complex3DText
+	$(CXXLINK) $(06_3_Complex3DText_LDFLAGS) $(06_3_Complex3DText_OBJECTS) $(06_3_Complex3DText_LDADD) $(LIBS)
+
+07.1.BasicTexture: $(07_1_BasicTexture_OBJECTS) $(07_1_BasicTexture_DEPENDENCIES)
+	@rm -f 07.1.BasicTexture
+	$(CXXLINK) $(07_1_BasicTexture_LDFLAGS) $(07_1_BasicTexture_OBJECTS) $(07_1_BasicTexture_LDADD) $(LIBS)
+
+07.2.TextureCoordinates: $(07_2_TextureCoordinates_OBJECTS) $(07_2_TextureCoordinates_DEPENDENCIES)
+	@rm -f 07.2.TextureCoordinates
+	$(CXXLINK) $(07_2_TextureCoordinates_LDFLAGS) $(07_2_TextureCoordinates_OBJECTS) $(07_2_TextureCoordinates_LDADD) $(LIBS)
+
+07.3.TextureFunction: $(07_3_TextureFunction_OBJECTS) $(07_3_TextureFunction_DEPENDENCIES)
+	@rm -f 07.3.TextureFunction
+	$(CXXLINK) $(07_3_TextureFunction_LDFLAGS) $(07_3_TextureFunction_OBJECTS) $(07_3_TextureFunction_LDADD) $(LIBS)
+
+08.1.BSCurve: $(08_1_BSCurve_OBJECTS) $(08_1_BSCurve_DEPENDENCIES)
+	@rm -f 08.1.BSCurve
+	$(CXXLINK) $(08_1_BSCurve_LDFLAGS) $(08_1_BSCurve_OBJECTS) $(08_1_BSCurve_LDADD) $(LIBS)
+
+08.2.UniCurve: $(08_2_UniCurve_OBJECTS) $(08_2_UniCurve_DEPENDENCIES)
+	@rm -f 08.2.UniCurve
+	$(CXXLINK) $(08_2_UniCurve_LDFLAGS) $(08_2_UniCurve_OBJECTS) $(08_2_UniCurve_LDADD) $(LIBS)
+
+08.3.BezSurf: $(08_3_BezSurf_OBJECTS) $(08_3_BezSurf_DEPENDENCIES)
+	@rm -f 08.3.BezSurf
+	$(CXXLINK) $(08_3_BezSurf_LDFLAGS) $(08_3_BezSurf_OBJECTS) $(08_3_BezSurf_LDADD) $(LIBS)
+
+08.4.TrimSurf: $(08_4_TrimSurf_OBJECTS) $(08_4_TrimSurf_DEPENDENCIES)
+	@rm -f 08.4.TrimSurf
+	$(CXXLINK) $(08_4_TrimSurf_LDFLAGS) $(08_4_TrimSurf_OBJECTS) $(08_4_TrimSurf_LDADD) $(LIBS)
+
+09.1.Print: $(09_1_Print_OBJECTS) $(09_1_Print_DEPENDENCIES)
+	@rm -f 09.1.Print
+	$(CXXLINK) $(09_1_Print_LDFLAGS) $(09_1_Print_OBJECTS) $(09_1_Print_LDADD) $(LIBS)
+
+09.2.Texture: $(09_2_Texture_OBJECTS) $(09_2_Texture_DEPENDENCIES)
+	@rm -f 09.2.Texture
+	$(CXXLINK) $(09_2_Texture_LDFLAGS) $(09_2_Texture_OBJECTS) $(09_2_Texture_LDADD) $(LIBS)
+
+09.3.Search: $(09_3_Search_OBJECTS) $(09_3_Search_DEPENDENCIES)
+	@rm -f 09.3.Search
+	$(CXXLINK) $(09_3_Search_LDFLAGS) $(09_3_Search_OBJECTS) $(09_3_Search_LDADD) $(LIBS)
+
+09.4.PickAction: $(09_4_PickAction_OBJECTS) $(09_4_PickAction_DEPENDENCIES)
+	@rm -f 09.4.PickAction
+	$(CXXLINK) $(09_4_PickAction_LDFLAGS) $(09_4_PickAction_OBJECTS) $(09_4_PickAction_LDADD) $(LIBS)
+
+09.5.GenSph: $(09_5_GenSph_OBJECTS) $(09_5_GenSph_DEPENDENCIES)
+	@rm -f 09.5.GenSph
+	$(CXXLINK) $(09_5_GenSph_LDFLAGS) $(09_5_GenSph_OBJECTS) $(09_5_GenSph_LDADD) $(LIBS)
+
+10.1.addEventCB: $(10_1_addEventCB_OBJECTS) $(10_1_addEventCB_DEPENDENCIES)
+	@rm -f 10.1.addEventCB
+	$(CXXLINK) $(10_1_addEventCB_LDFLAGS) $(10_1_addEventCB_OBJECTS) $(10_1_addEventCB_LDADD) $(LIBS)
+
+10.2.setEventCB: $(10_2_setEventCB_OBJECTS) $(10_2_setEventCB_DEPENDENCIES)
+	@rm -f 10.2.setEventCB
+	$(CXXLINK) $(10_2_setEventCB_LDFLAGS) $(10_2_setEventCB_OBJECTS) $(10_2_setEventCB_LDADD) $(LIBS)
+
+10.5.SelectionCB: $(10_5_SelectionCB_OBJECTS) $(10_5_SelectionCB_DEPENDENCIES)
+	@rm -f 10.5.SelectionCB
+	$(CXXLINK) $(10_5_SelectionCB_LDFLAGS) $(10_5_SelectionCB_OBJECTS) $(10_5_SelectionCB_LDADD) $(LIBS)
+
+10.6.PickFilterTopLevel: $(10_6_PickFilterTopLevel_OBJECTS) $(10_6_PickFilterTopLevel_DEPENDENCIES)
+	@rm -f 10.6.PickFilterTopLevel
+	$(CXXLINK) $(10_6_PickFilterTopLevel_LDFLAGS) $(10_6_PickFilterTopLevel_OBJECTS) $(10_6_PickFilterTopLevel_LDADD) $(LIBS)
+
+10.7.PickFilterManip: $(10_7_PickFilterManip_OBJECTS) $(10_7_PickFilterManip_DEPENDENCIES)
+	@rm -f 10.7.PickFilterManip
+	$(CXXLINK) $(10_7_PickFilterManip_LDFLAGS) $(10_7_PickFilterManip_OBJECTS) $(10_7_PickFilterManip_LDADD) $(LIBS)
+
+11.1.ReadFile: $(11_1_ReadFile_OBJECTS) $(11_1_ReadFile_DEPENDENCIES)
+	@rm -f 11.1.ReadFile
+	$(CXXLINK) $(11_1_ReadFile_LDFLAGS) $(11_1_ReadFile_OBJECTS) $(11_1_ReadFile_LDADD) $(LIBS)
+
+11.2.ReadString: $(11_2_ReadString_OBJECTS) $(11_2_ReadString_DEPENDENCIES)
+	@rm -f 11.2.ReadString
+	$(CXXLINK) $(11_2_ReadString_LDFLAGS) $(11_2_ReadString_OBJECTS) $(11_2_ReadString_LDADD) $(LIBS)
+
+12.1.FieldSensor: $(12_1_FieldSensor_OBJECTS) $(12_1_FieldSensor_DEPENDENCIES)
+	@rm -f 12.1.FieldSensor
+	$(CXXLINK) $(12_1_FieldSensor_LDFLAGS) $(12_1_FieldSensor_OBJECTS) $(12_1_FieldSensor_LDADD) $(LIBS)
+
+12.2.NodeSensor: $(12_2_NodeSensor_OBJECTS) $(12_2_NodeSensor_DEPENDENCIES)
+	@rm -f 12.2.NodeSensor
+	$(CXXLINK) $(12_2_NodeSensor_LDFLAGS) $(12_2_NodeSensor_OBJECTS) $(12_2_NodeSensor_LDADD) $(LIBS)
+
+12.3.AlarmSensor: $(12_3_AlarmSensor_OBJECTS) $(12_3_AlarmSensor_DEPENDENCIES)
+	@rm -f 12.3.AlarmSensor
+	$(CXXLINK) $(12_3_AlarmSensor_LDFLAGS) $(12_3_AlarmSensor_OBJECTS) $(12_3_AlarmSensor_LDADD) $(LIBS)
+
+12.4.TimerSensor: $(12_4_TimerSensor_OBJECTS) $(12_4_TimerSensor_DEPENDENCIES)
+	@rm -f 12.4.TimerSensor
+	$(CXXLINK) $(12_4_TimerSensor_LDFLAGS) $(12_4_TimerSensor_OBJECTS) $(12_4_TimerSensor_LDADD) $(LIBS)
+
+13.1.GlobalFlds: $(13_1_GlobalFlds_OBJECTS) $(13_1_GlobalFlds_DEPENDENCIES)
+	@rm -f 13.1.GlobalFlds
+	$(CXXLINK) $(13_1_GlobalFlds_LDFLAGS) $(13_1_GlobalFlds_OBJECTS) $(13_1_GlobalFlds_LDADD) $(LIBS)
+
+13.2.ElapsedTime: $(13_2_ElapsedTime_OBJECTS) $(13_2_ElapsedTime_DEPENDENCIES)
+	@rm -f 13.2.ElapsedTime
+	$(CXXLINK) $(13_2_ElapsedTime_LDFLAGS) $(13_2_ElapsedTime_OBJECTS) $(13_2_ElapsedTime_LDADD) $(LIBS)
+
+13.3.TimeCounter: $(13_3_TimeCounter_OBJECTS) $(13_3_TimeCounter_DEPENDENCIES)
+	@rm -f 13.3.TimeCounter
+	$(CXXLINK) $(13_3_TimeCounter_LDFLAGS) $(13_3_TimeCounter_OBJECTS) $(13_3_TimeCounter_LDADD) $(LIBS)
+
+13.4.Gate: $(13_4_Gate_OBJECTS) $(13_4_Gate_DEPENDENCIES)
+	@rm -f 13.4.Gate
+	$(CXXLINK) $(13_4_Gate_LDFLAGS) $(13_4_Gate_OBJECTS) $(13_4_Gate_LDADD) $(LIBS)
+
+13.5.Boolean: $(13_5_Boolean_OBJECTS) $(13_5_Boolean_DEPENDENCIES)
+	@rm -f 13.5.Boolean
+	$(CXXLINK) $(13_5_Boolean_LDFLAGS) $(13_5_Boolean_OBJECTS) $(13_5_Boolean_LDADD) $(LIBS)
+
+13.6.Calculator: $(13_6_Calculator_OBJECTS) $(13_6_Calculator_DEPENDENCIES)
+	@rm -f 13.6.Calculator
+	$(CXXLINK) $(13_6_Calculator_LDFLAGS) $(13_6_Calculator_OBJECTS) $(13_6_Calculator_LDADD) $(LIBS)
+
+13.7.Rotor: $(13_7_Rotor_OBJECTS) $(13_7_Rotor_DEPENDENCIES)
+	@rm -f 13.7.Rotor
+	$(CXXLINK) $(13_7_Rotor_LDFLAGS) $(13_7_Rotor_OBJECTS) $(13_7_Rotor_LDADD) $(LIBS)
+
+13.8.Blinker: $(13_8_Blinker_OBJECTS) $(13_8_Blinker_DEPENDENCIES)
+	@rm -f 13.8.Blinker
+	$(CXXLINK) $(13_8_Blinker_LDFLAGS) $(13_8_Blinker_OBJECTS) $(13_8_Blinker_LDADD) $(LIBS)
+
+14.1.FrolickingWords: $(14_1_FrolickingWords_OBJECTS) $(14_1_FrolickingWords_DEPENDENCIES)
+	@rm -f 14.1.FrolickingWords
+	$(CXXLINK) $(14_1_FrolickingWords_LDFLAGS) $(14_1_FrolickingWords_OBJECTS) $(14_1_FrolickingWords_LDADD) $(LIBS)
+
+14.3.Balance: $(14_3_Balance_OBJECTS) $(14_3_Balance_DEPENDENCIES)
+	@rm -f 14.3.Balance
+	$(CXXLINK) $(14_3_Balance_LDFLAGS) $(14_3_Balance_OBJECTS) $(14_3_Balance_LDADD) $(LIBS)
+
+15.1.ConeRadius: $(15_1_ConeRadius_OBJECTS) $(15_1_ConeRadius_DEPENDENCIES)
+	@rm -f 15.1.ConeRadius
+	$(CXXLINK) $(15_1_ConeRadius_LDFLAGS) $(15_1_ConeRadius_OBJECTS) $(15_1_ConeRadius_LDADD) $(LIBS)
+
+15.2.SliderBox: $(15_2_SliderBox_OBJECTS) $(15_2_SliderBox_DEPENDENCIES)
+	@rm -f 15.2.SliderBox
+	$(CXXLINK) $(15_2_SliderBox_LDFLAGS) $(15_2_SliderBox_OBJECTS) $(15_2_SliderBox_LDADD) $(LIBS)
+
+15.3.AttachManip: $(15_3_AttachManip_OBJECTS) $(15_3_AttachManip_DEPENDENCIES)
+	@rm -f 15.3.AttachManip
+	$(CXXLINK) $(15_3_AttachManip_LDFLAGS) $(15_3_AttachManip_OBJECTS) $(15_3_AttachManip_LDADD) $(LIBS)
+
+15.4.Customize: $(15_4_Customize_OBJECTS) $(15_4_Customize_DEPENDENCIES)
+	@rm -f 15.4.Customize
+	$(CXXLINK) $(15_4_Customize_LDFLAGS) $(15_4_Customize_OBJECTS) $(15_4_Customize_LDADD) $(LIBS)
+
+16.1.Overlay: $(16_1_Overlay_OBJECTS) $(16_1_Overlay_DEPENDENCIES)
+	@rm -f 16.1.Overlay
+	$(CXXLINK) $(16_1_Overlay_LDFLAGS) $(16_1_Overlay_OBJECTS) $(16_1_Overlay_LDADD) $(LIBS)
+
+16.5.Examiner: $(16_5_Examiner_OBJECTS) $(16_5_Examiner_DEPENDENCIES)
+	@rm -f 16.5.Examiner
+	$(CXXLINK) $(16_5_Examiner_LDFLAGS) $(16_5_Examiner_OBJECTS) $(16_5_Examiner_LDADD) $(LIBS)
+
+17.1.ColorIndex: $(17_1_ColorIndex_OBJECTS) $(17_1_ColorIndex_DEPENDENCIES)
+	@rm -f 17.1.ColorIndex
+	$(CXXLINK) $(17_1_ColorIndex_LDFLAGS) $(17_1_ColorIndex_OBJECTS) $(17_1_ColorIndex_LDADD) $(LIBS)
+
+17.2.GLCallback: $(17_2_GLCallback_OBJECTS) $(17_2_GLCallback_DEPENDENCIES)
+	@rm -f 17.2.GLCallback
+	$(CXXLINK) $(17_2_GLCallback_LDFLAGS) $(17_2_GLCallback_OBJECTS) $(17_2_GLCallback_LDADD) $(LIBS)
+
+17.3.GLFloor: $(17_3_GLFloor_OBJECTS) $(17_3_GLFloor_DEPENDENCIES)
+	@rm -f 17.3.GLFloor
+	$(CXXLINK) $(17_3_GLFloor_LDFLAGS) $(17_3_GLFloor_OBJECTS) $(17_3_GLFloor_LDADD) $(LIBS)
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
+	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	mkid -fID $$unique $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+		$(TAGS_FILES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || etags $(ETAGS_ARGS) $$tags  $$unique $(LISP)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+@AMDEP@include $(DEPDIR)/02.1.HelloCone.Po
+@AMDEP@include $(DEPDIR)/02.2.EngineSpin.Po
+@AMDEP@include $(DEPDIR)/02.3.Trackball.Po
+@AMDEP@include $(DEPDIR)/02.4.Examiner.Po
+@AMDEP@include $(DEPDIR)/03.1.Molecule.Po
+@AMDEP@include $(DEPDIR)/03.2.Robot.Po
+@AMDEP@include $(DEPDIR)/03.3.Naming.Po
+@AMDEP@include $(DEPDIR)/04.1.Cameras.Po
+@AMDEP@include $(DEPDIR)/04.2.Lights.Po
+@AMDEP@include $(DEPDIR)/05.1.FaceSet.Po
+@AMDEP@include $(DEPDIR)/05.2.IndexedFaceSet.Po
+@AMDEP@include $(DEPDIR)/05.3.TriangleStripSet.Po
+@AMDEP@include $(DEPDIR)/05.4.QuadMesh.Po
+@AMDEP@include $(DEPDIR)/05.5.Binding.Po
+@AMDEP@include $(DEPDIR)/05.6.TransformOrdering.Po
+@AMDEP@include $(DEPDIR)/06.1.Text.Po
+@AMDEP@include $(DEPDIR)/06.2.Simple3DText.Po
+@AMDEP@include $(DEPDIR)/06.3.Complex3DText.Po
+@AMDEP@include $(DEPDIR)/07.1.BasicTexture.Po
+@AMDEP@include $(DEPDIR)/07.2.TextureCoordinates.Po
+@AMDEP@include $(DEPDIR)/07.3.TextureFunction.Po
+@AMDEP@include $(DEPDIR)/08.1.BSCurve.Po
+@AMDEP@include $(DEPDIR)/08.2.UniCurve.Po
+@AMDEP@include $(DEPDIR)/08.3.BezSurf.Po
+@AMDEP@include $(DEPDIR)/08.4.TrimSurf.Po
+@AMDEP@include $(DEPDIR)/09.1.Print.Po
+@AMDEP@include $(DEPDIR)/09.2.Texture.Po
+@AMDEP@include $(DEPDIR)/09.3.Search.Po
+@AMDEP@include $(DEPDIR)/09.4.PickAction.Po
+@AMDEP@include $(DEPDIR)/09.5.GenSph.Po
+@AMDEP@include $(DEPDIR)/10.1.addEventCB.Po
+@AMDEP@include $(DEPDIR)/10.2.setEventCB.Po
+@AMDEP@include $(DEPDIR)/10.5.SelectionCB.Po
+@AMDEP@include $(DEPDIR)/10.6.PickFilterTopLevel.Po
+@AMDEP@include $(DEPDIR)/10.7.PickFilterManip.Po
+@AMDEP@include $(DEPDIR)/11.1.ReadFile.Po
+@AMDEP@include $(DEPDIR)/11.2.ReadString.Po
+@AMDEP@include $(DEPDIR)/12.1.FieldSensor.Po
+@AMDEP@include $(DEPDIR)/12.2.NodeSensor.Po
+@AMDEP@include $(DEPDIR)/12.3.AlarmSensor.Po
+@AMDEP@include $(DEPDIR)/12.4.TimerSensor.Po
+@AMDEP@include $(DEPDIR)/13.1.GlobalFlds.Po
+@AMDEP@include $(DEPDIR)/13.2.ElapsedTime.Po
+@AMDEP@include $(DEPDIR)/13.3.TimeCounter.Po
+@AMDEP@include $(DEPDIR)/13.4.Gate.Po
+@AMDEP@include $(DEPDIR)/13.5.Boolean.Po
+@AMDEP@include $(DEPDIR)/13.6.Calculator.Po
+@AMDEP@include $(DEPDIR)/13.7.Rotor.Po
+@AMDEP@include $(DEPDIR)/13.8.Blinker.Po
+@AMDEP@include $(DEPDIR)/14.1.FrolickingWords.Po
+@AMDEP@include $(DEPDIR)/14.3.Balance.Po
+@AMDEP@include $(DEPDIR)/15.1.ConeRadius.Po
+@AMDEP@include $(DEPDIR)/15.2.SliderBox.Po
+@AMDEP@include $(DEPDIR)/15.3.AttachManip.Po
+@AMDEP@include $(DEPDIR)/15.4.Customize.Po
+@AMDEP@include $(DEPDIR)/16.1.Overlay.Po
+@AMDEP@include $(DEPDIR)/16.5.Examiner.Po
+@AMDEP@include $(DEPDIR)/17.1.ColorIndex.Po
+@AMDEP@include $(DEPDIR)/17.2.GLCallback.Po
+@AMDEP@include $(DEPDIR)/17.3.GLFloor.Po
+
+mostlyclean-depend:
+
+clean-depend:
+
+distclean-depend:
+	-rm -rf $(DEPDIR)
+
+maintainer-clean-depend:
+
+@AMDEP@CXXDEPMODE = @CXXDEPMODE@
+
+.cpp.o:
+@AMDEP@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CXXCOMPILE) -c -o $@ `test -f $< || echo '$(srcdir)/'`$<
+
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  if test -d $$d/$$file; then \
+	    cp -pR $$d/$$file $(distdir) \
+	    || exit 1; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || cp -p $$d/$$file $(distdir)/$$file \
+	    || exit 1; \
+	  fi; \
+	done
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am:
+install-exec: install-exec-am
+
+install-data-am:
+install-data: install-data-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am:
+uninstall: uninstall-am
+all-am: Makefile $(PROGRAMS)
+all-redirect: all-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
+installdirs:
+
+
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+	-rm -f Makefile.in
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean-am:  mostlyclean-noinstPROGRAMS mostlyclean-compile \
+		mostlyclean-tags mostlyclean-depend mostlyclean-generic
+
+mostlyclean: mostlyclean-am
+
+clean-am:  clean-noinstPROGRAMS clean-compile clean-tags clean-depend \
+		clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-noinstPROGRAMS distclean-compile distclean-tags \
+		distclean-depend distclean-generic clean-am
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-noinstPROGRAMS \
+		maintainer-clean-compile maintainer-clean-tags \
+		maintainer-clean-depend maintainer-clean-generic \
+		distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: mostlyclean-noinstPROGRAMS distclean-noinstPROGRAMS \
+clean-noinstPROGRAMS maintainer-clean-noinstPROGRAMS \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags mostlyclean-depend distclean-depend \
+clean-depend maintainer-clean-depend distdir info-am info dvi-am dvi \
+check check-am installcheck-am installcheck install-exec-am \
+install-exec install-data-am install-data install-am install \
+uninstall-am uninstall all-redirect all-am all install-strip \
+installdirs mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+############################################################################
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:
