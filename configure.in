@@ -179,7 +179,7 @@ else
     EVENT=`$soguiconfig --ac-subst EVENT`
     COMPONENTHEADER=`$soguiconfig --ac-subst COMPONENTHEADER`
   else
-    AC_MSG_ERROR([cannot find required '$sim_ac_gui_configcmd' utility])
+    SIM_AC_ERROR([unable-to-run-soxx-config])
   fi
 
   # Which examples to build. These env vars also taken from
