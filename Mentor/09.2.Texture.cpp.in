@@ -58,6 +58,15 @@
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoTexture2.h>
 
+static char red_cone_iv[] = {
+  "#Inventor V2.1 ascii\n\n"
+  "Separator {\n"
+  "  BaseColor { rgb 0.8 0 0 }\n"
+  "  Rotation { rotation 1 1 0  1.57 }\n"
+  "  Cone { }\n"
+  "}\n"
+};
+
 
 SbBool 
 generateTextureMap (SoNode *root, SoTexture2 *texture, 
@@ -95,19 +104,26 @@ main(int, char **argv)
 
    // Make a scene from reading in a file
    SoSeparator *texRoot = new SoSeparator;
-   SoInput in;
-   SoNode *result;
-
    texRoot->ref();
+
    char * oivhome = getenv("OIVHOME");
    if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
+     (void)fprintf(stderr, "Warning: environment variable $OIVHOME not set.\n");
    }
-   SbString s(oivhome);
-   s += "/src/examples/data/jumpyMan.iv";
-   if (!in.openFile(s.getString())) exit(1);
-   if (!SoDB::read(&in, result)) exit(1);
+
+   SbString s("");
+   if (oivhome) {
+     s = oivhome;
+     s += "/src/examples/data/jumpyMan.iv";
+   }
+
+   SoInput in;
+   if ((s.getLength() == 0) || !in.openFile(s.getString())) {
+     in.setBuffer(red_cone_iv, sizeof(red_cone_iv));
+   }
+
+   SoSeparator * result = SoDB::readAll(&in);
+   if (result == NULL) { exit(1); }
 
    SoPerspectiveCamera *myCamera = new SoPerspectiveCamera;
    SoRotationXYZ *rot = new SoRotationXYZ;
@@ -120,10 +136,12 @@ main(int, char **argv)
    texRoot->addChild(rot);
    texRoot->addChild(result);
 
+   myCamera->viewAll(texRoot, SbViewportRegion());
+
    // Generate the texture map
    SoTexture2 *texture = new SoTexture2;
    texture->ref();
-   if (generateTextureMap(texRoot, texture, 64, 64))
+   if (generateTextureMap(texRoot, texture, 128, 128))
       printf ("Successfully generated texture map\n");
    else
       printf ("Could not generate texture map\n");
