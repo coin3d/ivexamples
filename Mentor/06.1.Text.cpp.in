@@ -80,20 +80,11 @@ main(int argc, char **argv)
    sphereComplexity->value = 0.55;
    root->addChild(sphereSep);
 
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr,
-                   "WARNING: environment variable $OIVHOME not set, "
-                   "can't find texture globe.rgb.\n");
-   }
-   else {
-     SoTexture2  *myTexture2 = new SoTexture2;
-     sphereSep->addChild(myTexture2);
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
 
-     SbString s(oivhome);
-     s += "/src/examples/data/globe.rgb";
-     myTexture2->filename = s;
-   }
+   SoTexture2 *myTexture2 = new SoTexture2;
+   sphereSep->addChild(myTexture2);
+   myTexture2->filename = "globe.rgb";
 
    sphereSep->addChild(sphereComplexity);
    sphereSep->addChild(new SoSphere);

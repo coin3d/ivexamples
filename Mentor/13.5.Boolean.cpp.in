@@ -119,15 +119,9 @@ main(int , char **argv)
 
    // Read the duck object from a file and add to the group
    SoInput myInput;
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
 
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/duck.iv";
-   if (!myInput.openFile(s.getString()))
+   if (!myInput.openFile("duck.iv"))
       exit (1);
    SoSeparator *duckObject = SoDB::readAll(&myInput);
    if (duckObject == NULL) 

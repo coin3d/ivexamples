@@ -85,16 +85,11 @@ main(int argc, char *argv[])
    // Initialization
    @WINWIDGET@ mainWindow = So@Gui@::init(argv[0]);
     
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
    // Open the data file
    SoInput in;   
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/parkbench.iv";
-   if (! in.openFile(s.getString())) {
+   if (! in.openFile("parkbench.iv")) {
       fprintf(stderr, "Cannot open %s for reading.\n", s.getString());
       return 1;
    }

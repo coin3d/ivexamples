@@ -67,17 +67,12 @@ main(int , char **argv)
    SoSeparator *root = new SoSeparator;
    root->ref();
 
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
    // Choose a texture.
    SoTexture2 *faceTexture = new SoTexture2;
    root->addChild(faceTexture);
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/sillyFace.rgb";
-   faceTexture->filename.setValue(s.getString());
+   faceTexture->filename.setValue("sillyFace.rgb");
 
    // Make the diffuse color pure white
    SoMaterial *myMaterial = new SoMaterial;

@@ -120,14 +120,9 @@ main(int, char **argv)
    SoWrapperKit *myWrapperKit = new SoWrapperKit;
    root->addChild(myWrapperKit);
    SoInput myInput;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/luxo.iv";
-   if (!myInput.openFile(s.getString()))
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
+   if (!myInput.openFile("luxo.iv"))
       exit (1);
    SoSeparator *objectFromFile = SoDB::readAll(&myInput);
    if (objectFromFile == NULL) exit (1);

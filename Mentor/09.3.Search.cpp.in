@@ -59,16 +59,11 @@ main(int argc, char **argv)
    // Initialize Inventor
    SoDB::init();
 
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
    // Open and read input scene graph
    SoInput sceneInput;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/bird.iv";
-   if (! sceneInput.openFile(s.getString()))
+   if (! sceneInput.openFile("bird.iv"))
       return (1);
 
    SoSeparator *root = SoDB::readAll(&sceneInput);

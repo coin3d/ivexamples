@@ -200,18 +200,7 @@ main(int, char **argv)
    if (appWindow == NULL)
       exit(1);
 
-
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     SoDebugError::postWarning("main", "Environment variable OIVHOME not set.");
-   }
-   else {
-     SbString s(oivhome);
-     s += "/src/examples/data";
-     // So we can find the texture.
-     SoInput::addDirectoryLast(s.getString());
-   }
-
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
 
    SoSeparator *root  = new SoSeparator;
    root->ref();

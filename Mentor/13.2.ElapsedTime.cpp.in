@@ -88,15 +88,9 @@ main(int , char **argv)
    root->addChild(initialTransform);
 
    // Read the figure object from a file and add to the scene
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
    SoInput myInput;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/jumpyMan.iv";
-   if (!myInput.openFile(s.getString()))
+   if (!myInput.openFile("jumpyMan.iv"))
       exit (1);
    SoSeparator *figureObject = SoDB::readAll(&myInput);
    if (figureObject == NULL) exit (1);

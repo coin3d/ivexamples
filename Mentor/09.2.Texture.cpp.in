@@ -106,19 +106,10 @@ main(int, char **argv)
    SoSeparator *texRoot = new SoSeparator;
    texRoot->ref();
 
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Warning: environment variable $OIVHOME not set.\n");
-   }
-
-   SbString s("");
-   if (oivhome) {
-     s = oivhome;
-     s += "/src/examples/data/jumpyMan.iv";
-   }
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
 
    SoInput in;
-   if ((s.getLength() == 0) || !in.openFile(s.getString())) {
+   if (!in.openFile("jumpyMan.iv")) {
      in.setBuffer(red_cone_iv, sizeof(red_cone_iv));
    }
 

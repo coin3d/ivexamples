@@ -82,16 +82,10 @@ main(int argc, char **argv)
    SoSeparator *root = new SoSeparator;
    root->ref();
 
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
    // Read in the data for the windmill tower
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/windmillTower.iv";
-   SoSeparator *windmillTower = 
-            readFile(s.getString());
+   SoSeparator *windmillTower = readFile("windmillTower.iv");
    root->addChild(windmillTower);
 
    // Add a rotor node to spin the vanes
@@ -101,10 +95,7 @@ main(int argc, char **argv)
    root->addChild(myRotor);
 
    // Read in the data for the windmill vanes
-   s = oivhome;
-   s += "/src/examples/data/windmillVanes.iv";
-   SoSeparator *windmillVanes = 
-            readFile(s.getString());
+   SoSeparator *windmillVanes = readFile("windmillVanes.iv");
    root->addChild(windmillVanes);
 
    // Create a viewer

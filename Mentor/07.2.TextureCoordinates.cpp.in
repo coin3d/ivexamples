@@ -64,18 +64,12 @@ main(int , char **argv)
    SoSeparator *root = new SoSeparator;
    root->ref();
 
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
    // Choose a texture 
    SoTexture2 *brick = new SoTexture2;
    root->addChild(brick);
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/brick.1.rgb";
-   brick->filename.setValue(s.getString());
-
+   brick->filename.setValue("brick.1.rgb");
 
 #ifdef IV_STRICT
    // This is the preferred code for Inventor 2.1

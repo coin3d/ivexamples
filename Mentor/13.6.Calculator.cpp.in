@@ -86,14 +86,8 @@ main(int , char **argv)
 
    // Read the background path from a file and add to the group
    SoInput myInput;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/flowerPath.iv";
-   if (!myInput.openFile(s.getString()))
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   if (!myInput.openFile("flowerPath.iv"))
       exit (1);
    SoSeparator *flowerPath = SoDB::readAll(&myInput);
    if (flowerPath == NULL) exit (1);
@@ -107,9 +101,7 @@ main(int , char **argv)
    root->addChild(flowerGroup);
 
    // Read the flower object from a file and add to the group
-   s = oivhome;
-   s += "/src/examples/data/flower.iv";
-   if (!myInput.openFile(s.getString()))
+   if (!myInput.openFile("flower.iv"))
       exit (1);
    SoSeparator *flower= SoDB::readAll(&myInput);
    if (flower == NULL) exit (1);

@@ -64,17 +64,8 @@ main(int , char **argv)
    
    // Read the geometry from a file and add to the scene
    SoInput myInput;
-   SbString s;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     SoDebugError::postWarning("main", "Environment variable OIVHOME not set.");
-   }
-   else {
-     s += oivhome;
-     s += "/src/examples/data/";
-   }
-   s += "dogDish.iv";
-   if (!myInput.openFile(s.getString())) {
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   if (!myInput.openFile("dogDish.iv")) {
      // A warning is output by SoInput::openFile(), so additional
      // information for the user is not necessary.
      exit (1);
@@ -82,7 +73,7 @@ main(int , char **argv)
    SoSeparator *geomObject = SoDB::readAll(&myInput);
    if (geomObject == NULL) {
      SoDebugError::postWarning("main", "modelfile '%s' could not be read",
-                               s.getString());
+                               "dogDish.iv");
      exit (1);
    }
    

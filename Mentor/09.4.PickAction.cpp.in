@@ -126,16 +126,11 @@ main(int, char **argv)
    SoEventCallback *myEventCB = new SoEventCallback;
    root->addChild(myEventCB);
 
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
    // Read object data from a file
    SoInput mySceneInput;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/star.iv";
-   if (!mySceneInput.openFile(s.getString()))
+   if (!mySceneInput.openFile("star.iv"))
       exit (1);
    SoSeparator *starObject = SoDB::readAll(&mySceneInput);
    if (starObject == NULL) exit (1);

@@ -62,8 +62,9 @@ main(int , char *argv[])
     
    // Open the data file
    SoInput in;   
-   char *datafile = "../../data/monitor.iv";
-   if (! in.openFile(datafile)) {
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
+   if (! in.openFile("monitor.iv")) {
       fprintf(stderr, "Cannot open %s for reading.\n", datafile);
       return;
    }

@@ -95,15 +95,9 @@ main(int, char **argv)
    rightSep->addChild(myRotation);       // first rotated
 
    // Read an object from file. (as in example 4.2.Lights)
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
    SoInput myInput;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/temple.iv";
-   if (!myInput.openFile(s.getString()))
+   if (!myInput.openFile("temple.iv"))
       exit (1);
    SoSeparator *fileContents = SoDB::readAll(&myInput);
    if (fileContents == NULL) exit (1);

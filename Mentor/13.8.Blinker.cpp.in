@@ -71,14 +71,9 @@ main(int , char **argv)
 
    // Read in the parts of the sign from a file
    SoInput myInput;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/eatAtJosies.iv";
-   if (!myInput.openFile(s.getString()))
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
+   if (!myInput.openFile("eatAtJosies.iv"))
       exit (1);
    SoSeparator *fileContents = SoDB::readAll(&myInput);
    if (fileContents == NULL) exit (1);

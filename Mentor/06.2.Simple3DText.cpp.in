@@ -92,21 +92,10 @@ main(int, char **argv)
    sphereComplexity->value = 0.55;
    root->addChild(sphereSep);
 
-   SbString s("");
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     SoDebugError::postWarning("main", "environment variable $OIVHOME not set");
-   }
-   else {
-     s = oivhome;
-     s += "/src/examples/data/";
-   }
-
-   s += "globe.rgb";
-
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
    SoTexture2 *myTexture2 = new SoTexture2;
    sphereSep->addChild(myTexture2);
-   myTexture2->filename = s;
+   myTexture2->filename = "globe.rgb";
 
    sphereSep->addChild(sphereComplexity);
    sphereSep->addChild(new SoSphere);

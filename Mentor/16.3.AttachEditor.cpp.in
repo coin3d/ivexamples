@@ -79,14 +79,8 @@ main(int , char **argv)
 
    // Read the geometry from a file and add to the scene
    SoInput myInput;
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/dogDish.iv";
-   if (!myInput.openFile(s.getString()))
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   if (!myInput.openFile("dogDish.iv"))
       exit (1);
    SoSeparator *geomObject = SoDB::readAll(&myInput);
    if (geomObject == NULL)

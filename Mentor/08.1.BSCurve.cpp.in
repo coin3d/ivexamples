@@ -215,16 +215,7 @@ main(int, char **argv)
    SoInput       in;
    SoNode        *result;
 
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     SoDebugError::postWarning("main", "Environment variable OIVHOME not set.");
-   }
-   else {
-     SbString s(oivhome);
-     s += "/src/examples/data";
-     // So we can find the texture.
-     SoInput::addDirectoryLast(s.getString());
-   }
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
 
    in.setBuffer(floorData, strlen(floorData));
    SoDB::read(&in, result);

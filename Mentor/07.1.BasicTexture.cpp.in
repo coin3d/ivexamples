@@ -59,18 +59,12 @@ main(int , char **argv)
    SoSeparator *root = new SoSeparator;
    root->ref();
 
+   SoInput::addDirectoryFirst("@top_srcdir@/data");
+
    // Choose a texture 
    SoTexture2 *rock = new SoTexture2;
    root->addChild(rock);
-   char * oivhome = getenv("OIVHOME");
-   if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
-     exit (1);
-   }
-   SbString s(oivhome);
-   s += "/src/examples/data/brick.1.rgb";
-   rock->filename.setValue(s.getString());
-
+   rock->filename.setValue("brick.1.rgb");
 
    // Make a cube
    root->addChild(new SoCube);
