@@ -17,12 +17,11 @@
  *
 \**************************************************************************/
 
-#ifndef TEXTUREFILENAMEELEMENT_H_
-#define TEXTUREFILENAMEELEMENT_H_
+#ifndef TEXTUREFILENAMEELEMENT_H
+#define TEXTUREFILENAMEELEMENT_H
 
 #include <Inventor/elements/SoReplacedElement.h>
 #include <Inventor/SbString.h>
-#include <assert.h>
 
 class TextureFilenameElement : public SoReplacedElement {
   typedef SoReplacedElement inherited;
@@ -30,10 +29,7 @@ class TextureFilenameElement : public SoReplacedElement {
   SO_ELEMENT_HEADER(TextureFilenameElement);
 public:
   static void initClass(void);
-protected:
-  virtual ~TextureFilenameElement();
 
-public:
   virtual void init(SoState * state);
   static void set(SoState * const state, SoNode * const node,
                   const SbString & filename);
@@ -41,9 +37,11 @@ public:
   static const TextureFilenameElement * getInstance(SoState * state);
 
 protected:
+  virtual ~TextureFilenameElement();
   virtual void setElt(const SbString & filename);
 
+private:
   SbString filename;
 };
 
-#endif // !TEXTUREFILENAMEELEMENT_H_
+#endif // !TEXTUREFILENAMEELEMENT_H

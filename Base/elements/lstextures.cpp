@@ -17,28 +17,26 @@
  *
 \**************************************************************************/
 
-/*
-  The purpose of this file is to make a small wrapper "tool" around
-  the TextureFilenameElement extension element, just for showing
-  example code on how to make use of a user-defined custom element.
-
-  The code goes like this:
-
-  We initialize the element, enable it for the SoCallbackAction, read
-  a scene graph file, set callbacks on SoTexture2 and all shape nodes
-  and applies the SoCallbackAction. The callbacks will then print out
-  the texture filename information from the TextureFilenameElement
-  each time an interesting node is hit.
-
-
-  Check the code in texturefilenameelement.cpp for further information
-  on how to construct your own elements.
-
-
-  Code by Peder Blekken <pederb@sim.no>. Cleaned up, integrated in
-  Coin distribution and commented by Morten Eriksen <mortene@sim.no>.
-  1999-12-09.
-*/
+// The purpose of this file is to make a small wrapper "tool" around
+// the TextureFilenameElement extension element, just for showing
+// example code on how to make use of a user-defined custom element.
+//
+// The code goes like this:
+//
+// We initialize the element, enable it for the SoCallbackAction, read
+// a scene graph file, set callbacks on SoTexture2 and all shape nodes
+// and applies the SoCallbackAction. The callbacks will then print out
+// the texture filename information from the TextureFilenameElement
+// each time an interesting node is hit.
+//
+//
+// Check the code in texturefilenameelement.cpp for further
+// information on how to construct your own elements.
+//
+//
+// Code by Peder Blekken <pederb@sim.no>. Cleaned up, integrated in
+// Coin distribution and commented by Morten Eriksen <mortene@sim.no>.
+// 1999-12-09.
 
 #include <Inventor/SoDB.h>
 #include <Inventor/SoInput.h>
@@ -53,7 +51,7 @@
 
 
 SoCallbackAction::Response
-pre_tex2_cb(void * /*data*/, SoCallbackAction * action, const SoNode * node)
+pre_tex2_cb(void * data, SoCallbackAction * action, const SoNode * node)
 {
   const SbString & filename = ((SoTexture2 *)node)->filename.getValue();
   TextureFilenameElement::set(action->getState(), (SoNode *)node, filename);
@@ -66,7 +64,7 @@ pre_tex2_cb(void * /*data*/, SoCallbackAction * action, const SoNode * node)
 }
 
 SoCallbackAction::Response
-pre_shape_cb(void * /*data*/, SoCallbackAction * action, const SoNode * node)
+pre_shape_cb(void * data, SoCallbackAction * action, const SoNode * node)
 {
   const SbString & filename =
     TextureFilenameElement::get(action->getState());

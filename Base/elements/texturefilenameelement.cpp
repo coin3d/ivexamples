@@ -17,16 +17,14 @@
  *
 \**************************************************************************/
 
-/*
-  The purpose of the code in this file is to demonstrate how you
-  can make your own elements for scene graph traversals.
-
-  See the description and source code in lstextures.cpp for an
-  explanation on how new, user-defined extensions elements can
-  be put to use.
-
-  Code by Peder Blekken <pederb@sim.no>, 1999-12-09.
- */
+// The purpose of the code in this file is to demonstrate how you can
+// make your own elements for scene graph traversals.
+//
+// See the description and source code in lstextures.cpp for an
+// explanation on how new, user-defined extensions elements can be put
+// to use.
+//
+// Code by Peder Blekken <pederb@sim.no>, 1999-12-09.
 
 #include "texturefilenameelement.h"
 
@@ -41,7 +39,7 @@ TextureFilenameElement::initClass(void)
 }
 
 void
-TextureFilenameElement::init(SoState * /* state */)
+TextureFilenameElement::init(SoState * state)
 {
   this->filename = "<none>";
 }
