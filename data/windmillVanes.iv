@@ -1,0 +1,111 @@
+#Inventor V2.1 ascii
+
+
+Separator {
+
+  Separator {
+
+	Transform {
+	  translation -1 -5 -0.5
+	}
+	RotationXYZ {
+	  angle 1.37079
+	  axis Z
+	}
+	Scale {
+	  scaleFactor 1 1 0.69999999
+	}  }
+  Separator {
+
+	Transform {
+	  translation 0 0 0.5
+	}
+	Separator {
+
+	  Material {
+		diffuseColor 0.050000001 0.050000001 0.050000001
+	  }
+	  Transform {
+		rotation 1 0 0  1.5707999
+		scaleFactor 0.2 0.5 0.2
+	  }
+	  Cylinder {
+	  }	}
+	DEF _0+0 Separator {
+
+	  Transform {
+		translation 0.44999999 2.9000001 0.2
+		rotation 0 1.0000001 0  0.29999995
+	  }
+	  Separator {
+
+		Transform {
+		  scaleFactor 0.60000002 2.5 0.02
+		}
+		Material {
+		  diffuseColor 0.5 0.30000001 0.1
+		  transparency 0.30000001
+		}
+		Cube {
+		}	  }
+	  Separator {
+
+		Material {
+		  diffuseColor 0.2 0.059999999 0.02
+		}
+		Complexity {
+		  value 0
+		}
+		Separator {
+
+		  Transform {
+			translation -0.60000002 -2.7 0
+			scaleFactor 2 0.2 2
+		  }
+		  DEF _1+1 Cylinder {
+			radius 0.050000001
+		  }		}
+		Separator {
+
+		  Transform {
+			translation -0.60000002 0 0
+			scaleFactor 1 2.6500001 1
+		  }
+		  Array {
+			numElements1 4
+			separation1 0.41999999 0 0
+
+			USE _1+1		  }		}
+		Separator {
+
+		  Transform {
+			translation 0 -2.5 0
+			rotation 0 0 1  1.5707999
+			scaleFactor 1 0.60000002 1
+		  }
+		  Array {
+			numElements1 8
+			separation1 0.72500002 0 0
+
+			USE _1+1		  }		}	  }	}
+	Separator {
+
+	  RotationXYZ {
+		angle 1.5707999
+		axis Z
+	  }
+	  USE _0+0	}
+	Separator {
+
+	  RotationXYZ {
+		angle 3.1415901
+		axis Z
+	  }
+	  USE _0+0	}
+	Separator {
+
+	  RotationXYZ {
+		angle -1.5707999
+		axis Z
+	  }
+	  USE _0+0	}  }}

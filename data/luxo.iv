@@ -1,0 +1,134 @@
+#Inventor V2.1 ascii
+
+
+Separator {
+
+  Switch {
+
+	Cube {
+	  width 1
+	  height 46
+	  depth 1
+	}  }
+  Separator {
+
+	Separator {
+
+	  MatrixTransform {
+		matrix 0.059999999 0 0 0
+		  0 0.059999999 0 0
+		  0 0 0.059999999 0
+		  0 -0.18000001 0 1
+	  }
+	  Cylinder {
+		radius 10
+		height 2
+		parts (SIDES | TOP)
+	  }	}
+	Separator {
+
+	  MatrixTransform {
+		matrix 0.059999999 0 0 0
+		  0 0.059999999 0 0
+		  0 0 0.059999999 0
+		  0 -0.059999999 0 1
+	  }
+	  Cylinder {
+		radius 0.5
+		height 2
+	  }	}
+	Separator {
+
+	  Separator {
+
+		MatrixTransform {
+		  matrix 0.059999999 0 0 0
+			0 0.059999999 0 0
+			0 0 0.059999999 0
+			0 1.5 0 1
+		}
+		DEF +0 Cube {
+		  width 1
+		  height 46
+		  depth 1
+		}	  }
+	  Separator {
+
+		Separator {
+
+		  MatrixTransform {
+			matrix 0.059999999 0 0 0
+			  0 0.059999999 0 0
+			  0 0 0.059999999 0
+			  0.20999999 1.38 0.15000001 1
+		  }
+		  USE +0		}
+		Separator {
+
+		  MatrixTransform {
+			matrix 0.059999999 0 0 0
+			  0 0.059999999 0 0
+			  0 0 0.059999999 0
+			  0.20999999 1.38 -0.15000001 1
+		  }
+		  USE +0		}	  }	}
+	Separator {
+
+	  Separator {
+
+		MatrixTransform {
+		  matrix 0.017731 -0.0573203 0 0
+			0.0573203 0.017731 0 0
+			0 0 0.059999999 0
+			1.52837 3.40781 0 1
+		}
+		USE +0	  }
+	  Separator {
+
+		MatrixTransform {
+		  matrix 0.017731 -0.0573203 0 0
+			0.0573203 0.017731 0 0
+			0 0 0.059999999 0
+			1.52837 3.16781 0 1
+		}
+		USE +0	  }	}
+	Separator {
+
+	  MatrixTransform {
+		matrix 0.022899101 -0.0541621 0.0119202 0
+		  0.055263702 0.0233649 4.40508e-08 0
+		  -0.0046419301 0.0109792 0.058804002 0
+		  3.0014601 3.6722701 -4.40508e-08 1
+	  }
+	  Cylinder {
+		radius 0.5
+		height 2
+	  }	}
+	Separator {
+
+	  Separator {
+
+		MatrixTransform {
+		  matrix 0.055263601 0.023365101 0 0
+			-0.0228994 0.0541621 -0.0119202 0
+			-0.0046419301 0.0109792 0.058804002 0
+			3.1480999 3.9417601 -0.038740501 1
+		}
+		Cylinder {
+		  radius 3
+		  height 7.5
+		  parts (SIDES | TOP)
+		}	  }
+	  Separator {
+
+		MatrixTransform {
+		  matrix 0.055263601 0.023365101 0 0
+			-0.0228994 0.0541621 -0.0119202 0
+			-0.0046419301 0.0109792 0.058804002 0
+			3.30267 3.57616 0.041720599 1
+		}
+		Cone {
+		  bottomRadius 10
+		  height 15
+		  parts SIDES
+		}	  }	}  }}
