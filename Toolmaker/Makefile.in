@@ -13,6 +13,9 @@
 
 @SET_MAKE@
 
+# FIXME: there are more subdirs to build, which we now
+# just ignore. 20021220 mortene.
+
 SHELL = @SHELL@
 
 srcdir = @srcdir@
@@ -83,7 +86,7 @@ gui = @gui@
 install_sh = @install_sh@
 soguiconfig = @soguiconfig@
 
-SUBDIRS = 02.Nodes 03.Fields 04.Actions 05.Elements
+SUBDIRS = 02.Nodes 03.Fields 04.Actions 05.Elements 07.Nodekits
 subdir = Toolmaker
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h

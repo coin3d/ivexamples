@@ -889,11 +889,12 @@ AC_ARG_ENABLE(
 # FIXME: don't mangle options like -fno-gnu-linker and -fvolatile-global
 # 20020104 larsa
 if test x"$enable_symbols" = x"no"; then
-  # CPPFLAGS="`echo $CPPFLAGS | sed 's/-g[0-9]//'`"
-  CFLAGS="`echo $CFLAGS | sed 's/-g[0-9]?//'`"
-  CXXFLAGS="`echo $CXXFLAGS | sed 's/-g[0-9]?//'`"
+  # CPPFLAGS="`echo $CPPFLAGS | sed 's/-g\>//'`"
+  CFLAGS="`echo $CFLAGS | sed 's/-g\>//'`"
+  CXXFLAGS="`echo $CXXFLAGS | sed 's/-g\>//'`"
 fi
-])
+]) # SIM_AC_DEBUGSYMBOLS
+
 
 # Usage:
 #   SIM_AC_RTTI_SUPPORT
@@ -2567,6 +2568,20 @@ if test x"$with_pthread" != xno; then
                  [sim_cv_lib_pthread_avail=false])])
 
   if $sim_cv_lib_pthread_avail; then
+    AC_CACHE_CHECK(
+      [the struct timespec resolution],
+      sim_cv_lib_pthread_timespec_resolution,
+      [AC_TRY_COMPILE([#include <pthread.h>],
+                      [struct timespec timeout;
+                       timeout.tv_nsec = 0;],
+                      [sim_cv_lib_pthread_timespec_resolution=nsecs],
+                      [sim_cv_lib_pthread_timespec_resolution=usecs])])
+    if test x"$sim_cv_lib_pthread_timespec_resolution" = x"nsecs"; then
+      AC_DEFINE([HAVE_PTHREAD_TIMESPEC_NSEC], 1, [define if pthread's struct timespec uses nsecs and not usecs])
+    fi
+  fi
+
+  if $sim_cv_lib_pthread_avail; then
     sim_ac_pthread_avail=yes
     $1
   else
@@ -2759,7 +2774,9 @@ EOF
   AC_MSG_CHECKING([for Open Inventor library])
 
   for sim_ac_iv_cppflags_loop in "" "-DWIN32"; do
-    for sim_ac_iv_libcheck in $sim_ac_inventor_chk_libs; do
+    # Trying with no libraries first, as TGS Inventor uses pragmas in
+    # a header file to notify MSVC of what to link with.
+    for sim_ac_iv_libcheck in "" $sim_ac_inventor_chk_libs; do
       if test "x$sim_ac_inventor_libs" = "xUNRESOLVED"; then
         CPPFLAGS="$sim_ac_iv_cppflags_loop $sim_ac_inventor_cppflags $sim_ac_save_CPPFLAGS"
         LDFLAGS="$sim_ac_inventor_ldflags $sim_ac_save_LDFLAGS"

@@ -3250,9 +3250,9 @@ fi;
 # FIXME: don't mangle options like -fno-gnu-linker and -fvolatile-global
 # 20020104 larsa
 if test x"$enable_symbols" = x"no"; then
-  # CPPFLAGS="`echo $CPPFLAGS | sed 's/-g[0-9]//'`"
-  CFLAGS="`echo $CFLAGS | sed 's/-g0-9?//'`"
-  CXXFLAGS="`echo $CXXFLAGS | sed 's/-g0-9?//'`"
+  # CPPFLAGS="`echo $CPPFLAGS | sed 's/-g\>//'`"
+  CFLAGS="`echo $CFLAGS | sed 's/-g\>//'`"
+  CXXFLAGS="`echo $CXXFLAGS | sed 's/-g\>//'`"
 fi
 
 
@@ -6825,6 +6825,62 @@ echo "$as_me:$LINENO: result: $sim_cv_lib_pthread_avail" >&5
 echo "${ECHO_T}$sim_cv_lib_pthread_avail" >&6
 
   if $sim_cv_lib_pthread_avail; then
+    echo "$as_me:$LINENO: checking the struct timespec resolution" >&5
+echo $ECHO_N "checking the struct timespec resolution... $ECHO_C" >&6
+if test "${sim_cv_lib_pthread_timespec_resolution+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  cat >conftest.$ac_ext <<_ACEOF
+#line $LINENO "configure"
+#include "confdefs.h"
+#include <pthread.h>
+#ifdef F77_DUMMY_MAIN
+#  ifdef __cplusplus
+     extern "C"
+#  endif
+   int F77_DUMMY_MAIN() { return 1; }
+#endif
+int
+main ()
+{
+struct timespec timeout;
+                       timeout.tv_nsec = 0;
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext
+if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
+  (eval $ac_compile) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+         { ac_try='test -s conftest.$ac_objext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  sim_cv_lib_pthread_timespec_resolution=nsecs
+else
+  echo "$as_me: failed program was:" >&5
+cat conftest.$ac_ext >&5
+sim_cv_lib_pthread_timespec_resolution=usecs
+fi
+rm -f conftest.$ac_objext conftest.$ac_ext
+fi
+echo "$as_me:$LINENO: result: $sim_cv_lib_pthread_timespec_resolution" >&5
+echo "${ECHO_T}$sim_cv_lib_pthread_timespec_resolution" >&6
+    if test x"$sim_cv_lib_pthread_timespec_resolution" = x"nsecs"; then
+
+cat >>confdefs.h <<\_ACEOF
+#define HAVE_PTHREAD_TIMESPEC_NSEC 1
+_ACEOF
+
+    fi
+  fi
+
+  if $sim_cv_lib_pthread_avail; then
     sim_ac_pthread_avail=yes
 
           sim_ac_ogl_cppflags="$sim_ac_ogl_cppflags $sim_ac_pthread_cppflags"
@@ -7490,7 +7546,9 @@ echo "${ECHO_T}probably SGI or older TGS Open Inventor" >&6
 echo $ECHO_N "checking for Open Inventor library... $ECHO_C" >&6
 
   for sim_ac_iv_cppflags_loop in "" "-DWIN32"; do
-    for sim_ac_iv_libcheck in $sim_ac_inventor_chk_libs; do
+    # Trying with no libraries first, as TGS Inventor uses pragmas in
+    # a header file to notify MSVC of what to link with.
+    for sim_ac_iv_libcheck in "" $sim_ac_inventor_chk_libs; do
       if test "x$sim_ac_inventor_libs" = "xUNRESOLVED"; then
         CPPFLAGS="$sim_ac_iv_cppflags_loop $sim_ac_inventor_cppflags $sim_ac_save_CPPFLAGS"
         LDFLAGS="$sim_ac_inventor_ldflags $sim_ac_save_LDFLAGS"
@@ -8256,7 +8314,7 @@ fi
 # * All files configure must automatically generate.
 # *******************************************************************
 
-ac_config_files="$ac_config_files Makefile Base/Makefile Base/elements/Makefile Mentor/Makefile Mentor/02.1.HelloCone.cpp Mentor/02.2.EngineSpin.cpp Mentor/02.3.Trackball.cpp Mentor/02.4.Examiner.cpp Mentor/03.1.Molecule.cpp Mentor/03.2.Robot.cpp Mentor/03.3.Naming.cpp Mentor/04.1.Cameras.cpp Mentor/04.2.Lights.cpp Mentor/05.1.FaceSet.cpp Mentor/05.2.IndexedFaceSet.cpp Mentor/05.3.TriangleStripSet.cpp Mentor/05.4.QuadMesh.cpp Mentor/05.5.Binding.cpp Mentor/05.6.TransformOrdering.cpp Mentor/06.1.Text.cpp Mentor/06.2.Simple3DText.cpp Mentor/06.3.Complex3DText.cpp Mentor/07.1.BasicTexture.cpp Mentor/07.2.TextureCoordinates.cpp Mentor/07.3.TextureFunction.cpp Mentor/08.1.BSCurve.cpp Mentor/08.2.UniCurve.cpp Mentor/08.3.BezSurf.cpp Mentor/08.4.TrimSurf.cpp Mentor/09.1.Print.cpp Mentor/09.2.Texture.cpp Mentor/09.3.Search.cpp Mentor/09.4.PickAction.cpp Mentor/09.5.GenSph.cpp Mentor/10.1.addEventCB.cpp Mentor/10.2.setEventCB.cpp Mentor/10.3and4.MotifList.cpp Mentor/10.5.SelectionCB.cpp Mentor/10.6.PickFilterTopLevel.cpp Mentor/10.7.PickFilterManip.cpp Mentor/10.8.PickFilterNodeKit.cpp Mentor/11.1.ReadFile.cpp Mentor/11.2.ReadString.cpp Mentor/12.1.FieldSensor.cpp Mentor/12.2.NodeSensor.cpp Mentor/12.3.AlarmSensor.cpp Mentor/12.4.TimerSensor.cpp Mentor/13.1.GlobalFlds.cpp Mentor/13.2.ElapsedTime.cpp Mentor/13.3.TimeCounter.cpp Mentor/13.4.Gate.cpp Mentor/13.5.Boolean.cpp Mentor/13.6.Calculator.cpp Mentor/13.7.Rotor.cpp Mentor/13.8.Blinker.cpp Mentor/14.1.FrolickingWords.cpp Mentor/14.2.Editors.cpp Mentor/14.3.Balance.cpp Mentor/15.1.ConeRadius.cpp Mentor/15.2.SliderBox.cpp Mentor/15.3.AttachManip.cpp Mentor/15.4.Customize.cpp Mentor/16.1.Overlay.cpp Mentor/16.2.Callback.cpp Mentor/16.3.AttachEditor.cpp Mentor/16.4.OneWindow.cpp Mentor/16.5.Examiner.cpp Mentor/17.1.ColorIndex.cpp Mentor/17.2.GLCallback.cpp Mentor/17.3.GLFloor.cpp Toolmaker/Makefile Toolmaker/02.Nodes/Makefile Toolmaker/02.Nodes/newNodes.cpp Toolmaker/03.Fields/Makefile Toolmaker/04.Actions/Makefile Toolmaker/05.Elements/Makefile"
+ac_config_files="$ac_config_files Makefile Base/Makefile Base/elements/Makefile Mentor/Makefile Mentor/02.1.HelloCone.cpp Mentor/02.2.EngineSpin.cpp Mentor/02.3.Trackball.cpp Mentor/02.4.Examiner.cpp Mentor/03.1.Molecule.cpp Mentor/03.2.Robot.cpp Mentor/03.3.Naming.cpp Mentor/04.1.Cameras.cpp Mentor/04.2.Lights.cpp Mentor/05.1.FaceSet.cpp Mentor/05.2.IndexedFaceSet.cpp Mentor/05.3.TriangleStripSet.cpp Mentor/05.4.QuadMesh.cpp Mentor/05.5.Binding.cpp Mentor/05.6.TransformOrdering.cpp Mentor/06.1.Text.cpp Mentor/06.2.Simple3DText.cpp Mentor/06.3.Complex3DText.cpp Mentor/07.1.BasicTexture.cpp Mentor/07.2.TextureCoordinates.cpp Mentor/07.3.TextureFunction.cpp Mentor/08.1.BSCurve.cpp Mentor/08.2.UniCurve.cpp Mentor/08.3.BezSurf.cpp Mentor/08.4.TrimSurf.cpp Mentor/09.1.Print.cpp Mentor/09.2.Texture.cpp Mentor/09.3.Search.cpp Mentor/09.4.PickAction.cpp Mentor/09.5.GenSph.cpp Mentor/10.1.addEventCB.cpp Mentor/10.2.setEventCB.cpp Mentor/10.3and4.MotifList.cpp Mentor/10.5.SelectionCB.cpp Mentor/10.6.PickFilterTopLevel.cpp Mentor/10.7.PickFilterManip.cpp Mentor/10.8.PickFilterNodeKit.cpp Mentor/11.1.ReadFile.cpp Mentor/11.2.ReadString.cpp Mentor/12.1.FieldSensor.cpp Mentor/12.2.NodeSensor.cpp Mentor/12.3.AlarmSensor.cpp Mentor/12.4.TimerSensor.cpp Mentor/13.1.GlobalFlds.cpp Mentor/13.2.ElapsedTime.cpp Mentor/13.3.TimeCounter.cpp Mentor/13.4.Gate.cpp Mentor/13.5.Boolean.cpp Mentor/13.6.Calculator.cpp Mentor/13.7.Rotor.cpp Mentor/13.8.Blinker.cpp Mentor/14.1.FrolickingWords.cpp Mentor/14.2.Editors.cpp Mentor/14.3.Balance.cpp Mentor/15.1.ConeRadius.cpp Mentor/15.2.SliderBox.cpp Mentor/15.3.AttachManip.cpp Mentor/15.4.Customize.cpp Mentor/16.1.Overlay.cpp Mentor/16.2.Callback.cpp Mentor/16.3.AttachEditor.cpp Mentor/16.4.OneWindow.cpp Mentor/16.5.Examiner.cpp Mentor/17.1.ColorIndex.cpp Mentor/17.2.GLCallback.cpp Mentor/17.3.GLFloor.cpp Toolmaker/Makefile Toolmaker/02.Nodes/Makefile Toolmaker/02.Nodes/newNodes.cpp Toolmaker/03.Fields/Makefile Toolmaker/04.Actions/Makefile Toolmaker/05.Elements/Makefile Toolmaker/07.Nodekits/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -8815,6 +8873,7 @@ do
   "Toolmaker/03.Fields/Makefile" ) CONFIG_FILES="$CONFIG_FILES Toolmaker/03.Fields/Makefile" ;;
   "Toolmaker/04.Actions/Makefile" ) CONFIG_FILES="$CONFIG_FILES Toolmaker/04.Actions/Makefile" ;;
   "Toolmaker/05.Elements/Makefile" ) CONFIG_FILES="$CONFIG_FILES Toolmaker/05.Elements/Makefile" ;;
+  "Toolmaker/07.Nodekits/Makefile" ) CONFIG_FILES="$CONFIG_FILES Toolmaker/07.Nodekits/Makefile" ;;
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
   "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
