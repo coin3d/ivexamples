@@ -43,7 +43,7 @@ TextureFilenameElement::initClass(void)
 void
 TextureFilenameElement::init(SoState * /* state */)
 {
-  this->filename.makeEmpty();
+  this->filename = "<none>";
 }
 
 TextureFilenameElement::~TextureFilenameElement()
