@@ -116,6 +116,33 @@ EOF
   COMPONENTHEADER=
 
 else
+  sim_ac_gui_default=soxt
+
+  test x${with_qt+set} = xset && sim_ac_gui_default=soqt
+  test x${with_xt+set} = xset && sim_ac_gui_default=soxt
+  test x${with_gtk+set} = xset && sim_ac_gui_default=sogtk
+
+  AC_ARG_WITH(
+    soxt,
+    AC_HELP_STRING([--with-soxt], [build against the SoXt toolkit]),
+    [sim_ac_gui_default=soxt])
+  AC_ARG_WITH(
+    soqt,
+    AC_HELP_STRING([--with-soqt], [build against the SoQt toolkit]),
+    [sim_ac_gui_default=soqt])
+  AC_ARG_WITH(
+    sowin,
+    AC_HELP_STRING([--with-sowin], [build against the SoWin toolkit]),
+    [sim_ac_gui_default=sowin])
+  AC_ARG_WITH(
+    sogtk,
+    AC_HELP_STRING([--with-sogtk], [build against the SoGtk toolkit]),
+    [sim_ac_gui_default=sogtk])
+  AC_ARG_WITH(
+    oiv,
+    AC_HELP_STRING([--with-oiv], [build against the InventorXt toolkit]),
+    [sim_ac_gui_default=oivxt])
+
   AC_ARG_WITH(
     toolkit,
     AC_HELP_STRING([--with-toolkit=<toolkit>],
@@ -124,17 +151,20 @@ else
     case $lwithval in
       xt  | soxt)    sim_ac_gui_toolkit=soxt  ;;
       qt  | soqt)    sim_ac_gui_toolkit=soqt  ;;
+      win | sowin)   sim_ac_gui_toolkit=sowin ;;
       gtk | sogtk)   sim_ac_gui_toolkit=sogtk ;;
       be  | sobe)    sim_ac_gui_toolkit=sobe  ;;
+      oiv )          sim_ac_gui_toolkit=oivxt ;;
       *) AC_MSG_ERROR([invalid --with-toolkit value: "$withval"]) ;;
     esac],
-    [sim_ac_gui_toolkit=soxt])
+    [sim_ac_gui_toolkit=$sim_ac_gui_default])
 
+  # **************************************************************************
   # Environment variables to configure the generic sourcefiles.
-  
+
   sim_ac_path=$PATH
   test x"$prefix" = xNONE || sim_ac_path=$prefix/bin:$sim_ac_path
-  
+
   sim_ac_gui_configcmd=${sim_ac_gui_toolkit}-config
   AC_PATH_PROG(soguiconfig, $sim_ac_gui_configcmd, false, $sim_ac_path)
   if $soguiconfig; then
@@ -147,6 +177,28 @@ else
   else
     AC_MSG_ERROR([cannot find required '$sim_ac_gui_configcmd' utility])
   fi
+
+  # Which examples to build. These env vars also taken from
+  # libconfigvars.sh of the "parent module".
+
+  AM_CONDITIONAL(HAVE_EXAMINERVIEWER,
+    $soguiconfig --have-feature examinerviewer)
+  AM_CONDITIONAL(HAVE_PLANEVIEWER,
+    $soguiconfig --have-feature planeviewer)
+  AM_CONDITIONAL(HAVE_WALKVIEWER,
+    $soguiconfig --have-feature walkviewer)
+  AM_CONDITIONAL(HAVE_FLYVIEWER,
+    $soguiconfig --have-feature flyviewer)
+  AM_CONDITIONAL(HAVE_SLIDERSETS,
+    $soguiconfig --have-feature sliderset)
+  AM_CONDITIONAL(HAVE_MATERIALEDITOR,
+    $soguiconfig --have-feature materialeditor)
+  AM_CONDITIONAL(HAVE_DIRECTIONALLIGHTEDITOR,
+    $soguiconfig --have-feature directionallighteditor)
+  AM_CONDITIONAL(HAVE_MATERIALLIST,
+    $soguiconfig --have-feature materiallist)
+  AM_CONDITIONAL(HAVE_PRINTDIALOG,
+    $soguiconfig --have-feature printdialog)
 
   CPPFLAGS="`$soguiconfig --cppflags` $CPPFLAGS"
   LDFLAGS="`$soguiconfig --ldflags` $LDFLAGS"
