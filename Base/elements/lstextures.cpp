@@ -58,8 +58,9 @@ pre_tex2_cb(void * /*data*/, SoCallbackAction * action, const SoNode * node)
   const SbString & filename = ((SoTexture2 *)node)->filename.getValue();
   TextureFilenameElement::set(action->getState(), (SoNode *)node, filename);
 
-  fprintf(stdout, "=> New texture: %s\n",
-          filename.getLength() == 0 ? "<inlined>" : filename.getString());
+  (void)fprintf(stdout, "=> New texture: %s\n",
+                filename.getLength() == 0 ?
+                "<inlined>" : filename.getString());
 
   return SoCallbackAction::CONTINUE;
 }
@@ -70,9 +71,10 @@ pre_shape_cb(void * /*data*/, SoCallbackAction * action, const SoNode * node)
   const SbString & filename =
     TextureFilenameElement::get(action->getState());
 
-  fprintf(stdout, "Texturemap on %s: %s\n",
-          node->getTypeId().getName().getString(),
-          filename.getLength() == 0 ? "<inlined>" : filename.getString());
+  (void)fprintf(stdout, "   Texturemap on %s: %s\n",
+                node->getTypeId().getName().getString(),
+                filename.getLength() == 0 ?
+                "<inlined>" : filename.getString());
 
   return SoCallbackAction::CONTINUE;
 }
@@ -80,13 +82,13 @@ pre_shape_cb(void * /*data*/, SoCallbackAction * action, const SoNode * node)
 void
 usage(const char * appname)
 {
-  fprintf(stderr, "\n\tUsage: %s <modelfile.iv>\n\n", appname);
-  fprintf(stderr,
-          "\tLists all texture filenames in the model file,\n"
-          "\tand on which shape nodes they are used.\n\n"
-          "\tThe purpose of this example utility is simply to\n"
-          "\tshow how to create and use an extension element for\n"
-          "\tscene graph traversal.\n\n");
+  (void)fprintf(stderr, "\n\tUsage: %s <modelfile.iv>\n\n", appname);
+  (void)fprintf(stderr,
+                "\tLists all texture filenames in the model file,\n"
+                "\tand on which shape nodes they are used.\n\n"
+                "\tThe purpose of this example utility is simply to\n"
+                "\tshow how to create and use an extension element for\n"
+                "\tscene graph traversal.\n\n");
 }
 
 int
@@ -104,7 +106,7 @@ main(int argc, char ** argv)
 
   SoInput input;
   if (!input.openFile(argv[1])) {
-    fprintf(stderr, "ERROR: couldn't open file ``%s''.\n", argv[1]);
+    (void)fprintf(stderr, "ERROR: couldn't open file ``%s''.\n", argv[1]);
     exit(1);
   }
 
