@@ -43,10 +43,12 @@
  *  light in the scene are automatically created by the viewer.
  *-----------------------------------------------------------*/
 
-#include <Inventor/SoDB.h>         
 #include <Inventor/@Gui@/So@Gui@.h>         
 #include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>  
+#include <Inventor/SoDB.h>         
+#include <Inventor/errors/SoDebugError.h>
 #include <Inventor/nodes/SoSeparator.h>
+
 
 int
 main(int , char **argv)
@@ -60,18 +62,27 @@ main(int , char **argv)
    
    // Read the geometry from a file and add to the scene
    SoInput myInput;
+   SbString s;
    char * oivhome = getenv("OIVHOME");
    if (!oivhome) {
-     (void)fprintf(stderr, "Environment variable $OIVHOME not set.\n");
+     SoDebugError::postWarning("main", "Environment variable OIVHOME not set.");
+   }
+   else {
+     s += oivhome;
+     s += "/src/examples/data/";
+   }
+   s += "dogDish.iv";
+   if (!myInput.openFile(s.getString())) {
+     // A warning is output by SoInput::openFile(), so additional
+     // information for the user is not necessary.
      exit (1);
    }
-   SbString s(oivhome);
-   s += "/src/examples/data/dogDish.iv";
-   if (!myInput.openFile(s.getString()))
-      exit (1);
    SoSeparator *geomObject = SoDB::readAll(&myInput);
-   if (geomObject == NULL)
-      exit (1);
+   if (geomObject == NULL) {
+     SoDebugError::postWarning("main", "modelfile '%s' could not be read",
+                               s.getString());
+     exit (1);
+   }
    
    // Attach the viewer to the scene graph
    myViewer->setSceneGraph(geomObject);
