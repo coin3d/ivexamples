@@ -44,6 +44,7 @@
 
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
+#include <Inventor/errors/SoDebugError.h>
 #include <Inventor/nodes/SoComplexity.h>
 #include <Inventor/nodes/SoFont.h>
 #include <Inventor/nodes/SoGroup.h>
@@ -89,20 +90,21 @@ main(int, char **argv)
    sphereComplexity->value = 0.55;
    root->addChild(sphereSep);
 
+   SbString s("");
    char * oivhome = getenv("OIVHOME");
    if (!oivhome) {
-     (void)fprintf(stderr,
-                   "WARNING: environment variable $OIVHOME not set, "
-                   "can't find texture globe.rgb.\n");
+     SoDebugError::postWarning("main", "environment variable $OIVHOME not set");
    }
    else {
-     SoTexture2  *myTexture2 = new SoTexture2;
-     sphereSep->addChild(myTexture2);
-
-     SbString s(oivhome);
-     s += "/src/examples/data/globe.rgb";
-     myTexture2->filename = s;
+     s = oivhome;
+     s += "/src/examples/data/";
    }
+
+   s += "globe.rgb";
+
+   SoTexture2 *myTexture2 = new SoTexture2;
+   sphereSep->addChild(myTexture2);
+   myTexture2->filename = s;
 
    sphereSep->addChild(sphereComplexity);
    sphereSep->addChild(new SoSphere);
