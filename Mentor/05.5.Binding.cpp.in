@@ -46,6 +46,8 @@
  *  dodecahedron from an earlier example in this chapter.  
  *------------------------------------------------------------*/ 
 
+#include <stdlib.h>
+
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
 #include <Inventor/nodes/SoCoordinate3.h>

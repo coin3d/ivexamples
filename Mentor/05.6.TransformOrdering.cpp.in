@@ -45,6 +45,8 @@
  *  translated to the right.
  *------------------------------------------------------------*/
 
+#include <stdlib.h>
+
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
 #include <Inventor/SoDB.h>

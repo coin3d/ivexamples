@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4e from Makefile.am.
+# Makefile.in generated automatically by automake 1.5 from Makefile.am.
 
 # Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
 # Free Software Foundation, Inc.
@@ -10,6 +10,8 @@
 # but WITHOUT ANY WARRANTY, to the extent permitted by law; without
 # even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE.
+
+@SET_MAKE@
 
 SHELL = @SHELL@
 
@@ -31,11 +33,9 @@ infodir = @infodir@
 mandir = @mandir@
 includedir = @includedir@
 oldincludedir = /usr/include
-
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-
 top_builddir = ../..
 
 ACLOCAL = @ACLOCAL@
@@ -49,44 +49,42 @@ INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_HEADER = $(INSTALL_DATA)
 transform = @program_transform_name@
-
 NORMAL_INSTALL = :
 PRE_INSTALL = :
 POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-
-@SET_MAKE@
-AMDEP = @AMDEP@
 AMTAR = @AMTAR@
 AWK = @AWK@
 BUILD_WITH_MSVC = @BUILD_WITH_MSVC@
 COMPONENTHEADER = @COMPONENTHEADER@
+CPP = @CPP@
 CXX = @CXX@
 DEPDIR = @DEPDIR@
 EVENT = @EVENT@
+EXEEXT = @EXEEXT@
 GUI = @GUI@
 Gui = @Gui@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
-INSTALL_STRIP_PROGRAM_ENV = @INSTALL_STRIP_PROGRAM_ENV@
 MAINT = @MAINT@
-MAKEINFO = @MAKEINFO@
+OBJEXT = @OBJEXT@
 PACKAGE = @PACKAGE@
-STRIP = @STRIP@
 VERSION = @VERSION@
 WIDGET = @WIDGET@
 WINWIDGET = @WINWIDGET@
-_am_include = @_am_include@
+X_CFLAGS = @X_CFLAGS@
+X_EXTRA_LIBS = @X_EXTRA_LIBS@
+X_LIBS = @X_LIBS@
+X_PRE_LIBS = @X_PRE_LIBS@
+am__include = @am__include@
+am__quote = @am__quote@
 gui = @gui@
 install_sh = @install_sh@
 soguiconfig = @soguiconfig@
 
-
 noinst_PROGRAMS = lstextures
 lstextures_SOURCES = lstextures.cpp texturefilenameelement.cpp
-EXEEXT =
-OBJEXT = o
 subdir = Base/elements
 mkinstalldirs = $(SHELL) $(top_srcdir)/cfg/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -94,43 +92,38 @@ CONFIG_CLEAN_FILES =
 noinst_PROGRAMS = lstextures$(EXEEXT)
 PROGRAMS = $(noinst_PROGRAMS)
 
+am_lstextures_OBJECTS = lstextures.$(OBJEXT) \
+	texturefilenameelement.$(OBJEXT)
+lstextures_OBJECTS = $(am_lstextures_OBJECTS)
+lstextures_LDADD = $(LDADD)
+lstextures_DEPENDENCIES =
+lstextures_LDFLAGS =
 
-DEFS = @DEFS@ -I. -I$(srcdir) -I$(top_builddir)
+DEFS = @DEFS@
+DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
-X_CFLAGS = @X_CFLAGS@
-X_LIBS = @X_LIBS@
-X_EXTRA_LIBS = @X_EXTRA_LIBS@
-X_PRE_LIBS = @X_PRE_LIBS@
-am_lstextures_OBJECTS = lstextures.$(OBJEXT) \
-texturefilenameelement.$(OBJEXT)
-lstextures_OBJECTS = $(am_lstextures_OBJECTS)
-lstextures_LDADD = $(LDADD)
-lstextures_DEPENDENCIES = 
-lstextures_LDFLAGS = 
-CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-CXXFLAGS = @CXXFLAGS@
-CXXLD = $(CXX)
-CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(lstextures_SOURCES)
 depcomp = $(SHELL) $(top_srcdir)/cfg/depcomp
-@AMDEP@DEP_FILES = $(DEPDIR)/lstextures.Po \
-@AMDEP@ $(DEPDIR)/texturefilenameelement.Po
+@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/lstextures.Po \
+@AMDEP_TRUE@	$(DEPDIR)/texturefilenameelement.Po
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
+CXXFLAGS = @CXXFLAGS@
+DIST_SOURCES = $(lstextures_SOURCES)
 DIST_COMMON = README Makefile.am Makefile.in
-
 SOURCES = $(lstextures_SOURCES)
-OBJECTS = $(am_lstextures_OBJECTS)
 
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .cpp .o .obj
-
+.SUFFIXES: .cpp .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
 	  $(AUTOMAKE) --foreign  Base/elements/Makefile
-
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && \
 	  CONFIG_HEADERS= CONFIG_LINKS= \
@@ -138,6 +131,9 @@ Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.s
 
 clean-noinstPROGRAMS:
 	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
+lstextures$(EXEEXT): $(lstextures_OBJECTS) $(lstextures_DEPENDENCIES) 
+	@rm -f lstextures$(EXEEXT)
+	$(CXXLINK) $(lstextures_LDFLAGS) $(lstextures_OBJECTS) $(lstextures_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -145,9 +141,25 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-lstextures$(EXEEXT): $(lstextures_OBJECTS) $(lstextures_DEPENDENCIES)
-	@rm -f lstextures$(EXEEXT)
-	$(CXXLINK) $(lstextures_LDFLAGS) $(lstextures_OBJECTS) $(lstextures_LDADD) $(LIBS)
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/lstextures.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/texturefilenameelement.Po@am__quote@
+
+distclean-depend:
+	-rm -rf $(DEPDIR)
+
+.cpp.o:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CXXCOMPILE) -c -o $@ `test -f $< || echo '$(srcdir)/'`$<
+
+.cpp.obj:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CXXCOMPILE) -c -o $@ `cygpath -w $<`
+CXXDEPMODE = @CXXDEPMODE@
+uninstall-info-am:
 
 tags: TAGS
 
@@ -176,31 +188,10 @@ TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
 GTAGS:
 	here=`CDPATH=: && cd $(top_builddir) && pwd` \
 	  && cd $(top_srcdir) \
-	  && gtags -i $$here
+	  && gtags -i $(GTAGS_ARGS) $$here
 
 distclean-tags:
-	-rm -f TAGS ID
-
-@AMDEP@@_am_include@ $(DEPDIR)/lstextures.Po
-@AMDEP@@_am_include@ $(DEPDIR)/texturefilenameelement.Po
-
-distclean-depend:
-	-rm -rf $(DEPDIR)
-
-@AMDEP@CXXDEPMODE = @CXXDEPMODE@
-
-.cpp.o:
-@AMDEP@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
-@AMDEP@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(CXXCOMPILE) -c -o $@ `test -f $< || echo '$(srcdir)/'`$<
-
-.cpp.obj:
-@AMDEP@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
-@AMDEP@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(CXXCOMPILE) -c -o $@ `cygpath -w $<`
-
+	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
 
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
@@ -209,7 +200,11 @@ distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
-	  d=$(srcdir); \
+	  if test -f $$file; then d=.; else d=$(srcdir); fi; \
+	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+	  if test "$$dir" != "$$file" && test "$$dir" != "."; then \
+	    $(mkinstalldirs) "$(distdir)/$$dir"; \
+	  fi; \
 	  if test -d $$d/$$file; then \
 	    cp -pR $$d/$$file $(distdir) \
 	    || exit 1; \
@@ -234,23 +229,20 @@ install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 
 installcheck: installcheck-am
-
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
-	  INSTALL_PROGRAM_ENV='$(INSTALL_STRIP_PROGRAM_ENV)' install
-
+	  `test -z '$(STRIP)' || \
+	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install
 mostlyclean-generic:
 
 clean-generic:
 
 distclean-generic:
-	-rm -f Makefile $(CONFIG_CLEAN_FILES)
-	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+	-rm -f Makefile $(CONFIG_CLEAN_FILES) stamp-h stamp-h[0-9]*
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
-	-rm -f Makefile.in
 clean: clean-am
 
 clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
@@ -260,11 +252,11 @@ distclean: distclean-am
 distclean-am: clean-am distclean-compile distclean-depend \
 	distclean-generic distclean-tags
 
-dvi:
+dvi: dvi-am
 
 dvi-am:
 
-info:
+info: info-am
 
 info-am:
 
@@ -272,7 +264,7 @@ install-data-am:
 
 install-exec-am:
 
-install-info:
+install-info: install-info-am
 
 install-man:
 
@@ -286,16 +278,18 @@ mostlyclean: mostlyclean-am
 
 mostlyclean-am: mostlyclean-compile mostlyclean-generic
 
-.PHONY: all all-am check check-am clean clean-generic \
+uninstall-am: uninstall-info-am
+
+.PHONY: GTAGS all all-am check check-am clean clean-generic \
 	clean-noinstPROGRAMS distclean distclean-compile \
 	distclean-depend distclean-generic distclean-tags distdir dvi \
 	dvi-am info info-am install install-am install-data \
 	install-data-am install-exec install-exec-am install-info \
-	install-man install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic tags \
-	uninstall uninstall-am
-
+	install-info-am install-man install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic tags uninstall uninstall-am \
+	uninstall-info-am
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

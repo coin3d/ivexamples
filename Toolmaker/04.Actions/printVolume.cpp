@@ -43,6 +43,8 @@
  *  and prints the resulting computed volume to stdout.
  *------------------------------------------------------------*/
 
+#include <stdlib.h>
+
 #include <Inventor/SoDB.h>
 #include <Inventor/SoInput.h>
 #include <Inventor/SoInteraction.h>

@@ -45,6 +45,8 @@
  *  and print out the modified scene.
  *-----------------------------------------------------------*/
 
+#include <stdlib.h>
+
 #include <Inventor/SoDB.h>
 #include <Inventor/actions/SoSearchAction.h>
 #include <Inventor/actions/SoWriteAction.h>

@@ -43,6 +43,8 @@
  *  light in the scene are automatically created by the viewer.
  *-----------------------------------------------------------*/
 
+#include <stdlib.h>
+
 #include <Inventor/@Gui@/So@Gui@.h>         
 #include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>  
 #include <Inventor/SoDB.h>         

@@ -44,6 +44,8 @@
  *  that the figure slides across the scene.
  *------------------------------------------------------------*/
 
+#include <stdlib.h>
+
 #include <Inventor/SoDB.h>
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/So@Gui@RenderArea.h>

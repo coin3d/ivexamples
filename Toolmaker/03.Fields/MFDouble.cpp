@@ -41,6 +41,8 @@
  *  Source file for "MFDouble" field.
  *------------------------------------------------------------*/
 
+#include <stdlib.h> // malloc(), realloc(), free()
+
 #include "MFDouble.h"
 
 // Defines all required member variables and functions for a

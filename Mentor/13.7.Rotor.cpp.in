@@ -43,6 +43,8 @@
  *  Use a rotor node to rotate the vanes.
  *------------------------------------------------------------*/
 
+#include <stdlib.h>
+
 #include <Inventor/SoDB.h>
 #include <Inventor/SoInput.h>
 #include <Inventor/@Gui@/So@Gui@.h>

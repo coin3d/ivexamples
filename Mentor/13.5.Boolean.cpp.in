@@ -43,6 +43,8 @@
  *  and starts moving as soon as the bigger duck stops.
  *------------------------------------------------------------*/
 
+#include <stdlib.h>
+
 #include <Inventor/SoDB.h>
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/So@Gui@RenderArea.h>

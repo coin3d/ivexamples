@@ -26,3 +26,6 @@
 
 /* Define this to the Xt/Motif OpenGL widget class to use */
 #undef XT_GLWIDGET
+
+/* Define if the X Window System is missing or not being used. */
+#undef X_DISPLAY_MISSING

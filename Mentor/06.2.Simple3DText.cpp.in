@@ -42,6 +42,8 @@
  *  continents Africa and Asia.
  *------------------------------------------------------------*/
 
+#include <stdlib.h>
+
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
 #include <Inventor/errors/SoDebugError.h>
