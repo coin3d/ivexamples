@@ -15,8 +15,8 @@ if test ! -f ./"$me"; then
   exit 1
 fi
 
-AUTOCONF_VER=2.5[023456789]
-AUTOMAKE_VER=1.4[efghijklmn]     # Automake from CVS
+AUTOCONF_VER=2.5
+AUTOMAKE_VER=1.5
 
 PROJECT=ivexamples
 MACRODIR=cfg/m4
@@ -94,4 +94,3 @@ echo "Running autoconf (generating the configure script)..."
 autoconf
 
 echo "Done."
-
