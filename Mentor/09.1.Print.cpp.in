@@ -120,7 +120,7 @@ printToPostScript (SoNode *root, const char * filename,
   // Note: passing pointers to a FILE structure from the application
   // code to an MSWindows DLL is dangerous and will most likely cause
   // a crash.
-  SbBool result = this->writeToPostScript(psfp);
+  SbBool result = myRenderer->writeToPostScript(psfp);
   (void)fclose(psfp);
 #endif
    delete myRenderer;
