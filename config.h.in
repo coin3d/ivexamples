@@ -1,7 +1,25 @@
 /* config.h.in.  Generated automatically from configure.in by autoheader.  */
 
+/* Define this to use OpenGL widget from <GL/GLwDrawA.h> */
+#undef HAVE_GL_GLWDRAWA_H
+
+/* Define this to use OpenGL widget from <GL/GLwMDrawA.h> */
+#undef HAVE_GL_GLWMDRAWA_H
+
+/* Define this to use OpenGL widget from <X11/GLw/GLwDrawA.h> */
+#undef HAVE_X11_GLW_GLWDRAWA_H
+
+/* Define this to use OpenGL widget from <X11/GLw/GLwMDrawA.h> */
+#undef HAVE_X11_GLW_GLWMDRAWA_H
+
 /* Name of package */
 #undef PACKAGE
 
 /* Version number of package */
 #undef VERSION
+
+/* Define this to the Xt/Motif OpenGL widget class to use */
+#undef XT_GLWIDGET
+
+/* Define if the X Window System is missing or not being used. */
+#undef X_DISPLAY_MISSING
