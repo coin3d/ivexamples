@@ -44,6 +44,14 @@
  *  file for printing.
  *----------------------------------------------------------*/
 
+/*-----------------------------------------------------------
+ *  Changes by Systems in Motion:
+ *
+ *   - Use safe calling convention for SoOffscreenRenderer's
+ *     writeToPostscript() if Coin is the Open Inventor implementation.
+ * 
+ *----------------------------------------------------------*/
+
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/viewers/So@Gui@ExaminerViewer.h>
 #include <Inventor/SbViewportRegion.h>
@@ -63,8 +71,8 @@ typedef struct cbdata {
 // CODE FOR The Inventor Mentor STARTS HERE
 
 SbBool 
-printToPostScript (SoNode *root, FILE *file,
-   So@Gui@ExaminerViewer *viewer, int printerDPI)
+printToPostScript (SoNode *root, const char * filename,
+                   So@Gui@ExaminerViewer *viewer, int printerDPI)
 {
    // Calculate size of the images in inches which is equal to
    // the size of the viewport in pixels divided by the number
@@ -101,10 +109,22 @@ printToPostScript (SoNode *root, FILE *file,
    }
 
    // Generate PostScript and write it to the given file
-   myRenderer->writeToPostScript(file);
 
+#ifdef __COIN__   
+   SbBool result = myRenderer->writeToPostScript(filename);
+#else
+   // SGI or TGS Inventor doesn't have
+   // SoOffscreenRenderer::writeToPostScript(const char *).
+  FILE * psfp = fopen(filename, "wb");
+  if (!psfp) { return FALSE; }
+  // Note: passing pointers to a FILE structure from the application
+  // code to an MSWindows DLL is dangerous and will most likely cause
+  // a crash.
+  SbBool result = this->writeToPostScript(psfp);
+  (void)fclose(psfp);
+#endif
    delete myRenderer;
-   return TRUE;
+   return result;
 }
 
 // CODE FOR The Inventor Mentor ENDS HERE
@@ -116,23 +136,12 @@ processKeyEvents( void *data, SoEventCallback *cb )
    if (SO_KEY_PRESS_EVENT(cb->getEvent(), P)) {
     
       callbackData *cbData = (callbackData *)data;
-      FILE *myFile = fopen(cbData->filename, "w");
-
-      if (myFile == NULL) {
-         fprintf(stderr, "Cannot open output file\n");
-         exit(1);
-      }
-
-      printf("Printing scene... ");
-      fflush(stdout);
-      if (!printToPostScript(cbData->scene, myFile,
-            cbData->vwr, 75)) {
+      if (!printToPostScript(cbData->scene, cbData->filename,
+                             cbData->vwr, 75)) {
          fprintf(stderr, "Cannot print image\n");
-         fclose(myFile);
          exit(1);
       }
 
-      fclose(myFile);
       printf("  ...done printing.\n");
       fflush(stdout);
       cb->setHandled(); 
