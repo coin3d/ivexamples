@@ -44,6 +44,12 @@
  *  through a Callback node.
  *----------------------------------------------------------*/
 
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif // HAVE_CONFIG_H
+#if HAVE_WINDOWS_H
+#include <windows.h> // GL/gl.h needs this.
+#endif // HAVE_WINDOWS_H
 #include <GL/gl.h>
 #include <Inventor/SbLinear.h>
 #include <Inventor/@Gui@/So@Gui@.h>
