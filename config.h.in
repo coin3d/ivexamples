@@ -1,5 +1,8 @@
 /* config.h.in.  Generated automatically from configure.in by autoheader.  */
 
+/* Define if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
 /* Define this to use OpenGL widget from <GL/GLwDrawA.h> */
 #undef HAVE_GL_GLWDRAWA_H
 
@@ -23,6 +26,3 @@
 
 /* Define this to the Xt/Motif OpenGL widget class to use */
 #undef XT_GLWIDGET
-
-/* Define if the X Window System is missing or not being used. */
-#undef X_DISPLAY_MISSING

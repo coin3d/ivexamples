@@ -5,14 +5,14 @@ AC_INIT(Mentor/02.1.HelloCone.cpp.in)
 # If the Microsoft Visual C++ cl.exe compiler is available, set us up for
 # compiling with it.
 
-BUILD_WITH_MSVC=false
-sim_ac_msvccc=$srcdir/conf-macros/msvccc
-if test -z "$CC" && test -z "$CXX" && $sim_ac_msvccc >/dev/null 2>&1; then
-  CC=$sim_ac_msvccc
-  CXX=$sim_ac_msvccc
-  BUILD_WITH_MSVC=true
-fi
-AC_SUBST(BUILD_WITH_MSVC)
+SIM_AC_SETUP_MSVC_IFELSE([
+], [
+  case $host in
+  *-cygwin)
+    AC_MSG_ERROR([You need Microsoft Visual C++ to build on Cygwin])
+    ;;
+  esac
+])
 
 # **************************************************************************
 #  Locate C++ compiler and set C++ as the default compiler to run

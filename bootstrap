@@ -15,8 +15,8 @@ if test ! -f ./"$me"; then
   exit 1
 fi
 
-AUTOCONF_VER=2.49b  # Autoconf from CVS
-AUTOMAKE_VER=1.4a   # Automake from CVS
+AUTOCONF_VER=2.5[023456789]
+AUTOMAKE_VER=1.4[efghijklmn]     # Automake from CVS
 
 PROJECT=ivexamples
 MACRODIR=conf-macros
@@ -46,8 +46,7 @@ if test -z "`autoconf --version 2>/dev/null | grep \" $AUTOCONF_VER\"`"; then
     echo "You must have autoconf version $AUTOCONF_VER installed to"
     echo "generate configure information and Makefiles for $PROJECT."
     echo ""
-    echo "(The Autoconf version we are using is the bleeding edge"
-    echo "from the CVS repository.)"
+    echo "Get ftp://ftp.gnu.org/gnu/autoconf/autoconf-$AUTOCONF_VER.tar.gz"
     DIE=true
 fi
 
