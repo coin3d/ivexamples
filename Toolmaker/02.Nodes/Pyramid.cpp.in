@@ -48,7 +48,7 @@
 #if HAVE_WINDOWS_H
 #include <windows.h> // gl.h needs types from this file on MSWindows.
 #endif // HAVE_WINDOWS_H
-#include <GL/gl.h>
+@SIM_INCLUDE_GL_H@
 #include <Inventor/SbBox.h>
 #include <Inventor/SoPickedPoint.h>
 #include <Inventor/SoPrimitiveVertex.h>

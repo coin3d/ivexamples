@@ -1,6 +1,6 @@
 ############################################################################
 
-BUILT_SOURCES = newNodes.cpp
+BUILT_SOURCES = newNodes.cpp Pyramid.cpp
 
 noinst_PROGRAMS = newNodes
 
