@@ -190,6 +190,8 @@ else
   CPPFLAGS="`$soguiconfig --cppflags` $CPPFLAGS"
   LDFLAGS="`$soguiconfig --ldflags` $LDFLAGS"
   LIBS="`$soguiconfig --libs` $LIBS"
+
+  SIM_AC_CHECK_GLU([], AC_MSG_ERROR(needs the GLU library functions))
 fi
 
 if test x"${WINWIDGET+set}" != x"set"; then
