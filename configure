@@ -8117,6 +8117,88 @@ echo "$as_me: error: couldn't compile and link against the InventorXt library" >
 fi
 
 
+
+
+if true; then
+  HAVE_EXAMINERVIEWER_TRUE=
+  HAVE_EXAMINERVIEWER_FALSE='#'
+else
+  HAVE_EXAMINERVIEWER_TRUE='#'
+  HAVE_EXAMINERVIEWER_FALSE=
+fi
+
+
+if true; then
+  HAVE_PLANEVIEWER_TRUE=
+  HAVE_PLANEVIEWER_FALSE='#'
+else
+  HAVE_PLANEVIEWER_TRUE='#'
+  HAVE_PLANEVIEWER_FALSE=
+fi
+
+
+if true; then
+  HAVE_WALKVIEWER_TRUE=
+  HAVE_WALKVIEWER_FALSE='#'
+else
+  HAVE_WALKVIEWER_TRUE='#'
+  HAVE_WALKVIEWER_FALSE=
+fi
+
+
+if true; then
+  HAVE_FLYVIEWER_TRUE=
+  HAVE_FLYVIEWER_FALSE='#'
+else
+  HAVE_FLYVIEWER_TRUE='#'
+  HAVE_FLYVIEWER_FALSE=
+fi
+
+
+if true; then
+  HAVE_SLIDERSETS_TRUE=
+  HAVE_SLIDERSETS_FALSE='#'
+else
+  HAVE_SLIDERSETS_TRUE='#'
+  HAVE_SLIDERSETS_FALSE=
+fi
+
+
+if true; then
+  HAVE_MATERIALEDITOR_TRUE=
+  HAVE_MATERIALEDITOR_FALSE='#'
+else
+  HAVE_MATERIALEDITOR_TRUE='#'
+  HAVE_MATERIALEDITOR_FALSE=
+fi
+
+
+if true; then
+  HAVE_DIRECTIONALLIGHTEDITOR_TRUE=
+  HAVE_DIRECTIONALLIGHTEDITOR_FALSE='#'
+else
+  HAVE_DIRECTIONALLIGHTEDITOR_TRUE='#'
+  HAVE_DIRECTIONALLIGHTEDITOR_FALSE=
+fi
+
+
+if true; then
+  HAVE_MATERIALLIST_TRUE=
+  HAVE_MATERIALLIST_FALSE='#'
+else
+  HAVE_MATERIALLIST_TRUE='#'
+  HAVE_MATERIALLIST_FALSE=
+fi
+
+
+if true; then
+  HAVE_PRINTDIALOG_TRUE=
+  HAVE_PRINTDIALOG_FALSE='#'
+else
+  HAVE_PRINTDIALOG_TRUE='#'
+  HAVE_PRINTDIALOG_FALSE=
+fi
+
   GUI=XT
   Gui=Xt
   gui=xt
@@ -8263,7 +8345,7 @@ echo "$as_me: error: aborting" >&2;}
 
 
 
-if 1; then
+if true; then
   HAVE_EXAMINERVIEWER_TRUE=
   HAVE_EXAMINERVIEWER_FALSE='#'
 else
@@ -8272,7 +8354,7 @@ else
 fi
 
 
-if 1; then
+if true; then
   HAVE_PLANEVIEWER_TRUE=
   HAVE_PLANEVIEWER_FALSE='#'
 else
@@ -8281,7 +8363,7 @@ else
 fi
 
 
-if 1; then
+if true; then
   HAVE_WALKVIEWER_TRUE=
   HAVE_WALKVIEWER_FALSE='#'
 else
@@ -8290,7 +8372,7 @@ else
 fi
 
 
-if 1; then
+if true; then
   HAVE_FLYVIEWER_TRUE=
   HAVE_FLYVIEWER_FALSE='#'
 else
@@ -8299,7 +8381,7 @@ else
 fi
 
 
-if 0; then
+if false; then
   HAVE_SLIDERSETS_TRUE=
   HAVE_SLIDERSETS_FALSE='#'
 else
@@ -8308,7 +8390,7 @@ else
 fi
 
 
-if 0; then
+if false; then
   HAVE_MATERIALEDITOR_TRUE=
   HAVE_MATERIALEDITOR_FALSE='#'
 else
@@ -8317,7 +8399,7 @@ else
 fi
 
 
-if 0; then
+if false; then
   HAVE_DIRECTIONALLIGHTEDITOR_TRUE=
   HAVE_DIRECTIONALLIGHTEDITOR_FALSE='#'
 else
@@ -8326,7 +8408,7 @@ else
 fi
 
 
-if 0; then
+if false; then
   HAVE_MATERIALLIST_TRUE=
   HAVE_MATERIALLIST_FALSE='#'
 else
@@ -8335,7 +8417,7 @@ else
 fi
 
 
-if 0; then
+if false; then
   HAVE_PRINTDIALOG_TRUE=
   HAVE_PRINTDIALOG_FALSE='#'
 else
@@ -9347,7 +9429,6 @@ s,@X_CFLAGS@,$X_CFLAGS,;t t
 s,@X_PRE_LIBS@,$X_PRE_LIBS,;t t
 s,@X_LIBS@,$X_LIBS,;t t
 s,@X_EXTRA_LIBS@,$X_EXTRA_LIBS,;t t
-s,@soguiconfig@,$soguiconfig,;t t
 s,@HAVE_EXAMINERVIEWER_TRUE@,$HAVE_EXAMINERVIEWER_TRUE,;t t
 s,@HAVE_EXAMINERVIEWER_FALSE@,$HAVE_EXAMINERVIEWER_FALSE,;t t
 s,@HAVE_PLANEVIEWER_TRUE@,$HAVE_PLANEVIEWER_TRUE,;t t
@@ -9366,6 +9447,7 @@ s,@HAVE_MATERIALLIST_TRUE@,$HAVE_MATERIALLIST_TRUE,;t t
 s,@HAVE_MATERIALLIST_FALSE@,$HAVE_MATERIALLIST_FALSE,;t t
 s,@HAVE_PRINTDIALOG_TRUE@,$HAVE_PRINTDIALOG_TRUE,;t t
 s,@HAVE_PRINTDIALOG_FALSE@,$HAVE_PRINTDIALOG_FALSE,;t t
+s,@soguiconfig@,$soguiconfig,;t t
 s,@GUI@,$GUI,;t t
 s,@Gui@,$Gui,;t t
 s,@gui@,$gui,;t t
