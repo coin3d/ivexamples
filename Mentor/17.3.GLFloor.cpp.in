@@ -42,9 +42,9 @@
  *  but using a GLX window.
  *---------------------------------------------------------*/
 
-#include <GL/glx.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+@SIM_INCLUDE_GL_H@
+@SIM_INCLUDE_GLU_H@
+@SIM_INCLUDE_GLEXT_H@
 #include <stdio.h>
 #include <unistd.h>
 

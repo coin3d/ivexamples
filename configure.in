@@ -78,7 +78,10 @@ if $sim_ac_ivexamples_use_inventor; then
     SIM_AC_CHECK_X_INTRINSIC
   fi
   
-  SIM_AC_CHECK_OPENGL([ ], [AC_MSG_ERROR(needs an OpenGL-compatible development system installation)])
+  SIM_AC_CHECK_OPENGL(
+    [SIM_AC_CHECK_HEADER_GLEXT([])], 
+    [AC_MSG_ERROR(needs an OpenGL-compatible development system installation)]
+  )
 
   SIM_AC_CHECK_GLU( , AC_MSG_ERROR(needs the GLU library functions))
 
@@ -201,12 +204,55 @@ else
   LDFLAGS="`$soguiconfig --ldflags` $LDFLAGS"
   LIBS="`$soguiconfig --libs` $LIBS"
 
+  SIM_AC_CHECK_OPENGL(
+    [SIM_AC_CHECK_HEADER_GLEXT([])], 
+    [AC_MSG_ERROR(needs an OpenGL-compatible development system installation)]
+  )
   SIM_AC_CHECK_GLU([], AC_MSG_ERROR(needs the GLU library functions))
 fi
 
 if test x"${WINWIDGET+set}" != x"set"; then
   WINWIDGET=$WIDGET
 fi
+
+
+# how to include gl.h
+if test x"$ac_cv_header_GL_gl_h" = x"yes"; then
+  sim_include_gl_h="#include <GL/gl.h>"
+else
+  if test x"$ac_cv_header_OpenGL_gl_h" = x"yes"; then
+    sim_include_gl_h="#include <OpenGL/gl.h>"
+  else
+    sim_include_gl_h="#error \"don't know how to include gl.h header\""
+  fi
+fi
+
+# how to include glu.h
+if test x"$ac_cv_header_GL_glu_h" = x"yes"; then
+  sim_include_glu_h="#include <GL/glu.h>"
+else
+  if test x"$ac_cv_header_OpenGL_glu_h" = x"yes"; then
+    sim_include_glu_h="#include <OpenGL/glu.h>"
+  else
+    sim_include_glu_h="/* #include <GL/glu.h> - not found on system */"
+  fi
+fi
+
+# how to include glext.h
+if test x"$ac_cv_header_GL_glext_h" = x"yes"; then
+  sim_include_glext_h="#include <GL/glext.h>"
+else
+  if test x"$ac_cv_header_OpenGL_glext_h" = x"yes"; then
+    sim_include_glext_h="#include <OpenGL/glext.h>"
+  else
+    sim_include_glext_h="/* #include <GL/glext.h> - not found on system */"
+  fi
+fi
+
+AC_SUBST([SIM_INCLUDE_GL_H], [$sim_include_gl_h])
+AC_SUBST([SIM_INCLUDE_GLU_H], [$sim_include_glu_h])
+AC_SUBST([SIM_INCLUDE_GLEXT_H], [$sim_include_glext_h])
+
 
 AC_SUBST(GUI)
 AC_SUBST(Gui)
@@ -215,6 +261,7 @@ AC_SUBST(WIDGET)
 AC_SUBST(WINWIDGET)
 AC_SUBST(EVENT)
 AC_SUBST(COMPONENTHEADER)
+
 
 # Include Inventor Mentor examples that are Xt/Motif dependent if
 # we're building against SoXt or InventorXt.
