@@ -103,6 +103,8 @@ printToPostScript (SoNode *root, const char * filename,
    // Render the scene
    SoOffscreenRenderer *myRenderer = 
             new SoOffscreenRenderer(myViewport);
+   myRenderer->setBackgroundColor(SbColor(1, 1, 1));
+
    if (!myRenderer->render(root)) {
       delete myRenderer;
       return FALSE;
