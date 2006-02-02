@@ -39,6 +39,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_triplet = @build@
+host_triplet = @host@
+target_triplet = @target@
 ACLOCAL = @ACLOCAL@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
@@ -133,11 +136,19 @@ am__include = @am__include@
 am__leading_dot = @am__leading_dot@
 am__quote = @am__quote@
 bindir = @bindir@
+build = @build@
 build_alias = @build_alias@
+build_cpu = @build_cpu@
+build_os = @build_os@
+build_vendor = @build_vendor@
 datadir = @datadir@
 exec_prefix = @exec_prefix@
 gui = @gui@
+host = @host@
 host_alias = @host_alias@
+host_cpu = @host_cpu@
+host_os = @host_os@
+host_vendor = @host_vendor@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
@@ -152,7 +163,11 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 soguiconfig = @soguiconfig@
 sysconfdir = @sysconfdir@
+target = @target@
 target_alias = @target_alias@
+target_cpu = @target_cpu@
+target_os = @target_os@
+target_vendor = @target_vendor@
 
 noinst_PROGRAMS = jumpingJackKitTest
 
@@ -424,6 +439,14 @@ uninstall-am: uninstall-info-am
 
 jumpingJackKitTest.cpp: $(srcdir)/jumpingJackKitTest.cpp.in
 	@( cd $(top_builddir); ./config.status --file=Toolmaker/07.Nodekits/jumpingJackKitTest.cpp )
+
+# Create Mac OS X application bundles.
+app-bundles: all-am
+	@case $(target_os) in darwin* ) \
+	  for i in $(noinst_PROGRAMS); do \
+	    if test -f $$i; then $(soguiconfig) --build-app $$i; fi \
+	  done;; \
+	esac
 
 ############################################################################
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
