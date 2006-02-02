@@ -222,5 +222,14 @@ if BUILD_XT_ONLY_EXAMPLES
 17_1_ColorIndex_SOURCES = 17.1.ColorIndex.cpp
 endif
 
+# Create Mac OS X application bundles.
+app-bundles: all-am
+	@case $(target_os) in darwin* ) \
+	  echo "Making Mac OS X application bundles in Mentor."; \
+	  for i in $(noinst_PROGRAMS); do \
+	    if test -f $$i; then $(soguiconfig) --build-app $$i; fi \
+	  done;; \
+	esac
 
 ############################################################################
+

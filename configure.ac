@@ -21,6 +21,7 @@ AC_LANG(C++)
 # * Miscellaneous options and initializations.
 # *******************************************************************
 
+AC_CANONICAL_SYSTEM
 AM_INIT_AUTOMAKE(ivexamples, 0.0.1)
 
 #  File to cram results from the configure tests into.
@@ -346,3 +347,14 @@ AC_OUTPUT([
 	Toolmaker/05.Elements/Makefile
 	Toolmaker/07.Nodekits/Makefile
 ])
+
+echo ""
+echo "Now run 'make' to build the examples."
+case $target_os in
+  darwin* ) 
+    echo "Run 'make app-bundles' to create Mac OS X application bundles."
+    ;; 
+esac
+echo ""
+
+
