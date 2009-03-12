@@ -191,7 +191,7 @@ main(int argc, char **argv)
    callbackData *data = new callbackData;
    data->vwr = viewer;
    data->filename = argv[2];
-   data->scene = viewer->getSceneGraph();
+   data->scene = viewer->getSceneManager()->getSceneGraph();
    eventCB->addEventCallback(SoKeyboardEvent::getClassTypeId(),
          processKeyEvents, data);
    viewer->show();
