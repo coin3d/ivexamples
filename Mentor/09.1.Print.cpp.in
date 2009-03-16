@@ -191,6 +191,8 @@ main(int argc, char **argv)
    callbackData *data = new callbackData;
    data->vwr = viewer;
    data->filename = argv[2];
+   // FIXME: The getSceneManager() call is necessary to make this work
+   // in Coin. kintel 20093016. See COIN-171
    data->scene = viewer->getSceneManager()->getSceneGraph();
    eventCB->addEventCallback(SoKeyboardEvent::getClassTypeId(),
          processKeyEvents, data);
