@@ -34,15 +34,51 @@ AC_ARG_ENABLE([msvc],
 ])
 
 # **************************************************************************
+# Usage:
+#  SIM_AC_MSC_VERSION
+#
+# Find version number of the Visual C++ compiler. sim_ac_msc_version will
+# contain the full version number string, and sim_ac_msc_major_version
+# will contain only the Visual C++ major version number and
+# sim_ac_msc_minor_version will contain the minor version number.
 
-AC_DEFUN([SIM_AC_MSVC_VERSION], [
-AC_MSG_CHECKING([Visual Studio C++ version])
-AC_TRY_COMPILE([],
-  [long long number = 0;],
-  [sim_ac_msvc_version=7]
-  [sim_ac_msvc_version=6])
-AC_MSG_RESULT($sim_ac_msvc_version)
-])
+AC_DEFUN([SIM_AC_MSC_VERSION], [
+
+AC_MSG_CHECKING([version of Visual C++ compiler])
+
+cat > conftest.c << EOF
+int VerMSC = _MSC_VER;
+EOF
+
+# The " *"-parts of the last sed-expression on the next line are necessary
+# because at least the Solaris/CC preprocessor adds extra spaces before and
+# after the trailing semicolon.
+sim_ac_msc_version=`$CXXCPP $CPPFLAGS conftest.c 2>/dev/null | grep '^int VerMSC' | sed 's%^int VerMSC = %%' | sed 's% *;.*$%%'`
+
+sim_ac_msc_minor_version=0
+if test $sim_ac_msc_version -ge 1500; then
+  sim_ac_msc_major_version=9
+elif test $sim_ac_msc_version -ge 1400; then
+  sim_ac_msc_major_version=8
+elif test $sim_ac_msc_version -ge 1300; then
+  sim_ac_msc_major_version=7
+  if test $sim_ac_msc_version -ge 1310; then
+    sim_ac_msc_minor_version=1
+  fi
+elif test $sim_ac_msc_version -ge 1200; then
+  sim_ac_msc_major_version=6
+elif test $sim_ac_msc_version -ge 1100; then
+  sim_ac_msc_major_version=5
+else
+  sim_ac_msc_major_version=0
+fi
+
+# compatibility with old version of macro
+sim_ac_msvc_version=$sim_ac_msc_major_version
+
+rm -f conftest.c
+AC_MSG_RESULT($sim_ac_msc_major_version.$sim_ac_msc_minor_version)
+]) # SIM_AC_MSC_VERSION
 
 # **************************************************************************
 # Note: the SIM_AC_SETUP_MSVC_IFELSE macro has been OBSOLETED and
@@ -71,9 +107,6 @@ if $sim_ac_try_msvc; then
       export CC CXX
       BUILD_WITH_MSVC=true
       AC_MSG_RESULT([working])
-
-      # FIXME: why is this here, larsa? 20050714 mortene.
-      # SIM_AC_MSVC_VERSION
 
       # Robustness: we had multiple reports of Cygwin ''link'' getting in
       # the way of MSVC link.exe, so do a little sanity check for that.
@@ -332,7 +365,7 @@ while test $sim_ac_num_settings -ge 0; do
   sim_ac_description=`echo "$sim_ac_setting" | cut -d: -f1`
   sim_ac_status=`echo "$sim_ac_setting" | cut -d: -f2-`
   # hopefully not too many terminals are too dumb for this
-  echo -e "$sim_ac_padding $sim_ac_status\r  $sim_ac_description:"
+  printf "$sim_ac_padding $sim_ac_status\r  $sim_ac_description:\n"
   sim_ac_configuration_settings=`echo $sim_ac_configuration_settings | cut -d"|" -f2-`
   sim_ac_num_settings=`expr $sim_ac_num_settings - 1`
 done
@@ -1230,12 +1263,12 @@ AU_DEFUN([jm_MAINTAINER_MODE], [AM_MAINTAINER_MODE])
 #   Let the user decide if debug symbol information should be compiled
 #   in. The compiled libraries/executables will use a lot less space
 #   if stripped for their symbol information.
-# 
+#
 #   Note: this macro must be placed after either AC_PROG_CC or AC_PROG_CXX
 #   in the configure.in script.
-# 
+#
 # Author: Morten Eriksen, <mortene@sim.no>.
-# 
+#
 
 AC_DEFUN([SIM_AC_DEBUGSYMBOLS], [
 AC_ARG_ENABLE(
@@ -1251,8 +1284,8 @@ AC_ARG_ENABLE(
 
 # weird seds to don't mangle options like -fno-gnu-linker and -fvolatile-global
 if test x"$enable_symbols" = x"no"; then
-  CFLAGS="`echo $CFLAGS | sed 's/ -g //g' | sed 's/^-g //g' | sed 's/ -g$//g' | sed 's/^-g$//'`"
-  CXXFLAGS="`echo $CXXFLAGS | sed 's/ -g //g' | sed 's/^-g //g' | sed 's/ -g$//g' | sed 's/^-g$//'`"
+  CFLAGS="`echo $CFLAGS | sed 's/ -g / /g' | sed 's/^-g / /g' | sed 's/ -g$/ /g' | sed 's/^-g$/ /'`"
+  CXXFLAGS="`echo $CXXFLAGS | sed 's/ -g / /g' | sed 's/^-g / /g' | sed 's/ -g$/ /g' | sed 's/^-g$/ /'`"
 fi
 ]) # SIM_AC_DEBUGSYMBOLS
 
@@ -1264,10 +1297,10 @@ fi
 #   Let the user decide if RTTI should be compiled in. The compiled
 #   libraries/executables will use a lot less space if they don't
 #   contain RTTI.
-# 
+#
 #   Note: this macro must be placed after AC_PROG_CXX in the
 #   configure.in script.
-# 
+#
 # Author: Morten Eriksen, <mortene@sim.no>.
 
 AC_DEFUN([SIM_AC_RTTI_SUPPORT], [
@@ -1296,8 +1329,9 @@ fi
 #
 # Description:
 #   Let the user decide if C++ exception handling should be compiled
-#   in. The compiled libraries/executables will use a lot less space
-#   if they have exception handling support.
+#   in. With older compilers the libraries/executables will use a lot
+#   less space if they have exception handling support disabled, on
+#   modern compilers the difference is negligible.
 #
 #   Note: this macro must be placed after AC_PROG_CXX in the
 #   configure.in script.
@@ -1313,13 +1347,13 @@ AC_PREREQ([2.13])
 AC_ARG_ENABLE(
   [exceptions],
   AC_HELP_STRING([--enable-exceptions],
-                 [(g++ only) compile with exceptions [[default=no]]]),
+                 [(g++ only) compile with exceptions [[default=yes]]]),
   [case "${enableval}" in
     yes) enable_exceptions=yes ;;
     no)  enable_exceptions=no ;;
     *) AC_MSG_ERROR(bad value "${enableval}" for --enable-exceptions) ;;
   esac],
-  [enable_exceptions=no])
+  [enable_exceptions=yes])
 
 if test x"$enable_exceptions" = x"no"; then
   if test "x$GXX" = "xyes"; then
@@ -1338,8 +1372,12 @@ if test x"$enable_exceptions" = x"no"; then
     fi
   fi
 else
-  if test x"$GXX" != x"yes"; then
-    AC_MSG_WARN([--enable-exceptions only has effect when using GNU g++])
+  if $BUILD_WITH_MSVC; then
+    SIM_AC_CXX_COMPILER_OPTION([/EHsc], [CXXFLAGS="$CXXFLAGS /EHsc"])
+  else
+    if test x"$GXX" != x"yes"; then
+      AC_MSG_WARN([--enable-exceptions only has effect when using GNU g++])
+    fi
   fi
 fi
 ])
@@ -1585,6 +1623,8 @@ AC_DEFUN([SIM_AC_DETECT_COMMON_COMPILER_FLAGS], [
 AC_REQUIRE([SIM_AC_CHECK_PROJECT_BETA_STATUS_IFELSE])
 AC_REQUIRE([SIM_AC_CHECK_SIMIAN_IFELSE])
 
+sim_ac_simian=false
+
 SIM_AC_COMPILE_DEBUG([
   if test x"$GCC" = x"yes"; then
     # no auto string.h-functions
@@ -1631,12 +1671,7 @@ SIM_AC_COMPILE_DEBUG([
       # warning level 3
       SIM_AC_CC_COMPILER_OPTION([/W3], [sim_ac_compiler_CFLAGS="$sim_ac_compiler_CFLAGS /W3"])
       SIM_AC_CXX_COMPILER_OPTION([/W3], [sim_ac_compiler_CXXFLAGS="$sim_ac_compiler_CXXFLAGS /W3"])
-
-      if test ${sim_ac_msvc_version-0} -gt 6; then
-        # 64-bit porting warnings
-        SIM_AC_CC_COMPILER_OPTION([/Wp64], [sim_ac_compiler_CFLAGS="$sim_ac_compiler_CFLAGS /Wp64"])
-        SIM_AC_CXX_COMPILER_OPTION([/Wp64], [sim_ac_compiler_CXXFLAGS="$sim_ac_compiler_CXXFLAGS /Wp64"])
-      fi
+      
       ;;
     esac
   fi
@@ -1649,8 +1684,8 @@ ifelse($1, [], :, $1)
 AC_DEFUN([SIM_AC_COMPILER_NOBOOL], [
 sim_ac_nobool_CXXFLAGS=
 sim_ac_have_nobool=false
+AC_MSG_CHECKING([whether $CXX accepts /noBool])
 if $BUILD_WITH_MSVC && test x$sim_ac_msvc_version = x6; then
-  AC_MSG_CHECKING([whether $CXX accepts /noBool])
   SIM_AC_CXX_COMPILER_BEHAVIOR_OPTION_QUIET(
     [/noBool],
     [int temp],
@@ -1660,7 +1695,7 @@ if $BUILD_WITH_MSVC && test x$sim_ac_msvc_version = x6; then
       [],
       [sim_ac_have_nobool=true])])
 fi
- 
+
 if $sim_ac_have_nobool; then
   sim_ac_nobool_CXXFLAGS="/noBool"
   AC_MSG_RESULT([yes])
@@ -1766,7 +1801,7 @@ if $enable_debug; then
     case $CXX in
     *wrapmsvc* )
       # uninitialized checks
-      if test ${sim_ac_msvc_version-0} -gt 6; then
+      if test ${sim_ac_msc_major_version-0} -gt 6; then
         SIM_AC_CC_COMPILER_OPTION([/RTCu], [sim_ac_compiler_CFLAGS="$sim_ac_compiler_CFLAGS /RTCu"])
         SIM_AC_CXX_COMPILER_OPTION([/RTCu], [sim_ac_compiler_CXXFLAGS="$sim_ac_compiler_CXXFLAGS /RTCu"])
         # stack frame checks
@@ -1792,16 +1827,16 @@ AC_SUBST(DSUFFIX)
 # Description:
 #   Let the user decide if optimization should be attempted turned off
 #   by stripping off an "-O[0-9]" option.
-# 
+#
 #   Note: this macro must be placed after either AC_PROG_CC or AC_PROG_CXX
 #   in the configure.in script.
 #
 # FIXME: this is pretty much just a dirty hack. Unfortunately, this
 # seems to be the best we can do without fixing Autoconf to behave
 # properly wrt setting optimization options. 20011021 mortene.
-# 
+#
 # Author: Morten Eriksen, <mortene@sim.no>.
-# 
+#
 
 AC_DEFUN([SIM_AC_COMPILER_OPTIMIZATION], [
 AC_ARG_ENABLE(
@@ -1816,6 +1851,12 @@ AC_ARG_ENABLE(
   [sim_ac_enable_optimization=true])
 
 if $sim_ac_enable_optimization; then
+  case $CXX in
+  *wrapmsvc* )
+    CFLAGS="/Ox $CFLAGS"
+    CXXFLAGS="/Ox $CXXFLAGS"
+    ;;
+  esac
   :
 else
   CFLAGS="`echo $CFLAGS | sed 's/-O[[0-9]]*[[ ]]*//'`"
@@ -2079,7 +2120,7 @@ AC_DEFUN([SIM_AC_CHECK_DLD], [
 # SIM_AC_CHECK_DYLD([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
 # -------------------------------------------------------------------
 #
-#  Try to use the Mac OS X dynamik link editor method 
+#  Try to use the Mac OS X dynamik link editor method
 #  NSLookupAndBindSymbol()
 #
 # Author: Karin Kosina, <kyrah@sim.no>
@@ -2087,7 +2128,7 @@ AC_DEFUN([SIM_AC_CHECK_DLD], [
 AC_DEFUN([SIM_AC_CHECK_DYLD], [
 AC_ARG_ENABLE(
   [dyld],
-  [AC_HELP_STRING([--disable-dyld], 
+  [AC_HELP_STRING([--disable-dyld],
                   [don't use run-time link bindings under Mac OS X])],
   [case $enableval in
   yes | true ) sim_ac_dyld=true ;;
@@ -2138,25 +2179,26 @@ fi
 AC_DEFUN([SIM_AC_CHECK_X11], [
 AC_REQUIRE([AC_PATH_XTRA])
 
-sim_ac_enable_darwin_x11=true
+sim_ac_enable_darwin_x11=false
 
 case $host_os in
-  darwin* ) 
+  darwin* )
     AC_ARG_ENABLE([darwin-x11],
       AC_HELP_STRING([--enable-darwin-x11],
                      [enable X11 on Darwin [[default=--disable-darwin-x11]]]),
       [case "${enableval}" in
         yes | true) sim_ac_enable_darwin_x11=true ;;
-        no | false) sim_ac_enable_darwin_x11=false ;;
+        no | false) sim_ac_enable_darwin_x11=false; no_x=yes ;;
         *) SIM_AC_ENABLE_ERROR([--enable-darwin-x11]) ;;
       esac],
-      [sim_ac_enable_darwin_x11=false])
+      [sim_ac_enable_darwin_x11=false; no_x=yes])
   ;;
 esac
 
 sim_ac_x11_avail=no
 
-if test x"$no_x" != xyes -a x"$sim_ac_enable_darwin_x11" = xtrue; then
+if test x"$no_x" != xyes; then
+
   #  *** DEBUG ***
   #  Keep this around, as it can be handy when testing on new systems.
   # echo "X_CFLAGS: $X_CFLAGS"
@@ -2530,7 +2572,7 @@ fi
 
 # **************************************************************************
 # SIM_AC_CHECK_HEADER_SILENT([header], [if-found], [if-not-found], [includes])
-# 
+#
 # This macro will not output any header checking information, nor will it
 # cache the result, so it can be used multiple times on the same header,
 # trying out different compiler options.
@@ -2578,7 +2620,7 @@ if test x"$with_opengl" != x"no"; then
   case $host_os in
   darwin*)
     AC_REQUIRE([SIM_AC_CHECK_X11])
-    if test x$sim_ac_enable_darwin_x11 = xtrue; then
+    if $sim_ac_enable_darwin_x11; then
       sim_ac_gl_darwin_x11=/usr/X11R6
       if test -d $sim_ac_gl_darwin_x11; then
         sim_ac_gl_cppflags=-I$sim_ac_gl_darwin_x11/include
@@ -2589,18 +2631,22 @@ if test x"$with_opengl" != x"no"; then
 
   CPPFLAGS="$CPPFLAGS $sim_ac_gl_cppflags"
 
-  # Mac OS X framework (no X11, -framework OpenGL) 
-  if test x$sim_ac_enable_darwin_x11 = xtrue; then
-    SIM_AC_CHECK_HEADER_SILENT([GL/gl.h], [
-      sim_ac_gl_header_avail=true
-      sim_ac_gl_header=GL/gl.h
-      AC_DEFINE([HAVE_GL_GL_H], 1, [define if the GL header should be included as GL/gl.h])
-    ])
+  # Mac OS X framework (no X11, -framework OpenGL)
+  if $sim_ac_enable_darwin_x11; then :
   else
     SIM_AC_CHECK_HEADER_SILENT([OpenGL/gl.h], [
       sim_ac_gl_header_avail=true
       sim_ac_gl_header=OpenGL/gl.h
       AC_DEFINE([HAVE_OPENGL_GL_H], 1, [define if the GL header should be included as OpenGL/gl.h])
+    ])
+  fi
+
+  if $sim_ac_gl_header_avail; then :
+  else
+    SIM_AC_CHECK_HEADER_SILENT([GL/gl.h], [
+      sim_ac_gl_header_avail=true
+      sim_ac_gl_header=GL/gl.h
+      AC_DEFINE([HAVE_GL_GL_H], 1, [define if the GL header should be included as GL/gl.h])
     ])
   fi
 
@@ -2651,7 +2697,7 @@ if test x"$with_opengl" != x"no"; then
   case $host_os in
   darwin*)
     AC_REQUIRE([SIM_AC_CHECK_X11])
-    if test x$sim_ac_enable_darwin_x11 = xtrue; then
+    if $sim_ac_enable_darwin_x11; then
       sim_ac_gl_darwin_x11=/usr/X11R6
       if test -d $sim_ac_gl_darwin_x11; then
         sim_ac_gl_cppflags=-I$sim_ac_gl_darwin_x11/include
@@ -2662,13 +2708,8 @@ if test x"$with_opengl" != x"no"; then
 
   CPPFLAGS="$CPPFLAGS $sim_ac_glu_cppflags"
 
-  # Mac OS X framework (no X11, -framework OpenGL) 
-  if test x$sim_ac_enable_darwin_x11 = xtrue; then
-    SIM_AC_CHECK_HEADER_SILENT([GL/glu.h], [
-      sim_ac_glu_header_avail=true
-      sim_ac_glu_header=GL/glu.h
-      AC_DEFINE([HAVE_GL_GLU_H], 1, [define if the GLU header should be included as GL/glu.h])
-    ])
+  # Mac OS X framework (no X11, -framework OpenGL)
+  if $sim_ac_enable_darwin_x11; then :
   else
     SIM_AC_CHECK_HEADER_SILENT([OpenGL/glu.h], [
       sim_ac_glu_header_avail=true
@@ -2676,7 +2717,16 @@ if test x"$with_opengl" != x"no"; then
       AC_DEFINE([HAVE_OPENGL_GLU_H], 1, [define if the GLU header should be included as OpenGL/glu.h])
     ])
   fi
- 
+
+  if $sim_ac_glu_header_avail; then :
+  else
+    SIM_AC_CHECK_HEADER_SILENT([GL/glu.h], [
+      sim_ac_glu_header_avail=true
+      sim_ac_glu_header=GL/glu.h
+      AC_DEFINE([HAVE_GL_GLU_H], 1, [define if the GLU header should be included as GL/glu.h])
+    ])
+  fi
+
   CPPFLAGS="$sim_ac_glu_save_CPPFLAGS"
   if $sim_ac_glu_header_avail; then
     if test x"$sim_ac_glu_cppflags" = x""; then
@@ -2724,7 +2774,7 @@ if test x"$with_opengl" != x"no"; then
   case $host_os in
   darwin*)
     AC_REQUIRE([SIM_AC_CHECK_X11])
-    if test x$sim_ac_enable_darwin_x11 = xtrue; then
+    if $sim_ac_enable_darwin_x11; then
       sim_ac_gl_darwin_x11=/usr/X11R6
       if test -d $sim_ac_gl_darwin_x11; then
         sim_ac_gl_cppflags=-I$sim_ac_gl_darwin_x11/include
@@ -2735,18 +2785,22 @@ if test x"$with_opengl" != x"no"; then
 
   CPPFLAGS="$CPPFLAGS $sim_ac_glext_cppflags"
 
-  # Mac OS X framework (no X11, -framework OpenGL) 
-  if test x$sim_ac_enable_darwin_x11 = xtrue; then
-    SIM_AC_CHECK_HEADER_SILENT([GL/glext.h], [
-      sim_ac_glext_header_avail=true
-      sim_ac_glext_header=GL/glext.h
-      AC_DEFINE([HAVE_GL_GLEXT_H], 1, [define if the GLEXT header should be included as GL/glext.h])
-    ])
+  # Mac OS X framework (no X11, -framework OpenGL)
+  if $sim_ac_enable_darwin_x11; then :
   else
     SIM_AC_CHECK_HEADER_SILENT([OpenGL/glext.h], [
       sim_ac_glext_header_avail=true
       sim_ac_glext_header=OpenGL/glext.h
       AC_DEFINE([HAVE_OPENGL_GLEXT_H], 1, [define if the GLEXT header should be included as OpenGL/glext.h])
+    ])
+  fi
+
+  if $sim_ac_glext_header_avail; then :
+  else
+    SIM_AC_CHECK_HEADER_SILENT([GL/glext.h], [
+      sim_ac_glext_header_avail=true
+      sim_ac_glext_header=GL/glext.h
+      AC_DEFINE([HAVE_GL_GLEXT_H], 1, [define if the GLEXT header should be included as GL/glext.h])
     ])
   fi
 
@@ -2838,8 +2892,8 @@ if test x"$with_opengl" != xno; then
   case $host_os in
   darwin*)
     AC_REQUIRE([SIM_AC_CHECK_X11])
-    if test x"$GCC" = x"yes" -a x$sim_ac_enable_darwin_x11 = xtrue; then
-      # On Mac OS X, OpenGL is installed as part of the optional X11 SDK.
+    if $sim_ac_enable_darwin_x11; then
+      # Use X11-based GL instead of OpenGL.framework when building against X11
       sim_ac_gl_darwin_x11=/usr/X11R6
       if test -d $sim_ac_gl_darwin_x11; then
         sim_ac_ogl_cppflags=-I$sim_ac_gl_darwin_x11/include
@@ -2852,8 +2906,6 @@ if test x"$with_opengl" != xno; then
   esac
 
   if $sim_ac_use_framework_option; then
-    # hopefully, this is the default behavior and not needed. 20011005 larsa
-    # sim_ac_ogl_cppflags="-F/System/Library/Frameworks/OpenGL.framework/"
     sim_ac_ogl_ldflags="-Wl,-framework,OpenGL"
     sim_ac_ogl_lib=OpenGL
   fi
@@ -2897,14 +2949,15 @@ if test x"$with_opengl" != xno; then
           AC_TRY_LINK(
             [#ifdef HAVE_WINDOWS_H
              #include <windows.h>
-             #endif
+             #endif /* HAVE_WINDOWS_H */
              #ifdef HAVE_GL_GL_H
              #include <GL/gl.h>
-             #endif
+             #else /* ! HAVE_GL_GL_H */
              #ifdef HAVE_OPENGL_GL_H
              /* Mac OS X */
              #include <OpenGL/gl.h>
-             #endif
+             #endif /* HAVE_OPENGL_GL_H */
+             #endif /* ! HAVE_GL_GL_H */
             ],
             [glPointSize(1.0f);],
             [
@@ -3299,20 +3352,20 @@ fi
 
 AC_DEFUN([SIM_AC_HAVE_AGL_IFELSE], [
 sim_ac_save_ldflags=$LDFLAGS
-sim_ac_agl_ldflags="-Wl,-framework,ApplicationServices -Wl,-framework,AGL"
+sim_ac_agl_ldflags="-Wl,-framework,ApplicationServices -Wl,-framework,AGL -Wl,-framework,Carbon"
 
 LDFLAGS="$LDFLAGS $sim_ac_agl_ldflags"
 
-# see comment in Coin/src/glue/gl_agl.c: regarding __CARBONSOUND__ define 
+# see comment in Coin/src/glue/gl_agl.c: regarding __CARBONSOUND__ define
 
 AC_CACHE_CHECK(
   [whether AGL is on the system],
   sim_cv_have_agl,
   AC_TRY_LINK(
     [#include <AGL/agl.h>
-     #define __CARBONSOUND__ 
+     #define __CARBONSOUND__
      #include <Carbon/Carbon.h>],
-    [aglGetCurrentContext();],
+    [AGLContext ctx = NULL;WindowRef wref = aglGetWindowRef(ctx);HIViewRef href = HIViewGetRoot(wref);],
     [sim_cv_have_agl=true],
     [sim_cv_have_agl=false]))
 
@@ -3323,7 +3376,7 @@ else
   ifelse([$2], , :, [$2])
 fi
 ]) # SIM_AC_HAVE_AGL_IFELSE()
- 
+
 
 AC_DEFUN([SIM_AC_HAVE_AGL_PBUFFER], [
   AC_CACHE_CHECK([whether we can use AGL pBuffers],
@@ -3332,7 +3385,7 @@ AC_DEFUN([SIM_AC_HAVE_AGL_PBUFFER], [
                  [AGLPbuffer pbuffer;],
                  [sim_cv_agl_pbuffer_avail=yes],
                  [sim_cv_agl_pbuffer_avail=no])])
-  
+
   if test x"$sim_cv_agl_pbuffer_avail" = xyes; then
     ifelse([$1], , :, [$1])
   else
@@ -3340,6 +3393,33 @@ AC_DEFUN([SIM_AC_HAVE_AGL_PBUFFER], [
   fi
 ])
 
+# **************************************************************************
+# SIM_AC_HAVE_CGL_IFELSE( IF-FOUND, IF-NOT-FOUND )
+#
+# Check whether CGL is on the system.
+
+AC_DEFUN([SIM_AC_HAVE_CGL_IFELSE], [
+sim_ac_save_ldflags=$LDFLAGS
+sim_ac_cgl_ldflags="-Wl,-framework,OpenGL"
+
+LDFLAGS="$LDFLAGS $sim_ac_cgl_ldflags"
+
+AC_CACHE_CHECK(
+  [whether CGL is on the system],
+  sim_cv_have_cgl,
+  AC_TRY_LINK(
+    [#include <OpenGL/OpenGL.h>],
+    [CGLGetCurrentContext();],
+    [sim_cv_have_cgl=true],
+    [sim_cv_have_cgl=false]))
+
+LDFLAGS=$sim_ac_save_ldflags
+if ${sim_cv_have_cgl=false}; then
+  ifelse([$1], , :, [$1])
+else
+  ifelse([$2], , :, [$2])
+fi
+]) # SIM_AC_HAVE_CGL_IFELSE()
 
 # Usage:
 #  SIM_AC_CHECK_PTHREAD([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
@@ -3762,7 +3842,7 @@ AC_DEFUN([AC_TOLOWER], [translit([$1], [[A-Z]], [[a-z]])])
 #   Lars J. Aas  <larsa@sim.no>
 #   Morten Eriksen  <mortene@sim.no>
 
-AC_DEFUN([SIM_AC_HAVE_INVENTOR_NODE], 
+AC_DEFUN([SIM_AC_HAVE_INVENTOR_NODE],
 [m4_do([pushdef([cache_variable], sim_cv_have_oiv_[]AC_TOLOWER([$1])_node)],
        [pushdef([DEFINE_VARIABLE], HAVE_[]AC_TOUPPER([$1]))])
 AC_CACHE_CHECK(
@@ -3794,7 +3874,7 @@ m4_do([popdef([cache_variable])],
 #   Lars J. Aas  <larsa@sim.no>
 #   Morten Eriksen  <mortene@sim.no>
 
-AC_DEFUN([SIM_AC_HAVE_INVENTOR_VRMLNODE], 
+AC_DEFUN([SIM_AC_HAVE_INVENTOR_VRMLNODE],
 [m4_do([pushdef([cache_variable], sim_cv_have_oiv_[]AC_TOLOWER([$1])_vrmlnode)],
        [pushdef([DEFINE_VARIABLE], HAVE_[]AC_TOUPPER([$1]))])
 AC_CACHE_CHECK(
@@ -4003,6 +4083,7 @@ if test x"$with_motif" != xno; then
                  [sim_cv_lib_motif_avail=no])])
 
   if test x"$sim_cv_lib_motif_avail" = xyes; then
+    SIM_AC_MOTIF_VERSION
     sim_ac_motif_avail=yes
     $1
   else
@@ -4051,7 +4132,7 @@ fi
 #
 # Description:
 #   This macro checks for a GL widget that can be used with Xt/Motif.
-#  
+#
 # Variables:
 #   $sim_cv_motif_glwidget         (cached)  class + header + library
 #   $sim_cv_motif_glwidget_hdrloc  (cached)  GL | X11/GLw
@@ -4060,21 +4141,21 @@ fi
 #                                            glwDrawingAreaWidgetClass
 #   $sim_ac_motif_glwidget_header            GLwDrawA.h | GLwMDrawA.h
 #   $sim_ac_motif_glwidget_library           GLwM | GLw | MesaGLwM | MesaGLw
-#  
+#
 #   $LIBS = -l$sim_ac_motif_glwidget_library $LIBS
-#  
+#
 # Defines:
 #   XT_GLWIDGET                              $sim_ac_motif_glwidget_class
 #   HAVE_GL_GLWDRAWA_H                       #include <GL/GLwDrawA.h>
 #   HAVE_GL_GLWMDRAWA_H                      #include <GL/GLwMDrawA.h>
 #   HAVE_X11_GWL_GLWDRAWA_H                  #include <X11/GLw/GLwDrawA.h>
 #   HAVE_X11_GWL_GLWMDRAWA_H                 #include <X11/GLw/GLwMDrawA.h>
-#  
+#
 # Authors:
 #   Lars J. Aas <larsa@sim.no>,
 #   Loring Holden <lsh@cs.brown.edu>,
 #   Morten Eriksen <mortene@sim.no>
-#  
+#
 
 AC_DEFUN([SIM_CHECK_MOTIF_GLWIDGET], [
 
@@ -4162,4 +4243,40 @@ else
 fi
 ])
 
+# Usage:
+#  SIM_AC_MOTIF_VERSION
+#
+# Find version number of the Motif library. sim_ac_motif_version will
+# contain the full version number string, and
+# sim_ac_motif_major_version will contain only the major version
+# number. (based on SIM_AC_QT_VERSION)
+#
+# Authors:
+#   Tamer Fahmy <tamer@sim.no>,
+
+AC_DEFUN([SIM_AC_MOTIF_VERSION], [
+
+AC_CACHE_CHECK([version of Motif library], sim_ac_motif_version, [
+  AC_RUN_IFELSE(
+    [AC_LANG_SOURCE([
+#include <stdio.h>
+#include <Xm/Xm.h>
+
+int
+main(int argc, char **argv)
+{
+  FILE * fd;
+  fd = fopen("conftest.out", "w");
+  fprintf(fd, "%d.%d.%d", XmVERSION, XmREVISION, XmUPDATE_LEVEL);
+  fclose(fd);
+
+  return 0;
+}
+  ])],
+  [sim_ac_motif_version=`cat conftest.out`],
+  [AC_MSG_FAILURE([could not determine the version of the Motif library])])
+])
+
+sim_ac_motif_major_version=`echo $sim_ac_motif_version | cut -c1`
+])
 
