@@ -44,11 +44,12 @@
  *  to change the material color of that object.
  *------------------------------------------------------------*/
 
-#include <X11/Intrinsic.h>
-#include <Inventor/Sb.h>
-#include <Inventor/SoInput.h>
 #include <Inventor/@Gui@/So@Gui@.h>
 #include <Inventor/@Gui@/So@Gui@RenderArea.h>
+
+// #include <X11/Intrinsic.h>
+#include <Inventor/Sb.h>
+#include <Inventor/SoInput.h>
 #include <Inventor/nodes/SoDirectionalLight.h>
 #include <Inventor/nodes/SoMaterial.h>
 #include <Inventor/nodes/SoPerspectiveCamera.h>
