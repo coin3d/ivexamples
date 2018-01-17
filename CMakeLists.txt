@@ -1,11 +1,21 @@
 cmake_minimum_required (VERSION 3.9.1)
 project (ivexamples)
 
+option(HAVE_ASAN  "Link executable with the Address Sanitizer static library" ON)
 option(HAVE_DEBUG "Add debugging information during the configure process")
 option(DOTRACE    "Enable code tracing")
 if (DOTRACE)
   add_definitions(-DDOTRACE)
 endif(DOTRACE)
+
+if (HAVE_ASAN)
+  find_library(ASAN_LIBRARY NAMES libasan.so.4)
+  if (NOT ASAN_LIBRARY)
+    MESSAGE(WARNING "address sanitizer not installed.")
+  else (NOT ASAN_LIBRARY)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address")
+  endif (NOT ASAN_LIBRARY)
+endif(HAVE_ASAN)
 
 function(dump_variable)
   if (HAVE_DEBUG)
