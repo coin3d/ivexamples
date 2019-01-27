@@ -1,1 +1,94 @@
-stub
+This are examples taken from 'The Inventor Mentor' and 'The Inventor Toolmaker'
+and adapted for Coin libraries and its Component Libraries (SoQt,SoWin and SoXt).
+
+The original examples are strongly dependent to the original Open Inventor 
+component library, based on a X11/Xt APIs and so not always quickly adaptable
+to different window system.
+
+The current status is the following:
+
++----------------------------------------------+
+The Inventor Mentor     | SoQt  | SoWin | SoXt |
++-----------------------+-------+-------+------+
+02.1.HelloCone          |       |       |  ok  |
+02.2.EngineSpin         |       |       |  ok  |
+02.3.Trackball          |       |       |  ok  |
+02.4.Examiner           |       |       |  ok  |
+03.1.Molecule           |       |       |  ok  |
+03.2.Robot              |       |       |  ok  |
+03.3.Naming             |       |       |  ok  |
+04.1.Cameras            |       |       |  ok  |
+04.2.Lights             |       |       |  ok  |
+05.1.FaceSet            |       |       |  ok  |
+05.2.IndexedFaceSet     |       |       |  ok  |
+05.3.TriangleStripSet   |       |       |  ok  |
+05.4.QuadMesh           |       |       |  ok  |
+05.5.Binding            |       |       |  ok  |
+05.6.TransformOrdering  |       |       |  ok  |
+06.1.Text               |       |       |  ok  |
+06.2.Simple3DText       |       |       |  ok  |
+06.3.Complex3DText      |       |       |  ok  |
+07.1.BasicTexture       |       |       |  ok  |
+07.2.TextureCoordinates |       |       |  ok  |
+07.3.TextureFunction    |       |       |  ok  |
+08.1.BSCurve            |       |       |  ok  |
+08.2.UniCurve           |       |       |  ok  |
+08.3.BezSurf            |       |       |  ok  |
+08.4.TrimSurf           |       |       |  ok  |
+09.1.Print              |  KO   |       |  KO  | crash with SoOffscreenRenderer
+09.2.Texture            |  KO   |       |  KO  | fails creating GLX context
+09.3.Search             |       |       |  ok  |
+09.4.PickAction         |       |       |  ok  |
+09.5.GenSph             |       |       |  ok  |
+10.1.addEventCB         |       |       |  ok  |
+10.2.setEventCB         | N.A.  | N.A.  |  ok  |
+10.3and4.MotifList      | N.A.  | N.A.  |  KO  | possible internal SoXt bug
+10.5.SelectionCB        |       |       |  ok  |
+10.6.PickFilterTopLevel |       |       |  ok  |
+10.7.PickFilterManip    |       |       |  ok  |
+10.8.PickFilterNodeKit  | N.A.  | N.A.  |  KO  | fails creating GLX context
+11.1.ReadFile           |       |       |  ok  |
+11.2.ReadString         |       |       |  ok  |
+12.1.FieldSensor        |       |       |  ok  |
+12.2.NodeSensor         |       |       |  ok  |
+12.3.AlarmSensor        |       |       |  ok  |
+12.4.TimerSensor        |       |       |  ok  |
+13.1.GlobalFlds         |       |       |  ok  |
+13.2.ElapsedTime        |       |       |  ok  |
+13.3.TimeCounter        |       |       |  ok  |
+13.4.Gate               |       |       |  ok  |
+13.5.Boolean            |       |       |  ok  |
+13.6.Calculator         |       |       |  ok  |
+13.7.Rotor              |       |       |  ok  |
+13.8.Blinker            |       |       |  ok  |
+14.1.FrolickingWords    |       |       |  ok  | possible bug in Coin calculator engine
+14.2.Editors            | N.A.  | N.A.  |  KO  | SoXt: SoXtDirectionalLightEditor::attach() functionality not yet completed
+14.3.Balance            |       |       |  ok  |
+15.1.ConeRadius         |       |       |  ok  |
+15.2.SliderBox          |       |       |  ok  |
+15.3.AttachManip        |       |       |  ok  |
+15.4.Customize          |       |       |  ok  |
+16.1.Overlay            | N.A.  | N.A.  |  KO  | 
+16.2.Callback           | N.A.  | N.A.  |  KO  | fails creating GLX context
+16.3.AttachEditor       | N.A.  | N.A.  |  KO  | fails creating GLX context
+16.4.OneWindow          | N.A.  | N.A.  |  KO  |
+16.5.Examiner           |       |       |  ok  |
+17.1.ColorIndex         | N.A.  | N.A.  |  KO  | Couldn't create visual
+17.2.GLCallback         | N.A.  | N.A.  |  ok  |
+17.3.GLFloor            | N.A.  | N.A.  |  ok  |
++-----------------------+-------+-------+------+
+
+
++-----------------------------+-------+-------+------+
+The Inventor Toolmaker        | SoQt  | SoWin | SoXt |
++-----------------------------+-------+-------+------+
+02.Nodes/newNodes             |       |       |  ok  |
+03.Fields/fieldtest           |       |       |  ok  |
+04.Actions/printVolume        |       |       |  ok  |
+05.Elements/elementtest       |       |       |  ok  |
+07.Nodekits/jumpingJackKitTest|       |       |  ok  |
+08.Manips/newManips           |       |       |  ok  |
+09.Highlights/overlayTest     |       |       |  KO  | SoXt: SoXtGLWidget::setOverlayRender() functionality not yet completed
+09.Highlights/selectionTest   |       |       |  ok? |
+10.Components/tumble          |       |       |  KO  |
+11.Events/eventTest           |       |       |  KO  | the implementation of the Xt GUI component presents relevant differences between the original SGI implementation and the Coin3D one
