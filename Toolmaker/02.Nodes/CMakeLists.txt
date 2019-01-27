@@ -7,4 +7,4 @@ ${CMAKE_CURRENT_BINARY_DIR}/Pyramid.cpp
 Glow.cpp
 Alternate.cpp
 )
-target_link_libraries(newNodes Coin::Coin SoQt::SoQt)
+target_link_libraries(newNodes Coin::Coin So${Gui}::So${Gui})

@@ -4,4 +4,4 @@ add_executable(jumpingJackKitTest
 ${CMAKE_CURRENT_BINARY_DIR}/jumpingJackKitTest.cpp
 JumpingJackKit.cpp
 )
-target_link_libraries(jumpingJackKitTest Coin::Coin SoQt::SoQt)
+target_link_libraries(jumpingJackKitTest Coin::Coin So${Gui}::So${Gui})
