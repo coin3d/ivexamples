@@ -115,7 +115,7 @@ main(int , char **argv)
    root->addChild(duck);
 
    // Read the duck object from a file and add to the group
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
    SoInput myInput;
    if (!myInput.openFile("duck.iv"))
       exit (1);

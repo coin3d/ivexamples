@@ -64,7 +64,7 @@ int attribList[] = {
 // list of colors to load in the color map
 static float colors[3][3] = {{.2, .2, .2}, {.5, 1, .5}, {.5, .5, 1}};
 
-static char *sceneBuffer = "\
+static const char *sceneBuffer = "\
 #Inventor V2.0 ascii\n\
 \
 Separator { \

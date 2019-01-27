@@ -82,7 +82,7 @@ main(int argc, char **argv)
    SoSeparator *root = new SoSeparator;
    root->ref();
 
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    // Read in the data for the windmill tower
    SoSeparator *windmillTower = readFile("windmillTower.iv");

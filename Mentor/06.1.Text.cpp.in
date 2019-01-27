@@ -80,7 +80,7 @@ main(int argc, char **argv)
    sphereComplexity->value = 0.55;
    root->addChild(sphereSep);
 
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    SoTexture2 *myTexture2 = new SoTexture2;
    sphereSep->addChild(myTexture2);

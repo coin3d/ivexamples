@@ -86,7 +86,7 @@ main(int , char **argv)
 
    // Read the background path from a file and add to the group
    SoInput myInput;
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
    if (!myInput.openFile("flowerPath.iv"))
       exit (1);
    SoSeparator *flowerPath = SoDB::readAll(&myInput);

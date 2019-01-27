@@ -79,7 +79,7 @@ main(int , char **argv)
 
    // Read the geometry from a file and add to the scene
    SoInput myInput;
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
    if (!myInput.openFile("dogDish.iv"))
       exit (1);
    SoSeparator *geomObject = SoDB::readAll(&myInput);

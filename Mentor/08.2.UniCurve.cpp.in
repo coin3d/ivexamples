@@ -65,7 +65,7 @@
 #include <Inventor/nodes/SoSeparator.h>
 #include <Inventor/nodes/SoTranslation.h>
 
-static char *floorData = 
+static const char *floorData = 
    "#Inventor V2.0 ascii\n"
    "Separator {\n"
    "   SpotLight {\n"
@@ -223,7 +223,7 @@ main(int, char **argv)
    SoInput       in;
    SoNode        *result;
 
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    in.setBuffer(floorData, strlen(floorData));
    SoDB::read(&in, result);

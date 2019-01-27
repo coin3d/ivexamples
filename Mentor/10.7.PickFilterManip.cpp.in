@@ -186,7 +186,7 @@ pickFilterCB(void *, const SoPickedPoint *pick)
 
 // Create a sample scene graph
 SoNode *
-myText(char *str, int i, const SbColor &color)
+myText(const char *str, int i, const SbColor &color)
 {
    SoSeparator *sep = new SoSeparator;
    SoBaseColor *col = new SoBaseColor;

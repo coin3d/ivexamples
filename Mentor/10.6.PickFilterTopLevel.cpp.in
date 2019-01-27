@@ -86,7 +86,7 @@ main(int argc, char *argv[])
    // Initialization
    @WINWIDGET@ mainWindow = So@Gui@::init(argv[0]);
     
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    SbString s("parkbench.iv");
    // Open the data file

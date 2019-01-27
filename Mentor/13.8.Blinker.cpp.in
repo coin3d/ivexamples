@@ -71,7 +71,7 @@ main(int , char **argv)
 
    // Read in the parts of the sign from a file
    SoInput myInput;
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    if (!myInput.openFile("eatAtJosies.iv"))
       exit (1);

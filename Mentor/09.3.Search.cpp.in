@@ -59,7 +59,7 @@ main(int argc, char **argv)
    // Initialize Inventor
    SoDB::init();
 
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    // Open and read input scene graph
    SoInput sceneInput;

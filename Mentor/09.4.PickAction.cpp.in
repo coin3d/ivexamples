@@ -126,7 +126,7 @@ main(int, char **argv)
    SoEventCallback *myEventCB = new SoEventCallback;
    root->addChild(myEventCB);
 
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    // Read object data from a file
    SoInput mySceneInput;

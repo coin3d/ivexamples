@@ -106,7 +106,7 @@ main(int, char **argv)
    SoSeparator *texRoot = new SoSeparator;
    texRoot->ref();
 
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    SoInput in;
    if (!in.openFile("jumpyMan.iv")) {

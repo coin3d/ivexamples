@@ -67,7 +67,7 @@ main(int , char **argv)
    SoSeparator *root = new SoSeparator;
    root->ref();
 
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    // Choose a texture.
    SoTexture2 *faceTexture = new SoTexture2;

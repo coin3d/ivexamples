@@ -45,6 +45,7 @@
 @SIM_INCLUDE_GL_H@
 @SIM_INCLUDE_GLU_H@
 @SIM_INCLUDE_GLEXT_H@
+@SIM_INCLUDE_GLX_H@
 #include <stdio.h>
 #include <unistd.h>
 

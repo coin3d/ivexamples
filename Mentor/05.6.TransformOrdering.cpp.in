@@ -95,7 +95,7 @@ main(int, char **argv)
    rightSep->addChild(myRotation);       // first rotated
 
    // Read an object from file. (as in example 4.2.Lights)
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
    SoInput myInput;
    if (!myInput.openFile("temple.iv"))
       exit (1);

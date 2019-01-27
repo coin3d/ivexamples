@@ -120,7 +120,7 @@ main(int, char **argv)
    SoWrapperKit *myWrapperKit = new SoWrapperKit;
    root->addChild(myWrapperKit);
    SoInput myInput;
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
 
    if (!myInput.openFile("luxo.iv"))
       exit (1);

@@ -59,7 +59,7 @@
 // adjacent string literals together, so the compiler sees 
 // this as one big string)
 
-static char *dodecahedron =
+static const char *dodecahedron =
    "Separator {"
    "   Normal {"
    "      vector ["

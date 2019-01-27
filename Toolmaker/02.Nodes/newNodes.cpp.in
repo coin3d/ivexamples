@@ -73,7 +73,7 @@ main(int, char **argv)
    Pyramid::initClass();
    Alternate::initClass();
 
-   SoInput::addDirectoryFirst("@top_srcdir@/Toolmaker/02.Nodes");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/Toolmaker/02.Nodes");
 
    if (! myInput.openFile("newNodes.iv")) {
       return 1;

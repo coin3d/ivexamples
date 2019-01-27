@@ -86,7 +86,7 @@ main(int argc, char **argv)
    @WINWIDGET@ myWindow = So@Gui@::init(argv[0]);
 
    // Read the file
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
    SoSeparator *scene = readFile("star.iv");
 
    // Create a viewer

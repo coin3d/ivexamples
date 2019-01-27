@@ -89,7 +89,7 @@ main(int, char **argv)
    root->addChild(new SoDirectionalLight);
 
    // Read the object from a file and add to the scene
-   SoInput::addDirectoryFirst("@top_srcdir@/data");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/data");
    SoInput myInput;
    if (!myInput.openFile("parkbench.iv"))
       exit (1);

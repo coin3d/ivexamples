@@ -50,7 +50,7 @@
  *       of the point set.
  *-----------------------------------------------------------*/
 
-#include <X11/Intrinsic.h>
+// #include <X11/Intrinsic.h>
 
 #include <Inventor/Sb.h>
 #include <Inventor/@Gui@/So@Gui@RenderArea.h>

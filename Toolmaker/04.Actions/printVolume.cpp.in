@@ -66,7 +66,7 @@ main(void)
    SoInput      myInput;
    SoSeparator  *root;
 
-   SoInput::addDirectoryFirst("@top_srcdir@/Toolmaker/04.Actions");
+   SoInput::addDirectoryFirst("@PROJECT_SOURCE_DIR@/Toolmaker/04.Actions");
 
    if (! myInput.openFile("volume.iv")) {
       return 1;
