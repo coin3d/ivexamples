@@ -23,12 +23,8 @@ include(CheckIncludeFileCXX)
 # Provide options to customise the build
 # ############################################################################
 
-option(HAVE_ASAN  "Link executable with the Address Sanitizer static library" OFF)
+option(HAVE_ASAN  "Link executable with the Address Sanitizer static library")
 option(HAVE_DEBUG "Add debugging information during the configure process")
-option(DOTRACE    "Enable code tracing")
-if (DOTRACE)
-  add_definitions(-DDOTRACE)
-endif(DOTRACE)
 
 if (HAVE_ASAN)
   find_library(ASAN_LIBRARY NAMES libasan.so.4)
