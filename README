@@ -1,12 +1,13 @@
 This are examples taken from 'The Inventor Mentor' and 'The Inventor Toolmaker'
 and adapted for Coin libraries and its Component Libraries (SoQt,SoWin and SoXt).
 
-The original examples are strongly dependent to the original Open Inventor 
-component library, based on a X11/Xt APIs and so not always quickly adaptable
-to different window system.
+Some of the original examples are strongly dependent to the original Open
+Inventor component library, based on a X11/Xt APIs and so not always quickly 
+adaptable to different window systems.
 
 The current status is the following:
 
+````
 +----------------------------------------------+
 The Inventor Mentor     | SoQt  | SoWin | SoXt |
 +-----------------------+-------+-------+------+
@@ -61,7 +62,7 @@ The Inventor Mentor     | SoQt  | SoWin | SoXt |
 13.6.Calculator         |       |       |  ok  |
 13.7.Rotor              |       |       |  ok  |
 13.8.Blinker            |       |       |  ok  |
-14.1.FrolickingWords    |       |       |  ok  | possible bug in Coin calculator engine
+14.1.FrolickingWords    |       |       |  ok  | possible bug in Coin SoCalculator engine
 14.2.Editors            | N.A.  | N.A.  |  KO  | SoXt: SoXtDirectionalLightEditor::attach() functionality not yet completed
 14.3.Balance            |       |       |  ok  |
 15.1.ConeRadius         |       |       |  ok  |
@@ -92,3 +93,5 @@ The Inventor Toolmaker        | SoQt  | SoWin | SoXt |
 09.Highlights/selectionTest   |       |       |  ok? |
 10.Components/tumble          |       |       |  KO  |
 11.Events/eventTest           |       |       |  KO  | the implementation of the Xt GUI component presents relevant differences between the original SGI implementation and the Coin3D one
++-----------------------------+-------+-------+------+
+````
