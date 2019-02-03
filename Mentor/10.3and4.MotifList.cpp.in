@@ -100,7 +100,7 @@ enum objects {
 	NUM_OBJECTS
 };
 
-static char *objectNames[] = {
+static const char *objectNames[] = {
 	"Cube",
 	"Sphere",
 	"Cone",
@@ -251,7 +251,7 @@ createList(Display *display, SoSelection *selection)
    // Create a table of object names
    XmString *table = new XmString[NUM_OBJECTS];
    for (i=0; i<NUM_OBJECTS; i++) {
-       table[i] = XmStringCreate(objectNames[i], 
+       table[i] = XmStringCreate(const_cast<char*>(objectNames[i]), 
 				 XmSTRING_DEFAULT_CHARSET);
    }
 
@@ -264,7 +264,7 @@ createList(Display *display, SoSelection *selection)
    XtSetArg(args[n], XmNselectionPolicy, XmEXTENDED_SELECT);
    n++;
 
-   motifList = XmCreateScrolledList(shell, "funcList", args, n);
+   motifList = XmCreateScrolledList(shell, const_cast<char*>("funcList"), args, n);
    XtAddCallback(motifList, XmNextendedSelectionCallback,
       (XtCallbackProc) myListPickCB, (XtPointer) selection);
 
