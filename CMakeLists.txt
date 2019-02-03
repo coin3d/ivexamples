@@ -1,32 +1,10 @@
 cmake_minimum_required (VERSION 3.9.1)
 
-# ############################################################################
-# GUI target preliminary setup
-# ############################################################################
-set(Gui "Qt" CACHE STRING "Target GUI for the Open Inventor examples")
-set(GuiValues "Qt;Xt;Win" CACHE INTERNAL "List of possible values for the GUI cache variable")
-set_property(CACHE Gui PROPERTY STRINGS ${GuiValues})
-message(STATUS "Gui='${Gui}'")
-if (Gui STREQUAL "Qt")
-  set(WINWIDGET QWidget*)
-elseif(Gui STREQUAL "Xt")
-  set(WINWIDGET Widget)
-elseif(Gui STREQUAL "Win")
-  set(WINWIDGET HWND)
-else()
-  message(FATAL_ERROR "Only Qt,Win and Xt supported: please set Gui at one of these values")
-endif()
-# ############################################################################
+# Add path for Coin specific utility scripts
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" "${CMAKE_MODULE_PATH}")
+include(CoinCMakeUtilities)
 
-project (ivexamples VERSION 1.0.0)
-string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
-
-# ############################################################################
-# these will be removed after upgrading CMake minimum version to 3.9.6
-set(PROJECT_DESCRIPTION   "Examples from Inventor Mentor and Inventor Toolmaker.")
-# ############################################################################
- 
-string(TIMESTAMP SO${GUI}EXAMPLES_BUILD_YEAR "%Y")
+coin_project(ivexamples VERSION 1.0.0 DESCRIPTION "Examples from Inventor Mentor and Inventor Toolmaker.")
 
 if(POLICY CMP0072)
   # get rid of OpenGL GLVND warning from CMake 3.11
@@ -60,42 +38,6 @@ if (HAVE_ASAN)
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address")
   endif (NOT ASAN_LIBRARY)
 endif(HAVE_ASAN)
-
-# ############################################################################
-# Macros & functions
-# ############################################################################
-
-function(dump_variable)
-  if (HAVE_DEBUG)
-    foreach(f ${ARGN})
-      message("${f} = ${${f}}")
-    endforeach()
-  endif(HAVE_DEBUG)
-endfunction(dump_variable)
-
-function(chk_gl_include_file VAR INCLUDE)
-  foreach(f ${ARGN})
-    list(APPEND GL_INCLUDES     "GL/${f}")
-    list(APPEND OPENGL_INCLUDES "OpenGL/${f}")
-  endforeach()
-  list(APPEND GL_INCLUDES     "GL/${INCLUDE}")
-  list(APPEND OPENGL_INCLUDES "OpenGL/${INCLUDE}")
-  dump_variable(
-  VAR
-  INCLUDE
-  GL_INCLUDES
-  OPENGL_INCLUDES
-  )
-  check_include_files("${GL_INCLUDES}"     HAVE_GL_${VAR}     LANGUAGE CXX)
-  check_include_files("${OPENGL_INCLUDEs}" HAVE_OPENGL_${VAR} LANGUAGE CXX)
-  if (HAVE_GL_${VAR})
-    set(SIM_INCLUDE_${VAR} "#include <GL/${INCLUDE}>" PARENT_SCOPE)
-  elseif (HAVE_OPENGL_${VAR})
-    set(SIM_INCLUDE_${VAR} "#include <OpenGL/${INCLUDE}>" PARENT_SCOPE)
-  else ()
-    set(SIM_INCLUDE_${VAR} "#error \"don't know how to include ${INCLUDE} header\"" PARENT_SCOPE)
-  endif()
-endfunction(chk_gl_include_file)
 
 # ############################################################################
 # Target environment checks

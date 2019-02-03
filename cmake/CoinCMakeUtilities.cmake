@@ -1,0 +1,65 @@
+macro(coin_project PROJECT_NAME)
+  set(options)
+  set(oneValueArgs VERSION DESCRIPTION)
+  set(multiValueArgs)
+  cmake_parse_arguments(PROJECT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+  string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
+  string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
+  project(${PROJECT_NAME} VERSION ${PROJECT_VERSION})
+  # ############################################################################
+  # GUI target preliminary setup
+  set(Gui "Xt" CACHE STRING "Target GUI for the Open Inventor examples")
+  set(GuiValues "Qt;Xt;Win" CACHE INTERNAL "List of possible values for the GUI cache variable")
+  set_property(CACHE Gui PROPERTY STRINGS ${GuiValues})
+  message(STATUS "Gui='${Gui}'")
+  if (Gui STREQUAL "Qt")
+    set(WINWIDGET QWidget*)
+  elseif(Gui STREQUAL "Xt")
+    set(WINWIDGET Widget)
+  elseif(Gui STREQUAL "Win")
+    set(WINWIDGET HWND)
+  else()
+    message(FATAL_ERROR "Only Qt,Win and Xt supported: please set Gui at one of these values")
+  endif()
+  string(TOUPPER ${Gui} GUI)
+  # ############################################################################
+  string(TIMESTAMP PROJECT_BUILD_YEAR "%Y")
+endmacro(coin_project)
+
+# option controlled helper for cmake variable dumping during config
+function(dump_variable)
+  if (HAVE_DEBUG)
+    foreach(f ${ARGN})
+      if (DEFINED ${f})
+        message("${f} = ${${f}}")
+      else()
+        message("${f} = ***UNDEF***")
+      endif()
+    endforeach()
+  endif()
+endfunction()
+
+function(chk_gl_include_file VAR INCLUDE)
+  foreach(f ${ARGN})
+    list(APPEND GL_INCLUDES     "GL/${f}")
+    list(APPEND OPENGL_INCLUDES "OpenGL/${f}")
+  endforeach()
+  list(APPEND GL_INCLUDES     "GL/${INCLUDE}")
+  list(APPEND OPENGL_INCLUDES "OpenGL/${INCLUDE}")
+  dump_variable(
+  VAR
+  INCLUDE
+  GL_INCLUDES
+  OPENGL_INCLUDES
+  )
+  check_include_files("${GL_INCLUDES}"     HAVE_GL_${VAR}     LANGUAGE CXX)
+  check_include_files("${OPENGL_INCLUDEs}" HAVE_OPENGL_${VAR} LANGUAGE CXX)
+  if (HAVE_GL_${VAR})
+    set(SIM_INCLUDE_${VAR} "#include <GL/${INCLUDE}>" PARENT_SCOPE)
+  elseif (HAVE_OPENGL_${VAR})
+    set(SIM_INCLUDE_${VAR} "#include <OpenGL/${INCLUDE}>" PARENT_SCOPE)
+  else ()
+    set(SIM_INCLUDE_${VAR} "#error \"don't know how to include ${INCLUDE} header\"" PARENT_SCOPE)
+  endif()
+endfunction(chk_gl_include_file)
+
