@@ -1,1 +1,3 @@
-stub
+IvExamples 1.0.0 (so far):
+* build system:
+  - ported to CMake
