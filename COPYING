@@ -1,0 +1,8 @@
+COPYING
+=======
+
+Sources in 'Base' example directory are released under BSD license.
+
+'Mentor' and 'Toolmaker' example sources are relased under LGPL license.
+
+In both cases, license text can be found at the top of each source file.
