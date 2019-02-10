@@ -8,4 +8,4 @@ TranslateRadialManip.cpp
 RotTransManip.cpp
 Coordinate3Manip.cpp
 )
-target_link_libraries(newManips Coin::Coin So${Gui}::So${Gui})
+target_link_libraries(newManips So${Gui}::So${Gui})

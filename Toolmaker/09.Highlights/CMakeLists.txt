@@ -11,4 +11,4 @@ add_executable(overlayTest
 ${CMAKE_CURRENT_BINARY_DIR}/overlayTest.cpp
 OverlayHL.cpp
 )
-target_link_libraries(overlayTest Coin::Coin So${Gui}::So${Gui})
+target_link_libraries(overlayTest So${Gui}::So${Gui})

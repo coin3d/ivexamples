@@ -39,10 +39,13 @@ endif(HAVE_ASAN)
 # Target environment checks
 # ############################################################################
 
+check_include_file(windows.h HAVE_WINDOWS_H)
+set(CMAKE_REQUIRED_INCLUDES "${OPENGL_INCLUDE_DIR}")
 chk_gl_include_file(GL_H    gl.h)
 chk_gl_include_file(GLU_H   glu.h)
 chk_gl_include_file(GLEXT_H glext.h gl.h)
 chk_gl_include_file(GLX_H   glx.h)
+set(CMAKE_REQUIRED_INCLUDES)
 
 find_package(OpenGL REQUIRED)
 find_package(Coin REQUIRED)
@@ -64,11 +67,15 @@ SIM_INCLUDE_GLEXT_H
 # Project setup
 # ############################################################################
 
+configure_file(config.h.cmake.in config.h)
+add_compile_definitions(HAVE_CONFIG_H=1)
+
 #Add header directories
 include_directories(BEFORE
-  ${So${Gui}_INCLUDE_DIRS}
-  ${Coin_INCLUDE_DIR}
-  ${OPENGL_INCLUDE_DIR}
+#  ${So${Gui}_INCLUDE_DIRS}
+#  ${Coin_INCLUDE_DIR}
+#  ${OPENGL_INCLUDE_DIR}
+  ${CMAKE_BINARY_DIR}
 )
 
 add_subdirectory(Base)
