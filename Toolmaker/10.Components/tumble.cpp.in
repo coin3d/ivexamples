@@ -49,7 +49,7 @@ main(int argc, char *argv[])
       return 1;
    }
    
-   auto window = So@Gui@::init(argv[0]);
+   @WINWIDGET@ window = So@Gui@::init(argv[0]);
 
    SoInput in;
    SoSeparator *scene = NULL;

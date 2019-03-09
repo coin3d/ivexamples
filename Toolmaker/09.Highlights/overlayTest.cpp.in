@@ -57,7 +57,7 @@ int
 main(int , char *argv[])
 {
    // Initialization
-   auto mainWindow = So@Gui@::init(argv[0]);
+   @WINWIDGET@ mainWindow = So@Gui@::init(argv[0]);
    OverlayHighlightRenderAction::initClass();
     
    // Open the data file
