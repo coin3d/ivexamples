@@ -19,5 +19,5 @@ if (Gui STREQUAL "Xt")
   ${CMAKE_CURRENT_BINARY_DIR}/tumble.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/SceneTumble.cpp
   )
-  target_link_libraries(tumble So${Gui}::So${Gui} ${X11_Xt_LIB})
+  target_link_libraries(tumble So${Gui}::So${Gui} X11::Xt)
 endif()

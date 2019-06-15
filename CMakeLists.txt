@@ -50,8 +50,10 @@ set(CMAKE_REQUIRED_INCLUDES)
 find_package(OpenGL REQUIRED)
 find_package(Coin REQUIRED)
 find_package(So${Gui} REQUIRED)
-find_package(Motif)
-find_package(X11)
+if (Gui STREQUAL "Xt")
+  find_package(Motif REQUIRED)
+  find_package(X11 REQUIRED COMPONENTS Xt)
+endif()
 
 dump_variable(
 Coin_INCLUDE_DIR

@@ -36,18 +36,18 @@ The Inventor Mentor     | SoQt  | SoWin | SoXt |
 08.2.UniCurve           |  ok   |       |  ok  |
 08.3.BezSurf            |  ok   |       |  ok  |
 08.4.TrimSurf           |  ok   |       |  ok  |
-09.1.Print              |  KO   |       |  KO  | crash with SoOffscreenRenderer
-09.2.Texture            |  KO   |       |  KO  | fails creating GLX context
+09.1.Print              |  [1]  |       |  [1] |
+09.2.Texture            |  [1]  |       |  [1] |
 09.3.Search             |  ok   |       |  ok  |
 09.4.PickAction         |  ok   |       |  ok  |
 09.5.GenSph             |  ok   |       |  ok  |
 10.1.addEventCB         |  ok   |       |  ok  |
 10.2.setEventCB         | N.A.  | N.A.  |  ok  |
-10.3and4.MotifList      | N.A.  | N.A.  |  KO  | possible internal SoXt bug
+10.3and4.MotifList      | N.A.  | N.A.  |  [4] |
 10.5.SelectionCB        |  ok   |       |  ok  |
 10.6.PickFilterTopLevel |  ok   |       |  ok  |
 10.7.PickFilterManip    |  ok   |       |  ok  |
-10.8.PickFilterNodeKit  | N.A.  | N.A.  |  KO  | fails creating GLX context
+10.8.PickFilterNodeKit  | N.A.  | N.A.  |  [1] |
 11.1.ReadFile           |  ok   |       |  ok  |
 11.2.ReadString         |  ok   |       |  ok  |
 12.1.FieldSensor        |  ok   |       |  ok  |
@@ -62,16 +62,16 @@ The Inventor Mentor     | SoQt  | SoWin | SoXt |
 13.6.Calculator         |  ok   |       |  ok  |
 13.7.Rotor              |  ok   |       |  ok  |
 13.8.Blinker            |  ok   |       |  ok  |
-14.1.FrolickingWords    |  ok   |       |  ok  | possible bug in Coin SoCalculator engine
-14.2.Editors            | N.A.  | N.A.  |  KO  | SoXt: SoXtDirectionalLightEditor::attach() functionality not yet completed
+14.1.FrolickingWords    |  ok   |       |  [3] |
+14.2.Editors            |  [2]  | N.A.  |  [2] |
 14.3.Balance            |  ok   |       |  ok  |
 15.1.ConeRadius         |  ok   |       |  ok  |
 15.2.SliderBox          |  ok   |       |  ok  |
 15.3.AttachManip        |  ok   |       |  ok  |
 15.4.Customize          |  ok   |       |  ok  |
-16.1.Overlay            | N.A.  | N.A.  |  KO  | 
-16.2.Callback           | N.A.  | N.A.  |  KO  | fails creating GLX context
-16.3.AttachEditor       | N.A.  | N.A.  |  KO  | fails creating GLX context
+16.1.Overlay            | N.A.  | N.A.  |  [4] |
+16.2.Callback           | N.A.  | N.A.  |  [1] |
+16.3.AttachEditor       | N.A.  | N.A.  |  [1] |
 16.4.OneWindow          | N.A.  | N.A.  |  KO  |
 16.5.Examiner           |  ok   |       |  ok  |
 17.1.ColorIndex         | N.A.  | N.A.  |  KO  | Couldn't create visual
@@ -92,6 +92,13 @@ The Inventor Toolmaker        | SoQt  | SoWin | SoXt |
 09.Highlights/overlayTest     |  ok   |       |  KO  | SoXt: SoXtGLWidget::setOverlayRender() functionality not yet completed
 09.Highlights/selectionTest   |  ok   |       |  ok  |
 10.Components/tumble          | N.A.  |       |  KO  |
-11.Events/eventTest           | N.A.  |       | N.A. | 
+11.Events/eventTest           | N.A.  |       | N.A. |
 +-----------------------------+-------+-------+------+
 ````
+
+[Link text](URL)
+
+[1] On Linux systems Indirect GLX rendering must be enabled in the X server [see here](https://groups.google.com/forum/#!topic/coin3d-discuss/eyb9jCIOkpA)
+[2] SoXt: So[Q,X]tDirectionalLightEditor::attach() functionality not yet completed
+[3] The code has been modified for a possible bug in Coin SoCalculator engine
+[4] Possible internal SoXt bug
