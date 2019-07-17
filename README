@@ -89,16 +89,19 @@ The Inventor Toolmaker        | SoQt  | SoWin | SoXt |
 05.Elements/elementtest       |  ok   |       |  ok  |
 07.Nodekits/jumpingJackKitTest|  ok   |       |  ok  |
 08.Manips/newManips           |  ok   |       |  ok  |
-09.Highlights/overlayTest     |  ok   |       |  KO  | SoXt: SoXtGLWidget::setOverlayRender() functionality not yet completed
+09.Highlights/overlayTest     |  ok   |       |  [5] |
 09.Highlights/selectionTest   |  ok   |       |  ok  |
 10.Components/tumble          | N.A.  |       |  KO  |
 11.Events/eventTest           | N.A.  |       | N.A. |
 +-----------------------------+-------+-------+------+
 ````
 
-[Link text](URL)
-
 [1] On Linux systems Indirect GLX rendering must be enabled in the X server [see here](https://groups.google.com/forum/#!topic/coin3d-discuss/eyb9jCIOkpA)
-[2] SoXt: So[Q,X]tDirectionalLightEditor::attach() functionality not yet completed
+
+[2] So[Q,X]tDirectionalLightEditor::attach() functionality not yet completed
+
 [3] The code has been modified for a possible bug in Coin SoCalculator engine
+
 [4] Possible internal SoXt bug
+
+[5] SoXtGLWidget::setOverlayRender() functionality not yet completed
