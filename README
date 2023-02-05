@@ -8,92 +8,92 @@ adaptable to different window systems.
 The current status is the following:
 
 ````
-+----------------------------------------------+
-The Inventor Mentor     | SoQt  | SoWin | SoXt |
-+-----------------------+-------+-------+------+
-02.1.HelloCone          |  ok   |       |  ok  |
-02.2.EngineSpin         |  ok   |       |  ok  |
-02.3.Trackball          |  ok   |       |  ok  |
-02.4.Examiner           |  ok   |       |  ok  |
-03.1.Molecule           |  ok   |       |  ok  |
-03.2.Robot              |  ok   |       |  ok  |
-03.3.Naming             |  ok   |       |  ok  |
-04.1.Cameras            |  ok   |       |  ok  |
-04.2.Lights             |  ok   |       |  ok  |
-05.1.FaceSet            |  ok   |       |  ok  |
-05.2.IndexedFaceSet     |  ok   |       |  ok  |
-05.3.TriangleStripSet   |  ok   |       |  ok  |
-05.4.QuadMesh           |  ok   |       |  ok  |
-05.5.Binding            |  ok   |       |  ok  |
-05.6.TransformOrdering  |  ok   |       |  ok  |
-06.1.Text               |  ok   |       |  ok  |
-06.2.Simple3DText       |  ok   |       |  ok  |
-06.3.Complex3DText      |  ok   |       |  ok  |
-07.1.BasicTexture       |  ok   |       |  ok  |
-07.2.TextureCoordinates |  ok   |       |  ok  |
-07.3.TextureFunction    |  ok   |       |  ok  |
-08.1.BSCurve            |  ok   |       |  ok  |
-08.2.UniCurve           |  ok   |       |  ok  |
-08.3.BezSurf            |  ok   |       |  ok  |
-08.4.TrimSurf           |  ok   |       |  ok  |
-09.1.Print              |  [1]  |       |  [1] |
-09.2.Texture            |  [1]  |       |  [1] |
-09.3.Search             |  ok   |       |  ok  |
-09.4.PickAction         |  ok   |       |  ok  |
-09.5.GenSph             |  ok   |       |  ok  |
-10.1.addEventCB         |  ok   |       |  ok  |
-10.2.setEventCB         | N.A.  | N.A.  |  ok  |
-10.3and4.MotifList      | N.A.  | N.A.  |  [4] |
-10.5.SelectionCB        |  ok   |       |  ok  |
-10.6.PickFilterTopLevel |  ok   |       |  ok  |
-10.7.PickFilterManip    |  ok   |       |  ok  |
-10.8.PickFilterNodeKit  | N.A.  | N.A.  |  [1] |
-11.1.ReadFile           |  ok   |       |  ok  |
-11.2.ReadString         |  ok   |       |  ok  |
-12.1.FieldSensor        |  ok   |       |  ok  |
-12.2.NodeSensor         |  ok   |       |  ok  |
-12.3.AlarmSensor        |  ok   |       |  ok  |
-12.4.TimerSensor        |  ok   |       |  ok  |
-13.1.GlobalFlds         |  ok   |       |  ok  |
-13.2.ElapsedTime        |  ok   |       |  ok  |
-13.3.TimeCounter        |  ok   |       |  ok  |
-13.4.Gate               |  ok   |       |  ok  |
-13.5.Boolean            |  ok   |       |  ok  |
-13.6.Calculator         |  ok   |       |  ok  |
-13.7.Rotor              |  ok   |       |  ok  |
-13.8.Blinker            |  ok   |       |  ok  |
-14.1.FrolickingWords    |  ok   |       |  [3] |
-14.2.Editors            |  [2]  | N.A.  |  [2] |
-14.3.Balance            |  ok   |       |  ok  |
-15.1.ConeRadius         |  ok   |       |  ok  |
-15.2.SliderBox          |  ok   |       |  ok  |
-15.3.AttachManip        |  ok   |       |  ok  |
-15.4.Customize          |  ok   |       |  ok  |
-16.1.Overlay            | N.A.  | N.A.  |  [4] |
-16.2.Callback           | N.A.  | N.A.  |  [1] |
-16.3.AttachEditor       | N.A.  | N.A.  |  [1] |
-16.4.OneWindow          | N.A.  | N.A.  |  KO  |
-16.5.Examiner           |  ok   |       |  ok  |
-17.1.ColorIndex         | N.A.  | N.A.  |  KO  | Couldn't create visual
-17.2.GLCallback         | N.A.  | N.A.  |  ok  |
-17.3.GLFloor            | N.A.  | N.A.  |  ok  |
-+-----------------------+-------+-------+------+
++-----------------------------------------------------+
+The Inventor Mentor     | SoQt  | SoWin | SoXt | SoWx |
++-----------------------+-------+-------+------+------+
+02.1.HelloCone          |  ok   |       |  ok  |  ok  |
+02.2.EngineSpin         |  ok   |       |  ok  |  ok  |
+02.3.Trackball          |  ok   |       |  ok  |  ok  |
+02.4.Examiner           |  ok   |       |  ok  |  ok  |
+03.1.Molecule           |  ok   |       |  ok  |  ok  |
+03.2.Robot              |  ok   |       |  ok  |  ok  |
+03.3.Naming             |  ok   |       |  ok  |  ok  |
+04.1.Cameras            |  ok   |       |  ok  |  ok  |
+04.2.Lights             |  ok   |       |  ok  |  ok  |
+05.1.FaceSet            |  ok   |       |  ok  |  ok  |
+05.2.IndexedFaceSet     |  ok   |       |  ok  |  ok  |
+05.3.TriangleStripSet   |  ok   |       |  ok  |  ok  |
+05.4.QuadMesh           |  ok   |       |  ok  |  ok  |
+05.5.Binding            |  ok   |       |  ok  |  ok  |
+05.6.TransformOrdering  |  ok   |       |  ok  |  ok  |
+06.1.Text               |  ok   |       |  ok  |  ok  |
+06.2.Simple3DText       |  ok   |       |  ok  |  ok  |
+06.3.Complex3DText      |  ok   |       |  ok  |  ok  |
+07.1.BasicTexture       |  ok   |       |  ok  |  ok  |
+07.2.TextureCoordinates |  ok   |       |  ok  |  ok  |
+07.3.TextureFunction    |  ok   |       |  ok  |  ok  |
+08.1.BSCurve            |  ok   |       |  ok  |  ok  |
+08.2.UniCurve           |  ok   |       |  ok  |  ok  |
+08.3.BezSurf            |  ok   |       |  ok  |  ok  |
+08.4.TrimSurf           |  ok   |       |  ok  |  ok  |
+09.1.Print              |  [1]  |       |  [1] |  ?   |   
+09.2.Texture            |  [1]  |       |  [1] |  ?   |
+09.3.Search             |  ok   |       |  ok  |  ok  |
+09.4.PickAction         |  ok   |       |  ok  |  ok  |
+09.5.GenSph             |  ok   |       |  ok  |  ok  |
+10.1.addEventCB         |  ok   |       |  ok  |  ok  |
+10.2.setEventCB         | N.A.  | N.A.  |  ok  | N.A. |
+10.3and4.MotifList      | N.A.  | N.A.  |  [4] | N.A. |
+10.5.SelectionCB        |  ok   |       |  ok  |  ok  |
+10.6.PickFilterTopLevel |  ok   |       |  ok  |  ko  |
+10.7.PickFilterManip    |  ok   |       |  ok  |      |
+10.8.PickFilterNodeKit  | N.A.  | N.A.  |  [1] | N.A. |
+11.1.ReadFile           |  ok   |       |  ok  |  ok  |
+11.2.ReadString         |  ok   |       |  ok  |  ok  |
+12.1.FieldSensor        |  ok   |       |  ok  |      |
+12.2.NodeSensor         |  ok   |       |  ok  |      |
+12.3.AlarmSensor        |  ok   |       |  ok  |      |
+12.4.TimerSensor        |  ok   |       |  ok  |      |
+13.1.GlobalFlds         |  ok   |       |  ok  |      |
+13.2.ElapsedTime        |  ok   |       |  ok  |      |
+13.3.TimeCounter        |  ok   |       |  ok  |      |
+13.4.Gate               |  ok   |       |  ok  |      |
+13.5.Boolean            |  ok   |       |  ok  |      |
+13.6.Calculator         |  ok   |       |  ok  |      |
+13.7.Rotor              |  ok   |       |  ok  |      |
+13.8.Blinker            |  ok   |       |  ok  |      |
+14.1.FrolickingWords    |  ok   |       |  [3] |      |
+14.2.Editors            |  [2]  | N.A.  |  [2] |      |
+14.3.Balance            |  ok   |       |  ok  |      |
+15.1.ConeRadius         |  ok   |       |  ok  |      |
+15.2.SliderBox          |  ok   |       |  ok  |      |
+15.3.AttachManip        |  ok   |       |  ok  |      |
+15.4.Customize          |  ok   |       |  ok  |      |
+16.1.Overlay            | N.A.  | N.A.  |  [4] |      |
+16.2.Callback           | N.A.  | N.A.  |  [1] |      |
+16.3.AttachEditor       | N.A.  | N.A.  |  [1] |      |
+16.4.OneWindow          | N.A.  | N.A.  |  KO  |      |
+16.5.Examiner           |  ok   |       |  ok  |      |
+17.1.ColorIndex         | N.A.  | N.A.  |  [6] |      |
+17.2.GLCallback         | N.A.  | N.A.  |  ok  |      |
+17.3.GLFloor            | N.A.  | N.A.  |  ok  |      |
++-----------------------+-------+-------+------+------+
 
 
-+-----------------------------+-------+-------+------+
-The Inventor Toolmaker        | SoQt  | SoWin | SoXt |
-+-----------------------------+-------+-------+------+
-02.Nodes/newNodes             |  ok   |       |  ok  |
-03.Fields/fieldtest           |  ok   |       |  ok  |
-04.Actions/printVolume        |  ok   |       |  ok  |
-05.Elements/elementtest       |  ok   |       |  ok  |
-07.Nodekits/jumpingJackKitTest|  ok   |       |  ok  |
-08.Manips/newManips           |  ok   |       |  ok  |
-09.Highlights/overlayTest     |  ok   |       |  [5] |
-09.Highlights/selectionTest   |  ok   |       |  ok  |
-10.Components/tumble          | N.A.  |       |  KO  |
-11.Events/eventTest           | N.A.  |       | N.A. |
-+-----------------------------+-------+-------+------+
++-----------------------------+-------+-------+------+------+
+The Inventor Toolmaker        | SoQt  | SoWin | SoXt | SoWx |
++-----------------------------+-------+-------+------+------+
+02.Nodes/newNodes             |  ok   |       |  ok  |  ?   |
+03.Fields/fieldtest           |  ok   |       |  ok  |  ?   |
+04.Actions/printVolume        |  ok   |       |  ok  |  ?   |
+05.Elements/elementtest       |  ok   |       |  ok  |  ?   |
+07.Nodekits/jumpingJackKitTest|  ok   |       |  ok  |  ?   |
+08.Manips/newManips           |  ok   |       |  ok  |  ?   |
+09.Highlights/overlayTest     |  ok   |       |  [5] |  ?   |
+09.Highlights/selectionTest   |  ok   |       |  ok  |  ?   |
+10.Components/tumble          | N.A.  |       |  KO  |  ?   |
+11.Events/eventTest           | N.A.  |       | N.A. |  ?   | 
++-----------------------------+-------+-------+------+------+
 ````
 
 [1] On Linux systems Indirect GLX rendering must be enabled in the X server [see here](https://groups.google.com/forum/#!topic/coin3d-discuss/eyb9jCIOkpA)
@@ -105,3 +105,16 @@ The Inventor Toolmaker        | SoQt  | SoWin | SoXt |
 [4] Possible internal SoXt bug
 
 [5] SoXtGLWidget::setOverlayRender() functionality not yet completed
+
+[6] Couldn't create visual
+
+
+Additional note on Sowx
+
+Only cmake is supported.
+If sowx or wxWidgets are not in standard path you can specify path with CMAKE_PREFIX_PATH.
+e.g.:
+cmake -DCMAKE_PREFIX_PATH="/opt/SoWx;/opt/wxWidgets" <path to ivexamples sources>
+
+Compilation in the same path of source code is deprecated.
+
