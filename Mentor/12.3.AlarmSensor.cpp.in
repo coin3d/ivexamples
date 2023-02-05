@@ -38,7 +38,7 @@
  *  This is an example from the Inventor Mentor,
  *  chapter 12, example 3.
  *
- *  Alarm sensor that raises a flag after 10 minutes
+ *  Alarm sensor that raises a flag after 12 seconds
  *------------------------------------------------------------*/
 
 #include <Inventor/@Gui@/So@Gui@.h>

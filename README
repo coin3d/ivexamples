@@ -50,49 +50,49 @@ The Inventor Mentor     | SoQt  | SoWin | SoXt | SoWx |
 10.8.PickFilterNodeKit  | N.A.  | N.A.  |  [1] | N.A. |
 11.1.ReadFile           |  ok   |       |  ok  |  ok  |
 11.2.ReadString         |  ok   |       |  ok  |  ok  |
-12.1.FieldSensor        |  ok   |       |  ok  |      |
-12.2.NodeSensor         |  ok   |       |  ok  |      |
-12.3.AlarmSensor        |  ok   |       |  ok  |      |
-12.4.TimerSensor        |  ok   |       |  ok  |      |
-13.1.GlobalFlds         |  ok   |       |  ok  |      |
-13.2.ElapsedTime        |  ok   |       |  ok  |      |
-13.3.TimeCounter        |  ok   |       |  ok  |      |
-13.4.Gate               |  ok   |       |  ok  |      |
-13.5.Boolean            |  ok   |       |  ok  |      |
-13.6.Calculator         |  ok   |       |  ok  |      |
-13.7.Rotor              |  ok   |       |  ok  |      |
-13.8.Blinker            |  ok   |       |  ok  |      |
-14.1.FrolickingWords    |  ok   |       |  [3] |      |
-14.2.Editors            |  [2]  | N.A.  |  [2] |      |
-14.3.Balance            |  ok   |       |  ok  |      |
-15.1.ConeRadius         |  ok   |       |  ok  |      |
-15.2.SliderBox          |  ok   |       |  ok  |      |
-15.3.AttachManip        |  ok   |       |  ok  |      |
-15.4.Customize          |  ok   |       |  ok  |      |
-16.1.Overlay            | N.A.  | N.A.  |  [4] |      |
-16.2.Callback           | N.A.  | N.A.  |  [1] |      |
-16.3.AttachEditor       | N.A.  | N.A.  |  [1] |      |
-16.4.OneWindow          | N.A.  | N.A.  |  KO  |      |
-16.5.Examiner           |  ok   |       |  ok  |      |
-17.1.ColorIndex         | N.A.  | N.A.  |  [6] |      |
-17.2.GLCallback         | N.A.  | N.A.  |  ok  |      |
-17.3.GLFloor            | N.A.  | N.A.  |  ok  |      |
+12.1.FieldSensor        |  ok   |       |  ok  |  ok  |
+12.2.NodeSensor         |  ok   |       |  ok  |  ok  |
+12.3.AlarmSensor        |  ok   |       |  ok  |  ok  |
+12.4.TimerSensor        |  ok   |       |  ok  |  ok  |
+13.1.GlobalFlds         |  ok   |       |  ok  |  ok  |
+13.2.ElapsedTime        |  ok   |       |  ok  |  ok  |
+13.3.TimeCounter        |  ok   |       |  ok  |  ok  |
+13.4.Gate               |  ok   |       |  ok  |  ok  |
+13.5.Boolean            |  ok   |       |  ok  |  ok  |
+13.6.Calculator         |  ok   |       |  ok  |  ok  |
+13.7.Rotor              |  ok   |       |  ok  |  ok  |
+13.8.Blinker            |  ok   |       |  ok  |  ok  |
+14.1.FrolickingWords    |  ok   |       |  [3] |  ok  |
+14.2.Editors            |  [2]  | N.A.  |  [2] |  [2] |
+14.3.Balance            |  ok   |       |  ok  |  ok  |
+15.1.ConeRadius         |  ok   |       |  ok  |  ok  |
+15.2.SliderBox          |  ok   |       |  ok  |  ok  |
+15.3.AttachManip        |  ok   |       |  ok  |  ok  |
+15.4.Customize          |  ok   |       |  ok  |  ok  |
+16.1.Overlay            | N.A.  | N.A.  |  [4] | N.A. |
+16.2.Callback           | N.A.  | N.A.  |  [1] |  [7] |
+16.3.AttachEditor       | N.A.  | N.A.  |  [1] |  [7] |
+16.4.OneWindow          | N.A.  | N.A.  |  KO  | N.A. |
+16.5.Examiner           |  ok   |       |  ok  |  ok  |
+17.1.ColorIndex         | N.A.  | N.A.  |  [6] | N.A. |
+17.2.GLCallback         | N.A.  | N.A.  |  ok  |  ok  |
+17.3.GLFloor            | N.A.  | N.A.  |  ok  | N.A. |
 +-----------------------+-------+-------+------+------+
 
 
 +-----------------------------+-------+-------+------+------+
 The Inventor Toolmaker        | SoQt  | SoWin | SoXt | SoWx |
 +-----------------------------+-------+-------+------+------+
-02.Nodes/newNodes             |  ok   |       |  ok  |  ?   |
-03.Fields/fieldtest           |  ok   |       |  ok  |  ?   |
-04.Actions/printVolume        |  ok   |       |  ok  |  ?   |
-05.Elements/elementtest       |  ok   |       |  ok  |  ?   |
-07.Nodekits/jumpingJackKitTest|  ok   |       |  ok  |  ?   |
-08.Manips/newManips           |  ok   |       |  ok  |  ?   |
-09.Highlights/overlayTest     |  ok   |       |  [5] |  ?   |
-09.Highlights/selectionTest   |  ok   |       |  ok  |  ?   |
-10.Components/tumble          | N.A.  |       |  KO  |  ?   |
-11.Events/eventTest           | N.A.  |       | N.A. |  ?   | 
+02.Nodes/newNodes             |  ok   |       |  ok  |  ok  |
+03.Fields/fieldtest           |  ok   |       |  ok  |  ok  |
+04.Actions/printVolume        |  ok   |       |  ok  |  ok  |
+05.Elements/elementtest       |  ok   |       |  ok  |  ok  |
+07.Nodekits/jumpingJackKitTest|  ok   |       |  ok  |  ok  |
+08.Manips/newManips           |  ok   |       |  ok  |  ok  |
+09.Highlights/overlayTest     |  ok   |       |  [5] |  [?] |
+09.Highlights/selectionTest   |  ok   |       |  ok  |  ok  |
+10.Components/tumble          | N.A.  |       |  KO  | N.A. |
+11.Events/eventTest           | N.A.  |       | N.A. | N.A. |
 +-----------------------------+-------+-------+------+------+
 ````
 
@@ -108,6 +108,7 @@ The Inventor Toolmaker        | SoQt  | SoWin | SoXt | SoWx |
 
 [6] Couldn't create visual
 
+[7] Error with Coin Offscreen rendering
 
 Additional note on Sowx
 
