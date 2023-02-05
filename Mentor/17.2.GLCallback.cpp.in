@@ -182,7 +182,7 @@ int
 main(int, char **)
 {
    // Initialize Inventor utilities
-   @WINWIDGET@ myWindow = So@Gui@::init("Example 17.1");
+   @WINWIDGET@ myWindow = So@Gui@::init("Example 17.2");
 
    buildFloor();
 
