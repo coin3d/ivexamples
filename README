@@ -110,12 +110,22 @@ The Inventor Toolmaker        | SoQt  | SoWin | SoXt | SoWx |
 
 [7] Error with Coin Offscreen rendering
 
-Additional note on Sowx
+How to build
 
-Only cmake is supported.
-If sowx or wxWidgets are not in standard path you can specify path with CMAKE_PREFIX_PATH.
+First make sure you have a working Coin3D setup either by building Coin on your machine, or by downloading the build artifacts from the releases. Make sure you include the GUI toolkit binding of your choice (SoWin, SoQt, SoWx, SoXt) when building.
+
+Then execute the typical CMake configure/build commands in directory where you cloned your ivexamples repository (make sure to include the submodules when cloning)
+
+Using Windows, SoQt, Visual Studio 2019, 64 bit, and Qt 6.5.2 the command would read:
+
+cmake -S ivexamples -B ivexamples_build -G "Visual Studio 16 2019" -A x64 -DGui=Qt -DCMAKE_PREFIX_PATH=C:\Coin3D;C:\Qt\6.5.2\msvc2019_64
+cmake --build ivexamples_build --target ALL_BUILD --config Release
+
+Additional note on SoWx
+
+Only CMake is supported to build with SoWx GUI toolkit binding.
+If SoWx or wxWidgets are not in a standard path you can specify the path with CMAKE_PREFIX_PATH.
 e.g.:
 cmake -DCMAKE_PREFIX_PATH="/opt/SoWx;/opt/wxWidgets" <path to ivexamples sources>
 
 Compilation in the same path of source code is deprecated.
-
