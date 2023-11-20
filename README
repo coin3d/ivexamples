@@ -114,9 +114,9 @@ How to build
 
 First make sure you have a working Coin3D setup either by building Coin on your machine, or by downloading the build artifacts from the releases. Make sure you include the GUI toolkit binding of your choice (SoWin, SoQt, SoWx, SoXt) when building.
 
-Then execute the typical CMake configure/build commands in directory where you cloned your ivexamples repository (make sure to include the submodules when cloning)
+Then execute the typical CMake configure/build commands in the parent directory of your cloned ivexamples repository (make sure to include the submodules when cloning).
 
-Using Windows, SoQt, Visual Studio 2019, 64 bit, and Qt 6.5.2 the command would read:
+Using Windows, SoQt, Visual Studio 2019, 64 bit, and Qt 6.5.2 the commands would read:
 
 cmake -S ivexamples -B ivexamples_build -G "Visual Studio 16 2019" -A x64 -DGui=Qt -DCMAKE_PREFIX_PATH=C:\Coin3D;C:\Qt\6.5.2\msvc2019_64
 cmake --build ivexamples_build --target ALL_BUILD --config Release
