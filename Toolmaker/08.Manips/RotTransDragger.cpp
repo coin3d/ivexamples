@@ -55,8 +55,8 @@
 // Include file for our new class.
 #include "RotTransDragger.h"
 
-// This file contains RotTransDragger::geomBuffer, whic 
-// describes the default geometry resources for his class.
+// This file contains RotTransDragger::geomBuffer, which 
+// describes the default geometry resources for this class.
 #include "RotTransDraggerGeom.h"
 
 SO_KIT_SOURCE(RotTransDragger);

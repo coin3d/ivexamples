@@ -240,7 +240,7 @@ tru64)
 
 dashmstdout)
   # Important note: in order to support this mode, a compiler *must*
-  # always write the proprocessed file to stdout, regardless of -o,
+  # always write the preprocessed file to stdout, regardless of -o,
   # because we must use -o when running libtool.
   test -z "$dashmflag" && dashmflag=-M
   ( IFS=" "
@@ -324,7 +324,7 @@ makedepend)
 
 cpp)
   # Important note: in order to support this mode, a compiler *must*
-  # always write the proprocessed file to stdout, regardless of -o,
+  # always write the preprocessed file to stdout, regardless of -o,
   # because we must use -o when running libtool.
   ( IFS=" "
     case " $* " in
@@ -362,7 +362,7 @@ cpp)
 
 msvisualcpp)
   # Important note: in order to support this mode, a compiler *must*
-  # always write the proprocessed file to stdout, regardless of -o,
+  # always write the preprocessed file to stdout, regardless of -o,
   # because we must use -o when running libtool.
   ( IFS=" "
     case " $* " in

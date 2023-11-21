@@ -44,7 +44,7 @@
  *  that uses a new kind of dragger.
  *  This is an SoTransformManip that employs a 
  *  TranslateRadialDragger.  The dragger provides a user 
- *  interface for editting the fields of the manip (which
+ *  interface for editing the fields of the manip (which
  *  are inherited from SoTransform)
  *
  *----------------------------------------------------------*/

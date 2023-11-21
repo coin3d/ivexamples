@@ -3458,7 +3458,7 @@ if test x"$with_pthread" != xno; then
   # FIXME: should investigate and document the exact meaning of
   # the _REENTRANT flag. larsa's commit message mentions
   # "glibc-doc/FAQ.threads.html". Also, kintel points to the
-  # comp.programming.thrads FAQ, which has an entry on the
+  # comp.programming.threads FAQ, which has an entry on the
   # _REENTRANT define.
   #
   # Preferably, it should only be set up when really needed
@@ -3929,7 +3929,7 @@ m4_do([popdef([cache_variable])],
 # SIM_AC_INVENTOR_EXTENSIONS( ACTION )
 #
 # This macro adds an "--with-iv-extensions=..." option to configure, that
-# enabes the configurer to enable extensions in third-party libraries to
+# enables the configurer to enable extensions in third-party libraries to
 # be initialized by the library by default.  The configure-option argument
 # must be a comma-separated list of link library path options, link library
 # options and class-names.

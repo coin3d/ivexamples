@@ -1,9 +1,10 @@
-This are examples taken from 'The Inventor Mentor' and 'The Inventor Toolmaker'
-and adapted for Coin libraries and its Component Libraries (SoQt,SoWin and SoXt).
+These are examples taken from 'The Inventor Mentor' and 'The Inventor Toolmaker'
+and adapted for Coin library and its GUI toolkit libraries (SoQt, SoWin, SoXt,
+and SoWx).
 
-Some of the original examples are strongly dependent to the original Open
-Inventor component library, based on a X11/Xt APIs and so not always quickly 
-adaptable to different window systems.
+Some of the original examples are strongly dependent on the original Open
+Inventor component library, based on X11/Xt APIs, and therefore are not always
+easily adaptable to different window systems.
 
 The current status is the following:
 
@@ -96,11 +97,11 @@ The Inventor Toolmaker        | SoQt  | SoWin | SoXt | SoWx |
 +-----------------------------+-------+-------+------+------+
 ````
 
-[1] On Linux systems Indirect GLX rendering must be enabled in the X server [see here](https://groups.google.com/forum/#!topic/coin3d-discuss/eyb9jCIOkpA)
+[1] On Linux systems indirect GLX rendering must be enabled in the X server [see here](https://groups.google.com/forum/#!topic/coin3d-discuss/eyb9jCIOkpA)
 
 [2] So[Q,X]tDirectionalLightEditor::attach() functionality not yet completed
 
-[3] The code has been modified for a possible bug in Coin SoCalculator engine
+[3] The code has been modified to avoid a possible bug in Coin SoCalculator engine
 
 [4] Possible internal SoXt bug
 
@@ -108,7 +109,8 @@ The Inventor Toolmaker        | SoQt  | SoWin | SoXt | SoWx |
 
 [6] Couldn't create visual
 
-[7] Error with Coin Offscreen rendering
+[7] Error with Coin offscreen rendering
+
 
 How to build
 
@@ -120,6 +122,7 @@ Using Windows, SoQt, Visual Studio 2019, 64 bit, and Qt 6.5.2 the commands would
 
 cmake -S ivexamples -B ivexamples_build -G "Visual Studio 16 2019" -A x64 -DGui=Qt -DCMAKE_PREFIX_PATH=C:\Coin3D;C:\Qt\6.5.2\msvc2019_64
 cmake --build ivexamples_build --target ALL_BUILD --config Release
+
 
 Additional note on SoWx
 

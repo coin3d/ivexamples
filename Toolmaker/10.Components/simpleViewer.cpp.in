@@ -144,7 +144,7 @@ simpleViewer::processEvent(XAnyEvent *xe)
     
     // check if cursors need to be defined (they can only
     // be defined after the window has been mapped. 
-    // Recieving events guarantees that the window has 
+    // Receiving events guarantees that the window has 
     // been mapped.
     if (!createdCursors) {
 	defineCursors();

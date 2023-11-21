@@ -48,7 +48,7 @@
 #include <Inventor/nodes/SoSphere.h>
 #include <Inventor/sensors/SoNodeSensor.h>
 
-// Function protoype
+// Function prototype
 void RemoveCube();
 
 int
