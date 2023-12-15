@@ -1,0 +1,136 @@
+name: Continuous Integration Build
+
+on:
+  workflow_dispatch:  # Allow manual triggers
+  pull_request:
+    branches: [ master ]
+#  push:
+#    branches: [ master ]
+
+jobs:
+  ubuntu-build:
+    name: Ubuntu Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Create build directory and run CMake
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install freeglut3-dev qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools qttools5-dev-tools libxi-dev
+          mkdir cmake_download_dir
+          DOWNLOAD_FILE_COIN=coin-latest-Ubuntu2204-gcc11-x64.tar.gz
+          RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases | jq -r --arg COIN_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id'`
+          ASSET_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
+          export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
+          echo download file $DOWNLOAD_FILE_COIN from address $DOWNLOAD_ADDRESS_COIN
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
+          tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
+          DOWNLOAD_FILE_SOQT=soqt-latest-Qt5-Ubuntu2204-gcc11-x64.tar.gz
+          RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/soqt/releases | jq -r --arg SOQT_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$SOQT_REPO_TAG_NAME) | .id'`
+          ASSET_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/soqt/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_SOQT "$DOWNLOAD_FILE_SOQT" '.assets[] | select(.name==$DOWNLOAD_FILE_SOQT) | .id'`
+          export DOWNLOAD_ADDRESS_SOQT=https://api.github.com/repos/coin3d/soqt/releases/assets/$ASSET_ID
+          echo download file $DOWNLOAD_FILE_SOQT from address $DOWNLOAD_ADDRESS_SOQT
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_SOQT $DOWNLOAD_ADDRESS_SOQT
+          tar xzf $DOWNLOAD_FILE_SOQT -C cmake_download_dir
+          cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D -DGui=Qt
+      - name: Build project
+        run: cmake --build cmake_build_dir --target install --config Release -- -j4
+      #- name: Run tests
+      #  run:  ctest -C Release -VV
+      #  working-directory: cmake_build_dir
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ubuntu-Artifacts
+          path: cmake_install_dir/
+        if: always()
+
+  windows-build:
+    name: Windows Build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      #- name: Install Qt
+      #  uses: jurplel/install-qt-action@v2
+      - name: Create build directory and run CMake
+        shell: cmd
+        run: |
+          mkdir cmake_download_dir
+          set DOWNLOAD_FILE_SUPERGLU=superglu-latest-msvc17-x64.zip
+          for /f %%i in ('curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/superglu/releases ^| jq -r --arg SUPERGLU_REPO_TAG_NAME "CI-builds" ".[] | select(.tag_name==$SUPERGLU_REPO_TAG_NAME) | .id"') do set RELEASE_ID=%%i
+          for /f %%i in ('curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/superglu/releases/%RELEASE_ID% ^| jq -r --arg DOWNLOAD_FILE_SUPERGLU "%DOWNLOAD_FILE_SUPERGLU%" ".assets[] | select(.name==$DOWNLOAD_FILE_SUPERGLU) | .id"') do set ASSET_ID=%%i
+          set DOWNLOAD_ADDRESS_SUPERGLU=https://api.github.com/repos/coin3d/superglu/releases/assets/%ASSET_ID%
+          echo download file %DOWNLOAD_FILE_SUPERGLU% from address %DOWNLOAD_ADDRESS_SUPERGLU%
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o %DOWNLOAD_FILE_SUPERGLU% %DOWNLOAD_ADDRESS_SUPERGLU%
+          7z x %DOWNLOAD_FILE_SUPERGLU% -ocmake_download_dir
+          set DOWNLOAD_FILE_COIN=coin-latest-msvc17-x64.zip
+          for /f %%i in ('curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases ^| jq -r --arg COIN_REPO_TAG_NAME "CI-builds" ".[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id"') do set RELEASE_ID=%%i
+          for /f %%i in ('curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases/%RELEASE_ID% ^| jq -r --arg DOWNLOAD_FILE_COIN "%DOWNLOAD_FILE_COIN%" ".assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id"') do set ASSET_ID=%%i
+          set DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/%ASSET_ID%
+          echo download file %DOWNLOAD_FILE_COIN% from address %DOWNLOAD_ADDRESS_COIN%
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o %DOWNLOAD_FILE_COIN% %DOWNLOAD_ADDRESS_COIN%
+          7z x %DOWNLOAD_FILE_COIN% -ocmake_download_dir
+          set DOWNLOAD_FILE_SOWIN=sowin-latest-msvc17-x64.zip
+          for /f %%i in ('curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/sowin/releases ^| jq -r --arg SOWIN_REPO_TAG_NAME "CI-builds" ".[] | select(.tag_name==$SOWIN_REPO_TAG_NAME) | .id"') do set RELEASE_ID=%%i
+          for /f %%i in ('curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/sowin/releases/%RELEASE_ID% ^| jq -r --arg DOWNLOAD_FILE_SOWIN "%DOWNLOAD_FILE_SOWIN%" ".assets[] | select(.name==$DOWNLOAD_FILE_SOWIN) | .id"') do set ASSET_ID=%%i
+          set DOWNLOAD_ADDRESS_SOWIN=https://api.github.com/repos/coin3d/sowin/releases/assets/%ASSET_ID%
+          echo download file %DOWNLOAD_FILE_SOWIN% from address %DOWNLOAD_ADDRESS_SOWIN%
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o %DOWNLOAD_FILE_SOWIN% %DOWNLOAD_ADDRESS_SOWIN%
+          7z x %DOWNLOAD_FILE_SOWIN% -ocmake_download_dir
+          cmake -S . -B cmake_build_dir -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D -DGui=Win
+      - name: Build project
+        run: cmake --build cmake_build_dir --target INSTALL --config Release -- /nologo /verbosity:minimal /maxcpucount:2 /property:MultiProcessorCompilation=true
+      #- name: Run tests
+      #  run:  ctest -C Release -VV
+      #  working-directory: cmake_build_dir
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Windows-Artifacts
+          path: cmake_install_dir/
+        if: always()
+
+  macos-build:
+    name: MacOS Build
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Create build directory and run CMake
+        run: |
+          brew install qt5
+          mkdir cmake_download_dir
+          DOWNLOAD_FILE_COIN=coin-latest-macos-monterey-clang14-x64.tar.gz
+          RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases | jq -r --arg COIN_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id'`
+          ASSET_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_COIN "$DOWNLOAD_FILE_COIN" '.assets[] | select(.name==$DOWNLOAD_FILE_COIN) | .id'`
+          export DOWNLOAD_ADDRESS_COIN=https://api.github.com/repos/coin3d/coin/releases/assets/$ASSET_ID
+          echo download file $DOWNLOAD_FILE_COIN from address $DOWNLOAD_ADDRESS_COIN
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_COIN $DOWNLOAD_ADDRESS_COIN
+          tar xzf $DOWNLOAD_FILE_COIN -C cmake_download_dir
+          DOWNLOAD_FILE_SOQT=soqt-latest-Qt5.15-macos-monterey-clang14-x64.tar.gz
+          RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/soqt/releases | jq -r --arg SOQT_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$SOQT_REPO_TAG_NAME) | .id'`
+          ASSET_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/soqt/releases/$RELEASE_ID | jq -r --arg DOWNLOAD_FILE_SOQT "$DOWNLOAD_FILE_SOQT" '.assets[] | select(.name==$DOWNLOAD_FILE_SOQT) | .id'`
+          export DOWNLOAD_ADDRESS_SOQT=https://api.github.com/repos/coin3d/soqt/releases/assets/$ASSET_ID
+          echo download file $DOWNLOAD_FILE_SOQT from address $DOWNLOAD_ADDRESS_SOQT
+          curl -s -S -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -H "Accept: application/octet-stream" -o $DOWNLOAD_FILE_SOQT $DOWNLOAD_ADDRESS_SOQT
+          tar xzf $DOWNLOAD_FILE_SOQT -C cmake_download_dir
+          cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH="cmake_download_dir/Coin3D;/usr/local/opt/qt5" -DGui=Qt
+      - name: Build project
+        run: sudo cmake --build cmake_build_dir --target install --config Release -- -j4
+      #- name: Run tests
+      #  run: ctest -C Release -VV
+      #  working-directory: cmake_build_dir
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: MacOS-Artifacts
+          path: cmake_install_dir/
+        if: always()
