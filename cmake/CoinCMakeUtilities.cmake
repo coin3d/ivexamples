@@ -1,11 +1,7 @@
-macro(coin_project PROJECT_NAME)
-  set(options)
-  set(oneValueArgs VERSION DESCRIPTION)
-  set(multiValueArgs)
-  cmake_parse_arguments(PROJECT "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+macro(coin_setup_gui_project)
   string(TOLOWER ${PROJECT_NAME} PROJECT_NAME_LOWER)
   string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
-  project(${PROJECT_NAME} VERSION ${PROJECT_VERSION})
+
   # ############################################################################
   # GUI target preliminary setup
   set(Gui "Qt" CACHE STRING "Target GUI for the Open Inventor examples")
@@ -21,12 +17,13 @@ macro(coin_project PROJECT_NAME)
   elseif(Gui STREQUAL "Wx")
     set(WINWIDGET wxWindow*)
   else()
-    message(FATAL_ERROR "Only Qt,Win,Wx and Xt supported: please set Gui at one of these values")
+    message(FATAL_ERROR "Only Qt, Win, Wx and Xt supported: please set Gui to one of these values")
   endif()
   string(TOUPPER ${Gui} GUI)
   # ############################################################################
+
   string(TIMESTAMP PROJECT_BUILD_YEAR "%Y")
-endmacro(coin_project)
+endmacro()
 
 # option controlled helper for cmake variable dumping during config
 function(dump_variable)
@@ -49,10 +46,10 @@ function(chk_gl_include_file VAR INCLUDE)
   list(APPEND GL_INCLUDES     "GL/${INCLUDE}")
   list(APPEND OPENGL_INCLUDES "OpenGL/${INCLUDE}")
   dump_variable(
-  VAR
-  INCLUDE
-  GL_INCLUDES
-  OPENGL_INCLUDES
+    VAR
+    INCLUDE
+    GL_INCLUDES
+    OPENGL_INCLUDES
   )
   if(HAVE_WINDOWS_H)
     check_include_files("windows.h;${GL_INCLUDES}"     HAVE_GL_${VAR}     LANGUAGE CXX)
@@ -68,5 +65,5 @@ function(chk_gl_include_file VAR INCLUDE)
   else ()
     set(SIM_INCLUDE_${VAR} "#error \"don't know how to include ${INCLUDE} header\"" PARENT_SCOPE)
   endif()
-endfunction(chk_gl_include_file)
+endfunction()
 

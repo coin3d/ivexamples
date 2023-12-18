@@ -15,9 +15,11 @@ if (Gui STREQUAL "Xt")
   configure_file(SceneTumble.h.in SceneTumble.h @ONLY)
   configure_file(SceneTumble.cpp.in SceneTumble.cpp @ONLY)
   configure_file(tumble.cpp.in tumble.cpp @ONLY)
-  add_executable(tumble
+  add_executable(10.Components
   ${CMAKE_CURRENT_BINARY_DIR}/tumble.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/SceneTumble.cpp
   )
-  target_link_libraries(tumble So${Gui}::So${Gui} X11::Xt)
+  set_target_properties(10.Components PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+  target_link_libraries(10.Components So${Gui}::So${Gui} X11::Xt)
+  install(TARGETS 10.Components RUNTIME DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ivexamples_${Gui}/Toolmaker)
 endif()

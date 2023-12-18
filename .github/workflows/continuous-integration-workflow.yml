@@ -19,7 +19,7 @@ jobs:
       - name: Create build directory and run CMake
         run: |
           sudo apt-get -y update
-          sudo apt-get -y install freeglut3-dev qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools qttools5-dev-tools libxi-dev
+          sudo apt-get -y install freeglut3-dev qtbase5-dev qttools5-dev libxi-dev
           mkdir cmake_download_dir
           DOWNLOAD_FILE_COIN=coin-latest-Ubuntu2204-gcc11-x64.tar.gz
           RELEASE_ID=`curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/coin3d/coin/releases | jq -r --arg COIN_REPO_TAG_NAME "CI-builds" '.[] | select(.tag_name==$COIN_REPO_TAG_NAME) | .id'`
@@ -37,16 +37,16 @@ jobs:
           tar xzf $DOWNLOAD_FILE_SOQT -C cmake_download_dir
           cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D -DGui=Qt
       - name: Build project
-        run: cmake --build cmake_build_dir --target all --config Release -- -j4
+        run: cmake --build cmake_build_dir --target install --config Release -- -j4
       #- name: Run tests
       #  run:  ctest -C Release -VV
       #  working-directory: cmake_build_dir
-      #- name: Create Artifacts
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: Ubuntu-Artifacts
-      #    path: cmake_install_dir/
-      #  if: always()
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ubuntu-Artifacts
+          path: cmake_install_dir/
+        if: always()
 
   windows-build:
     name: Windows Build
@@ -85,16 +85,16 @@ jobs:
           7z x %DOWNLOAD_FILE_SOWIN% -ocmake_download_dir
           cmake -S . -B cmake_build_dir -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH=cmake_download_dir/Coin3D -DGui=Win
       - name: Build project
-        run: cmake --build cmake_build_dir --target ALL_BUILD --config Release -- /nologo /verbosity:minimal /maxcpucount:2 /property:MultiProcessorCompilation=true
+        run: cmake --build cmake_build_dir --target INSTALL --config Release -- /nologo /verbosity:minimal /maxcpucount:2 /property:MultiProcessorCompilation=true
       #- name: Run tests
       #  run:  ctest -C Release -VV
       #  working-directory: cmake_build_dir
-      #- name: Create Artifacts
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: Windows-Artifacts
-      #    path: cmake_install_dir/
-      #  if: always()
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Windows-Artifacts
+          path: cmake_install_dir/
+        if: always()
 
   macos-build:
     name: MacOS Build
@@ -124,13 +124,13 @@ jobs:
           tar xzf $DOWNLOAD_FILE_SOQT -C cmake_download_dir
           cmake -S . -B cmake_build_dir -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=cmake_install_dir -DCMAKE_PREFIX_PATH="cmake_download_dir/Coin3D;/usr/local/opt/qt5" -DGui=Qt
       - name: Build project
-        run: sudo cmake --build cmake_build_dir --target all --config Release -- -j4
+        run: sudo cmake --build cmake_build_dir --target install --config Release -- -j4
       #- name: Run tests
       #  run: ctest -C Release -VV
       #  working-directory: cmake_build_dir
-      #- name: Create Artifacts
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: MacOS-Artifacts
-      #    path: cmake_install_dir/
-      #  if: always()
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: MacOS-Artifacts
+          path: cmake_install_dir/
+        if: always()

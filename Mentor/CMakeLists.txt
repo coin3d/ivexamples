@@ -5,12 +5,14 @@ macro(add_example)
   cmake_parse_arguments(EXAMPLE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
   set(name ${EXAMPLE_UNPARSED_ARGUMENTS})
   dump_variable(
-  name
-  EXAMPLE_LIBS
+    name
+    EXAMPLE_LIBS
   )
   configure_file(${name}.cpp.in ${name}.cpp @ONLY)
   add_executable(${name} ${CMAKE_CURRENT_BINARY_DIR}/${name}.cpp)
+  set_target_properties(${name} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
   target_link_libraries(${name} So${Gui}::So${Gui} ${EXAMPLE_LIBS})
+  install(TARGETS ${name} RUNTIME DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ivexamples_${Gui}/Mentor)
 endmacro(add_example)
 
 add_example(02.1.HelloCone)
