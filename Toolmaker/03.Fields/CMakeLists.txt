@@ -1,5 +1,5 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_executable(03.Fields main.cpp SFDouble.cpp MFDouble.cpp)
-set_target_properties(03.Fields PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+set_target_properties(03.Fields PROPERTIES DEBUG_POSTFIX "${CMAKE_DEBUG_POSTFIX}")
 target_link_libraries(03.Fields So${Gui}::So${Gui})
 install(TARGETS 03.Fields RUNTIME DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ivexamples_${Gui}/Toolmaker)

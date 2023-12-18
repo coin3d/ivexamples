@@ -7,6 +7,6 @@ ${CMAKE_CURRENT_BINARY_DIR}/Pyramid.cpp
 Glow.cpp
 Alternate.cpp
 )
-set_target_properties(02.Nodes PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+set_target_properties(02.Nodes PROPERTIES DEBUG_POSTFIX "${CMAKE_DEBUG_POSTFIX}")
 target_link_libraries(02.Nodes So${Gui}::So${Gui} OpenGL::GL)
 install(TARGETS 02.Nodes RUNTIME DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ivexamples_${Gui}/Toolmaker)

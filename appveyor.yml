@@ -309,7 +309,7 @@ before_build:
 build_script:
   - cmd: |
       set BUILD_TOOL_OPTIONS=/nologo /verbosity:minimal /maxcpucount /property:MultiProcessorCompilation=true;CL_MPCount=3
-      cmake --build build --target INSTALL --config Debug   -- %BUILD_TOOL_OPTIONS%
+      rem cmake --build build --target INSTALL --config Debug   -- %BUILD_TOOL_OPTIONS%
       cmake --build build --target INSTALL --config Release -- %BUILD_TOOL_OPTIONS%
   - sh: |
       BUILD_TOOL_OPTIONS=-j4

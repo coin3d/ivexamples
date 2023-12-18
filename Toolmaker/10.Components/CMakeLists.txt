@@ -19,7 +19,7 @@ if (Gui STREQUAL "Xt")
   ${CMAKE_CURRENT_BINARY_DIR}/tumble.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/SceneTumble.cpp
   )
-  set_target_properties(10.Components PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+  set_target_properties(10.Components PROPERTIES DEBUG_POSTFIX "${CMAKE_DEBUG_POSTFIX}")
   target_link_libraries(10.Components So${Gui}::So${Gui} X11::Xt)
   install(TARGETS 10.Components RUNTIME DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/ivexamples_${Gui}/Toolmaker)
 endif()
